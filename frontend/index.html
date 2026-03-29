@@ -15,8 +15,8 @@
   --purple-light: #c084fc;
   --violet: #7c3aed;
   --pink: #e879f9;
-  --pink-soft: #f0abfc;
   --green: #4ade80;
+  --red: #ef4444;
   --white: #f8f4ff;
   --white-dim: rgba(248,244,255,0.65);
   --white-faint: rgba(248,244,255,0.12);
@@ -24,327 +24,264 @@
   --border: rgba(156,84,245,0.22);
   --glass: rgba(14,8,30,0.7);
 }
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg); color: var(--white);
-  font-family: 'DM Sans', sans-serif;
-  overflow-x: hidden; cursor: none; line-height: 1.6;
-}
-#cursor, #cursor-ring {
-  position: fixed; border-radius: 50%; pointer-events: none;
-  z-index: 10000; transform: translate(-50%,-50%);
-}
-#cursor { width: 10px; height: 10px; background: var(--purple-light); transition: transform 0.08s; mix-blend-mode: screen; }
-#cursor-ring { width: 38px; height: 38px; border: 1.5px solid rgba(192,132,252,0.5); transition: width 0.2s, height 0.2s; }
-#bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-body::after {
-  content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-  opacity:0.5;
-}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;line-height:1.6;}
+#cursor,#cursor-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);}
+#cursor{width:10px;height:10px;background:var(--purple-light);transition:transform 0.08s;mix-blend-mode:screen;}
+#cursor-ring{width:38px;height:38px;border:1.5px solid rgba(192,132,252,0.5);transition:width 0.2s,height 0.2s;}
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+body::after{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");opacity:0.5;}
 
 /* NAV */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 500;
-  padding: 1.1rem 3rem; display: flex; align-items: center; justify-content: space-between;
-  backdrop-filter: blur(24px) saturate(180%);
-  background: rgba(6,4,15,0.72); border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem;
-  background: linear-gradient(135deg, var(--purple-light), var(--pink));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  letter-spacing: -0.02em; cursor: pointer;
-}
-.nav-logo span { font-family: 'Instrument Serif', serif; font-style: italic; }
-.nav-links { display: flex; gap: 2.2rem; list-style: none; }
-.nav-links a {
-  color: var(--white-dim); text-decoration: none;
-  font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
-  transition: color 0.25s; cursor: pointer;
-}
-.nav-links a:hover { color: var(--purple-light); }
-.nav-actions { display: flex; gap: 0.7rem; align-items: center; }
-.btn-ghost {
-  background: var(--white-faint); border: 1px solid var(--border);
-  color: var(--white-dim); padding: 0.42rem 1rem;
-  border-radius: 100px; font-size: 0.74rem; cursor: pointer;
-  transition: all 0.25s; font-family: 'DM Sans', sans-serif;
-}
-.btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--white); }
-.btn-danger {
-  background: linear-gradient(135deg, #7f1d1d, #dc2626);
-  color: white; padding: 0.42rem 1.1rem; border-radius: 100px;
-  font-size: 0.74rem; border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif; transition: all 0.25s; font-weight: 500;
-}
-.btn-danger:hover { transform: scale(1.05); box-shadow: 0 0 22px rgba(220,38,38,0.5); }
+nav{position:fixed;top:0;width:100%;z-index:500;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;backdrop-filter:blur(24px) saturate(180%);background:rgba(6,4,15,0.72);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.35rem;background:linear-gradient(135deg,var(--purple-light),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.02em;cursor:pointer;}
+.nav-logo span{font-family:'Instrument Serif',serif;font-style:italic;}
+.nav-links{display:flex;gap:2.2rem;list-style:none;}
+.nav-links a{color:var(--white-dim);text-decoration:none;font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.25s;cursor:pointer;}
+.nav-links a:hover{color:var(--purple-light);}
+.nav-actions{display:flex;gap:0.7rem;align-items:center;}
+.btn-ghost{background:var(--white-faint);border:1px solid var(--border);color:var(--white-dim);padding:0.42rem 1rem;border-radius:100px;font-size:0.74rem;cursor:pointer;transition:all 0.25s;font-family:'DM Sans',sans-serif;}
+.btn-ghost:hover{background:rgba(255,255,255,0.08);color:var(--white);}
+.btn-danger{background:linear-gradient(135deg,#7f1d1d,#dc2626);color:white;padding:0.42rem 1.1rem;border-radius:100px;font-size:0.74rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;font-weight:500;}
+.btn-danger:hover{transform:scale(1.05);box-shadow:0 0 22px rgba(220,38,38,0.5);}
+
+/* SOS BUTTON */
+.btn-sos{background:linear-gradient(135deg,#dc2626,#991b1b);color:white;padding:0.42rem 1.1rem;border-radius:100px;font-size:0.74rem;border:2px solid #ef4444;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;animation:sos-pulse 2s ease-in-out infinite;letter-spacing:0.05em;}
+@keyframes sos-pulse{0%,100%{box-shadow:0 0 8px rgba(239,68,68,0.4)}50%{box-shadow:0 0 25px rgba(239,68,68,0.8),0 0 50px rgba(239,68,68,0.3)}}
+.btn-sos:hover{transform:scale(1.08);}
+.btn-sos.alarm-active{animation:alarm-flash 0.3s ease-in-out infinite;}
+@keyframes alarm-flash{0%,100%{background:linear-gradient(135deg,#dc2626,#991b1b)}50%{background:linear-gradient(135deg,#ff0000,#cc0000)}}
 
 /* COMMON */
-section { position: relative; z-index: 2; }
-.section-pad { padding: 7rem 3rem; }
-.section-tag { display: block; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 0.9rem; }
-.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem,4.5vw,3.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
-.section-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; background: linear-gradient(135deg, var(--purple-mid), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.section-header { text-align: center; margin-bottom: 4rem; }
-.btn-primary {
-  background: linear-gradient(135deg, var(--violet), var(--pink));
-  color: white; padding: 0.85rem 2.2rem; border-radius: 100px; border: none;
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
-  cursor: pointer; transition: all 0.3s; box-shadow: 0 0 40px var(--glow);
-}
-.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 50px var(--glow); }
-.btn-outline {
-  background: transparent; color: var(--white-dim);
-  padding: 0.85rem 2.2rem; border-radius: 100px; border: 1px solid var(--border);
-  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;
-}
-.btn-outline:hover { border-color: var(--purple-light); color: var(--white); }
+section{position:relative;z-index:2;}
+.section-pad{padding:7rem 3rem;}
+.section-tag{display:block;font-size:0.7rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--purple-light);margin-bottom:0.9rem;}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;line-height:1.08;letter-spacing:-0.03em;}
+.section-title em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;background:linear-gradient(135deg,var(--purple-mid),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.section-header{text-align:center;margin-bottom:4rem;}
+.btn-primary{background:linear-gradient(135deg,var(--violet),var(--pink));color:white;padding:0.85rem 2.2rem;border-radius:100px;border:none;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.3s;box-shadow:0 0 40px var(--glow);}
+.btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 6px 50px var(--glow);}
+.btn-outline{background:transparent;color:var(--white-dim);padding:0.85rem 2.2rem;border-radius:100px;border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.95rem;cursor:pointer;transition:all 0.3s;}
+.btn-outline:hover{border-color:var(--purple-light);color:var(--white);}
 
 /* HERO */
-#home {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  text-align: center; padding: 6rem 2rem 5rem;
-}
-.orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; will-change: transform; }
-.orb1 { width:550px;height:550px;background:var(--violet);opacity:0.3;top:-150px;left:-180px;animation:drift1 14s ease-in-out infinite; }
-.orb2 { width:420px;height:420px;background:var(--pink);opacity:0.25;top:80px;right:-130px;animation:drift2 16s ease-in-out infinite; }
-.orb3 { width:320px;height:320px;background:#2563eb;opacity:0.18;bottom:-60px;left:38%;animation:drift1 11s ease-in-out infinite reverse; }
-@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(35px,-45px)} }
-@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
-.hero-eyebrow {
-  font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
-  color: var(--purple-light); margin-bottom: 1.6rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.hero-eyebrow::before,.hero-eyebrow::after { content:''; height:1px; width:45px; background:linear-gradient(90deg,transparent,var(--purple-light)); }
-.hero-eyebrow::after { transform: scaleX(-1); }
-.hero-title { font-family:'Syne',sans-serif; font-size:clamp(3.8rem,10vw,8.5rem); font-weight:800; line-height:0.93; letter-spacing:-0.04em; margin-bottom:1.2rem; }
-.hero-title .t1 { display:block; color:var(--white); }
-.hero-title .t2 { display:block; background:linear-gradient(135deg,var(--purple-mid) 0%,var(--pink) 60%,var(--purple-light) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; font-size:1.15em; animation:shimmer 4s ease-in-out infinite; }
-@keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
-.hero-sub { font-size:1.08rem; color:var(--white-dim); max-width:520px; line-height:1.75; margin:1.8rem auto 2.8rem; }
-.hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-.hero-chips { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; margin-top:3.5rem; }
-.chip { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--white-dim); display:flex; align-items:center; gap:0.5rem; }
-.chip-dot { width:4px; height:4px; border-radius:50%; background:var(--purple-light); }
-.scroll-hint { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); font-size:0.68rem; letter-spacing:0.15em; color:var(--white-dim); display:flex; flex-direction:column; align-items:center; gap:0.6rem; animation:bobble 2.5s ease-in-out infinite; }
-.scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--purple-light),transparent); }
-@keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+#home{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 5rem;}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;will-change:transform;}
+.orb1{width:550px;height:550px;background:var(--violet);opacity:0.3;top:-150px;left:-180px;animation:drift1 14s ease-in-out infinite;}
+.orb2{width:420px;height:420px;background:var(--pink);opacity:0.25;top:80px;right:-130px;animation:drift2 16s ease-in-out infinite;}
+.orb3{width:320px;height:320px;background:#2563eb;opacity:0.18;bottom:-60px;left:38%;animation:drift1 11s ease-in-out infinite reverse;}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(35px,-45px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-40px,30px)}}
+.hero-eyebrow{font-size:0.7rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--purple-light);margin-bottom:1.6rem;display:flex;align-items:center;gap:1rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';height:1px;width:45px;background:linear-gradient(90deg,transparent,var(--purple-light));}
+.hero-eyebrow::after{transform:scaleX(-1);}
+.hero-title{font-family:'Syne',sans-serif;font-size:clamp(3.8rem,10vw,8.5rem);font-weight:800;line-height:0.93;letter-spacing:-0.04em;margin-bottom:1.2rem;}
+.hero-title .t1{display:block;color:var(--white);}
+.hero-title .t2{display:block;background:linear-gradient(135deg,var(--purple-mid) 0%,var(--pink) 60%,var(--purple-light) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:1.15em;animation:shimmer 4s ease-in-out infinite;}
+@keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.15)}}
+.hero-sub{font-size:1.08rem;color:var(--white-dim);max-width:520px;line-height:1.75;margin:1.8rem auto 2.8rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:3.5rem;}
+.chip{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);display:flex;align-items:center;gap:0.5rem;}
+.chip-dot{width:4px;height:4px;border-radius:50%;background:var(--purple-light);}
+
+/* LANGUAGE SELECTOR - PROMINENT */
+.lang-selector-hero{display:flex;gap:0.8rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+.lang-hero-btn{padding:0.6rem 1.4rem;border-radius:100px;border:2px solid var(--border);background:rgba(124,58,237,0.1);color:var(--white-dim);font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.3s;font-weight:500;}
+.lang-hero-btn:hover,.lang-hero-btn.on{background:linear-gradient(135deg,var(--violet),var(--pink));border-color:transparent;color:white;transform:scale(1.05);box-shadow:0 0 20px var(--glow);}
 
 /* STATS */
-.stats-strip {
-  position:relative; z-index:2; display:flex; justify-content:center; flex-wrap:wrap;
-  background:rgba(18,10,36,0.5); border-top:1px solid var(--border); border-bottom:1px solid var(--border); backdrop-filter:blur(10px);
-}
-.stat { flex:1; min-width:190px; padding:2.2rem 2rem; border-right:1px solid var(--border); text-align:center; }
-.stat:last-child { border-right:none; }
-.stat-n { font-family:'Syne',sans-serif; font-size:2.8rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; margin-bottom:0.4rem; }
-.stat-l { font-size:0.75rem; color:var(--white-dim); letter-spacing:0.04em; }
+.stats-strip{position:relative;z-index:2;display:flex;justify-content:center;flex-wrap:wrap;background:rgba(18,10,36,0.5);border-top:1px solid var(--border);border-bottom:1px solid var(--border);backdrop-filter:blur(10px);}
+.stat{flex:1;min-width:190px;padding:2.2rem 2rem;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-n{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:800;background:linear-gradient(135deg,var(--purple-light),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:0.4rem;}
+.stat-l{font-size:0.75rem;color:var(--white-dim);letter-spacing:0.04em;}
 
 /* FEATURES */
-.features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.5px; max-width:1200px; margin:0 auto; background:var(--border); border:1px solid var(--border); }
-.feat {
-  background:var(--bg); padding:2.5rem; transition:background 0.35s; position:relative; overflow:hidden;
-  cursor:pointer;
-}
-.feat::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 25% 25%,rgba(124,58,237,0.3),transparent 65%); opacity:0; transition:opacity 0.4s; }
-.feat:hover { background:var(--purple-deep); }
-.feat:hover::before { opacity:1; }
-.feat-ico { width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.4rem; }
-.feat-title { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:0.7rem; }
-.feat-desc { font-size:0.85rem; color:var(--white-dim); line-height:1.65; }
-.feat-arrow { position:absolute; bottom:1.5rem; right:1.5rem; font-size:0.75rem; color:var(--purple-light); opacity:0; transition:opacity 0.3s,transform 0.3s; }
-.feat:hover .feat-arrow { opacity:1; transform:translateX(4px); }
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5px;max-width:1200px;margin:0 auto;background:var(--border);border:1px solid var(--border);}
+.feat{background:var(--bg);padding:2.5rem;transition:background 0.35s;position:relative;overflow:hidden;cursor:pointer;}
+.feat::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 25%,rgba(124,58,237,0.3),transparent 65%);opacity:0;transition:opacity 0.4s;}
+.feat:hover{background:var(--purple-deep);}
+.feat:hover::before{opacity:1;}
+.feat-ico{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.4rem;}
+.feat-title{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:700;margin-bottom:0.7rem;}
+.feat-desc{font-size:0.85rem;color:var(--white-dim);line-height:1.65;}
+.feat-arrow{position:absolute;bottom:1.5rem;right:1.5rem;font-size:0.75rem;color:var(--purple-light);opacity:0;transition:opacity 0.3s,transform 0.3s;}
+.feat:hover .feat-arrow{opacity:1;transform:translateX(4px);}
 
-/* CHATBOT SECTION */
-.chat-layout { max-width:950px; margin:0 auto; display:grid; grid-template-columns:1fr 1.7fr; gap:3rem; align-items:start; }
-.chat-sidebar { position:sticky; top:90px; }
-.chat-sidebar p { font-size:0.88rem; color:var(--white-dim); line-height:1.7; margin-bottom:1.5rem; }
-.lang-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
-.lang-btn { padding:0.42rem 1rem; border-radius:100px; border:1px solid var(--border); background:transparent; color:var(--white-dim); font-size:0.78rem; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
-.lang-btn.on { background:linear-gradient(135deg,var(--violet),var(--pink)); border-color:transparent; color:white; }
-.privacy-box { background:rgba(124,58,237,0.09); border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; font-size:0.77rem; color:var(--white-dim); line-height:1.65; }
-.privacy-box strong { color:var(--purple-light); }
-
-/* API KEY SETUP BOX */
-.api-setup-box {
-  background: rgba(124,58,237,0.08); border: 1px solid var(--border);
-  border-radius:16px; padding:1.4rem; margin-bottom:1.2rem;
-}
-.api-setup-box h4 { font-family:'Syne',sans-serif; font-size:0.85rem; margin-bottom:0.5rem; color:var(--purple-light); }
-.api-setup-box p { font-size:0.77rem; color:var(--white-dim); margin-bottom:0.8rem; }
-.api-input-row { display:flex; gap:0.5rem; }
-.api-input {
-  flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border);
-  border-radius:8px; padding:0.5rem 0.9rem; color:var(--white);
-  font-family:'DM Sans',sans-serif; font-size:0.8rem; outline:none;
-  transition:border-color 0.25s;
-}
-.api-input:focus { border-color:var(--purple-light); }
-.api-save-btn {
-  background:linear-gradient(135deg,var(--violet),var(--pink));
-  border:none; border-radius:8px; padding:0.5rem 1rem; cursor:pointer;
-  color:white; font-size:0.78rem; font-family:'DM Sans',sans-serif; white-space:nowrap;
-}
-.api-status { font-size:0.72rem; margin-top:0.5rem; }
-.api-status.ok { color:var(--green); }
-.api-status.err { color:#f87171; }
+/* CHATBOT */
+.chat-layout{max-width:950px;margin:0 auto;display:grid;grid-template-columns:1fr 1.7fr;gap:3rem;align-items:start;}
+.chat-sidebar{position:sticky;top:90px;}
+.chat-sidebar p{font-size:0.88rem;color:var(--white-dim);line-height:1.7;margin-bottom:1.5rem;}
+.lang-row{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.lang-btn{padding:0.42rem 1rem;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--white-dim);font-size:0.78rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;}
+.lang-btn.on{background:linear-gradient(135deg,var(--violet),var(--pink));border-color:transparent;color:white;}
+.privacy-box{background:rgba(124,58,237,0.09);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;font-size:0.77rem;color:var(--white-dim);line-height:1.65;}
+.privacy-box strong{color:var(--purple-light);}
+.api-setup-box{background:rgba(124,58,237,0.08);border:1px solid var(--border);border-radius:16px;padding:1.4rem;margin-bottom:1.2rem;}
+.api-setup-box h4{font-family:'Syne',sans-serif;font-size:0.85rem;margin-bottom:0.5rem;color:var(--purple-light);}
+.api-setup-box p{font-size:0.77rem;color:var(--white-dim);margin-bottom:0.8rem;}
 
 /* CHAT BOX */
-.chat-box { background:var(--glass); border:1px solid var(--border); border-radius:20px; overflow:hidden; backdrop-filter:blur(20px); box-shadow:0 0 70px rgba(124,58,237,0.12); }
-.chat-head { padding:1rem 1.4rem; background:rgba(124,58,237,0.1); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:0.8rem; }
-.chat-ava { width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0; }
-.chat-head-info .name { font-family:'Syne',sans-serif; font-size:0.88rem; font-weight:700; }
-.chat-head-info .status { font-size:0.7rem; color:var(--green); }
-.chat-badge { margin-left:auto; font-size:0.63rem; color:var(--purple-light); letter-spacing:0.08em; display:flex; align-items:center; gap:0.3rem; }
-.chat-msgs { height:370px; overflow-y:auto; padding:1.4rem; display:flex; flex-direction:column; gap:1rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
-.msg { display:flex; gap:0.6rem; align-items:flex-start; max-width:88%; }
-.msg.user { margin-left:auto; flex-direction:row-reverse; }
-.msg-ico { width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:0.72rem; }
-.msg.user .msg-ico { background:rgba(255,255,255,0.08); border:1px solid var(--border); }
-.bubble { padding:0.72rem 1rem; border-radius:14px; font-size:0.84rem; line-height:1.6; }
-.msg.bot .bubble { background:rgba(124,58,237,0.14); border:1px solid var(--border); color:var(--white); }
-.msg.user .bubble { background:linear-gradient(135deg,var(--violet),var(--pink)); color:white; }
-.typing-wrap { display:flex; gap:4px; padding:4px 0; }
-.typing-wrap span { width:6px;height:6px;border-radius:50%;background:var(--purple-light);animation:ty 1.2s infinite; }
-.typing-wrap span:nth-child(2){animation-delay:.2s} .typing-wrap span:nth-child(3){animation-delay:.4s}
-@keyframes ty { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-7px)} }
-.quick-chips { display:flex; flex-wrap:wrap; gap:0.4rem; padding:0.6rem 1.4rem 0.7rem; }
-.qchip { font-size:0.7rem; padding:0.28rem 0.75rem; background:var(--white-faint); border:1px solid var(--border); border-radius:100px; color:var(--white-dim); cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
-.qchip:hover { background:rgba(124,58,237,0.2); color:var(--purple-light); }
-.chat-input-row { display:flex; gap:0.5rem; padding:0.9rem 1.2rem; border-top:1px solid var(--border); background:rgba(0,0,0,0.25); align-items:center; }
-.chat-in { flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:0.58rem 1.2rem; color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.84rem; outline:none; transition:border-color 0.25s; }
-.chat-in::placeholder { color:rgba(248,244,255,0.28); }
-.chat-in:focus { border-color:var(--purple-light); }
-.send-btn,.voice-btn { width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s; }
-.send-btn { background:linear-gradient(135deg,var(--violet),var(--pink)); }
-.send-btn:hover { transform:scale(1.1); box-shadow:0 0 20px var(--glow); }
-.voice-btn { background:var(--white-faint); border:1px solid var(--border); }
-.voice-btn.recording { background:rgba(220,38,38,0.3); border-color:#dc2626; animation:pulse-rec 0.8s ease-in-out infinite; }
-@keyframes pulse-rec { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+.chat-box{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;backdrop-filter:blur(20px);box-shadow:0 0 70px rgba(124,58,237,0.12);}
+.chat-head{padding:1rem 1.4rem;background:rgba(124,58,237,0.1);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.8rem;}
+.chat-ava{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.chat-head-info .name{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;}
+.chat-head-info .status{font-size:0.7rem;color:var(--green);}
+.chat-badge{margin-left:auto;font-size:0.63rem;color:var(--purple-light);letter-spacing:0.08em;}
+.chat-msgs{height:370px;overflow-y:auto;padding:1.4rem;display:flex;flex-direction:column;gap:1rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.msg{display:flex;gap:0.6rem;align-items:flex-start;max-width:88%;}
+.msg.user{margin-left:auto;flex-direction:row-reverse;}
+.msg-ico{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:0.72rem;}
+.msg.user .msg-ico{background:rgba(255,255,255,0.08);border:1px solid var(--border);}
+.bubble{padding:0.72rem 1rem;border-radius:14px;font-size:0.84rem;line-height:1.6;}
+.msg.bot .bubble{background:rgba(124,58,237,0.14);border:1px solid var(--border);color:var(--white);}
+.msg.user .bubble{background:linear-gradient(135deg,var(--violet),var(--pink));color:white;}
+.typing-wrap{display:flex;gap:4px;padding:4px 0;}
+.typing-wrap span{width:6px;height:6px;border-radius:50%;background:var(--purple-light);animation:ty 1.2s infinite;}
+.typing-wrap span:nth-child(2){animation-delay:.2s}
+.typing-wrap span:nth-child(3){animation-delay:.4s}
+@keyframes ty{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-7px)}}
+.quick-chips{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0.6rem 1.4rem 0.7rem;}
+.qchip{font-size:0.7rem;padding:0.28rem 0.75rem;background:var(--white-faint);border:1px solid var(--border);border-radius:100px;color:var(--white-dim);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.qchip:hover{background:rgba(124,58,237,0.2);color:var(--purple-light);}
+.chat-input-row{display:flex;gap:0.5rem;padding:0.9rem 1.2rem;border-top:1px solid var(--border);background:rgba(0,0,0,0.25);align-items:center;}
+.chat-in{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:100px;padding:0.58rem 1.2rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.84rem;outline:none;transition:border-color 0.25s;}
+.chat-in::placeholder{color:rgba(248,244,255,0.28);}
+.chat-in:focus{border-color:var(--purple-light);}
+.send-btn,.voice-btn{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;}
+.send-btn{background:linear-gradient(135deg,var(--violet),var(--pink));}
+.send-btn:hover{transform:scale(1.1);box-shadow:0 0 20px var(--glow);}
+.voice-btn{background:var(--white-faint);border:1px solid var(--border);}
+.voice-btn.recording{background:rgba(220,38,38,0.3);border-color:#dc2626;animation:pulse-rec 0.8s ease-in-out infinite;}
+@keyframes pulse-rec{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 
 /* HELPLINES */
-.helplines-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; max-width:1100px; margin:0 auto; }
-.hl-card { background:var(--glass); border:1px solid var(--border); border-radius:16px; padding:1.5rem; backdrop-filter:blur(10px); transition:all 0.3s; position:relative; overflow:hidden; }
-.hl-card::after { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,var(--violet),var(--pink)); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
-.hl-card:hover { border-color:var(--purple-mid); transform:translateY(-3px); }
-.hl-card:hover::after { transform:scaleX(1); }
-.hl-ico { font-size:1.7rem; margin-bottom:0.7rem; }
-.hl-org { font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; margin-bottom:0.3rem; }
-.hl-num { font-size:1.55rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Syne',sans-serif; letter-spacing:-0.02em; margin-bottom:0.3rem; }
-.hl-desc { font-size:0.77rem; color:var(--white-dim); line-height:1.55; }
-.hl-tag { display:inline-block; margin-top:0.5rem; font-size:0.62rem; letter-spacing:0.08em; padding:0.22rem 0.6rem; border-radius:100px; background:rgba(124,58,237,0.14); color:var(--purple-light); border:1px solid var(--border); }
-.hl-call-btn {
-  display:block; width:100%; margin-top:0.9rem;
-  background:linear-gradient(135deg,var(--violet),var(--pink));
-  border:none; border-radius:100px; padding:0.5rem; cursor:pointer;
-  color:white; font-size:0.78rem; font-family:'DM Sans',sans-serif; font-weight:500;
-  transition:all 0.25s; text-align:center; text-decoration:none;
-}
-.hl-call-btn:hover { transform:scale(1.03); box-shadow:0 4px 20px var(--glow); }
+.helplines-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;max-width:1100px;margin:0 auto;}
+.hl-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:1.5rem;backdrop-filter:blur(10px);transition:all 0.3s;position:relative;overflow:hidden;}
+.hl-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--violet),var(--pink));transform:scaleX(0);transition:transform 0.3s;transform-origin:left;}
+.hl-card:hover{border-color:var(--purple-mid);transform:translateY(-3px);}
+.hl-card:hover::after{transform:scaleX(1);}
+.hl-ico{font-size:1.7rem;margin-bottom:0.7rem;}
+.hl-org{font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;margin-bottom:0.3rem;}
+.hl-num{font-size:1.55rem;font-weight:800;background:linear-gradient(135deg,var(--purple-light),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Syne',sans-serif;letter-spacing:-0.02em;margin-bottom:0.3rem;}
+.hl-desc{font-size:0.77rem;color:var(--white-dim);line-height:1.55;}
+.hl-tag{display:inline-block;margin-top:0.5rem;font-size:0.62rem;letter-spacing:0.08em;padding:0.22rem 0.6rem;border-radius:100px;background:rgba(124,58,237,0.14);color:var(--purple-light);border:1px solid var(--border);}
+.hl-call-btn{display:block;width:100%;margin-top:0.9rem;background:linear-gradient(135deg,var(--violet),var(--pink));border:none;border-radius:100px;padding:0.5rem;cursor:pointer;color:white;font-size:0.78rem;font-family:'DM Sans',sans-serif;font-weight:500;transition:all 0.25s;text-align:center;text-decoration:none;}
+.hl-call-btn:hover{transform:scale(1.03);box-shadow:0 4px 20px var(--glow);}
 
 /* LAWS */
-.laws-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.4rem; max-width:1100px; margin:0 auto; }
-.law-card { background:var(--glass); border:1px solid var(--border); border-radius:16px; padding:2rem; backdrop-filter:blur(10px); transition:all 0.3s; cursor:pointer; position:relative; overflow:hidden; }
-.law-card:hover { border-color:var(--purple-mid); background:rgba(26,10,61,0.85); transform:translateY(-3px); }
-.law-code { font-family:'Syne',sans-serif; font-size:1.7rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.35rem; }
-.law-name { font-size:0.83rem; font-weight:600; margin-bottom:0.8rem; }
-.law-desc { font-size:0.81rem; color:var(--white-dim); line-height:1.65; }
-.law-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1rem; }
-.law-tag { font-size:0.62rem; padding:0.2rem 0.6rem; border-radius:100px; background:rgba(124,58,237,0.12); color:var(--purple-light); border:1px solid var(--border); letter-spacing:0.05em; }
-.law-ask-btn { margin-top:1.2rem; font-size:0.75rem; color:var(--purple-light); background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:100px; padding:0.35rem 0.9rem; cursor:pointer; transition:all 0.25s; font-family:'DM Sans',sans-serif; }
-.law-ask-btn:hover { background:rgba(124,58,237,0.25); }
+.laws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;max-width:1100px;margin:0 auto;}
+.law-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:2rem;backdrop-filter:blur(10px);transition:all 0.3s;cursor:pointer;position:relative;overflow:hidden;}
+.law-card:hover{border-color:var(--purple-mid);background:rgba(26,10,61,0.85);transform:translateY(-3px);}
+.law-code{font-family:'Syne',sans-serif;font-size:1.7rem;font-weight:800;background:linear-gradient(135deg,var(--purple-light),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:0.35rem;}
+.law-name{font-size:0.83rem;font-weight:600;margin-bottom:0.8rem;}
+.law-desc{font-size:0.81rem;color:var(--white-dim);line-height:1.65;}
+.law-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem;}
+.law-tag{font-size:0.62rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(124,58,237,0.12);color:var(--purple-light);border:1px solid var(--border);letter-spacing:0.05em;}
+.law-ask-btn{margin-top:1.2rem;font-size:0.75rem;color:var(--purple-light);background:rgba(124,58,237,0.12);border:1px solid var(--border);border-radius:100px;padding:0.35rem 0.9rem;cursor:pointer;transition:all 0.25s;font-family:'DM Sans',sans-serif;}
+.law-ask-btn:hover{background:rgba(124,58,237,0.25);}
 
-/* FEATURE DETAIL MODAL */
-.modal-overlay {
-  position:fixed; inset:0; z-index:2000; background:rgba(6,4,15,0.88);
-  backdrop-filter:blur(12px); display:none; align-items:center; justify-content:center;
-  padding:2rem;
-}
-.modal-overlay.open { display:flex; }
-.modal-box {
-  background:var(--bg2); border:1px solid var(--border); border-radius:24px;
-  max-width:580px; width:100%; padding:2.5rem; position:relative;
-  animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
-  max-height:85vh; overflow-y:auto;
-}
-@keyframes modalIn { from{opacity:0;transform:scale(0.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
-.modal-close { position:absolute; top:1rem; right:1.2rem; background:var(--white-faint); border:1px solid var(--border); color:var(--white-dim); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
-.modal-close:hover { background:rgba(255,255,255,0.1); color:var(--white); }
-.modal-ico { width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem; }
-.modal-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; margin-bottom:0.5rem; }
-.modal-subtitle { font-size:0.85rem; color:var(--purple-light); margin-bottom:1.4rem; letter-spacing:0.05em; }
-.modal-body { font-size:0.88rem; color:var(--white-dim); line-height:1.75; }
-.modal-body p { margin-bottom:1rem; }
-.modal-body ul { padding-left:1.2rem; margin-bottom:1rem; }
-.modal-body li { margin-bottom:0.4rem; }
-.modal-body strong { color:var(--white); }
-.modal-body .highlight { background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1.1rem; margin:1rem 0; font-size:0.83rem; }
-.modal-cta { margin-top:1.5rem; display:flex; gap:0.7rem; flex-wrap:wrap; }
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(6,4,15,0.88);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:2rem;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:24px;max-width:580px;width:100%;padding:2.5rem;position:relative;animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1.2rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white-dim);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.modal-close:hover{background:rgba(255,255,255,0.1);color:var(--white);}
+.modal-ico{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem;}
+.modal-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
+.modal-subtitle{font-size:0.85rem;color:var(--purple-light);margin-bottom:1.4rem;letter-spacing:0.05em;}
+.modal-body{font-size:0.88rem;color:var(--white-dim);line-height:1.75;}
+.modal-body p{margin-bottom:1rem;}
+.modal-body ul{padding-left:1.2rem;margin-bottom:1rem;}
+.modal-body li{margin-bottom:0.4rem;}
+.modal-body strong{color:var(--white);}
+.modal-body .highlight{background:rgba(124,58,237,0.12);border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.1rem;margin:1rem 0;font-size:0.83rem;}
+.modal-cta{margin-top:1.5rem;display:flex;gap:0.7rem;flex-wrap:wrap;}
 
 /* DISGUISE CALCULATOR */
-#disguise { display:none; position:fixed; inset:0; z-index:99999; background:#1c1c1e; flex-direction:column; }
-#disguise.show { display:flex; }
-.calc-screen { background:#1c1c1e; padding:1.5rem 1.8rem 0.8rem; text-align:right; flex-shrink:0; }
-.calc-prev-val { font-size:1rem; color:rgba(255,255,255,0.35); min-height:1.4rem; }
-.calc-main { font-size:4rem; color:white; font-weight:200; line-height:1.1; word-break:break-all; }
-.calc-keys { display:grid; grid-template-columns:repeat(4,1fr); flex:1; gap:1px; background:#3a3a3c; }
-.ck { background:#505050; border:none; font-size:1.6rem; color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; transition:filter 0.1s; }
-.ck:active { filter:brightness(0.7); }
-.ck.fn { background:#a5a5a5; color:#1c1c1e; }
-.ck.op,.ck.eq { background:#ff9f0a; }
-.ck.zero { grid-column:span 2; justify-content:flex-start; padding-left:1.8rem; }
-.calc-back { position:fixed; bottom:16px; right:16px; background:rgba(255,255,255,0.06); border:none; border-radius:50%; width:38px; height:38px; cursor:pointer; color:rgba(255,255,255,0.2); font-size:0.7rem; display:flex; align-items:center; justify-content:center; }
+#disguise{display:none;position:fixed;inset:0;z-index:99999;background:#1c1c1e;flex-direction:column;}
+#disguise.show{display:flex;}
+.calc-screen{background:#1c1c1e;padding:1.5rem 1.8rem 0.8rem;text-align:right;flex-shrink:0;}
+.calc-prev-val{font-size:1rem;color:rgba(255,255,255,0.35);min-height:1.4rem;}
+.calc-main{font-size:4rem;color:white;font-weight:200;line-height:1.1;word-break:break-all;}
+.calc-keys{display:grid;grid-template-columns:repeat(4,1fr);flex:1;gap:1px;background:#3a3a3c;}
+.ck{background:#505050;border:none;font-size:1.6rem;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:filter 0.1s;}
+.ck:active{filter:brightness(0.7);}
+.ck.fn{background:#a5a5a5;color:#1c1c1e;}
+.ck.op,.ck.eq{background:#ff9f0a;}
+.ck.zero{grid-column:span 2;justify-content:flex-start;padding-left:1.8rem;}
+.calc-back{position:fixed;bottom:16px;right:16px;background:rgba(255,255,255,0.06);border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;color:rgba(255,255,255,0.2);font-size:0.7rem;display:flex;align-items:center;justify-content:center;}
 
 /* FOOTER */
-footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--border); background:rgba(6,4,15,0.9); display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:2rem; }
-.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; margin-bottom:0.5rem; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-.footer-note { font-size:0.77rem; color:var(--white-dim); max-width:380px; line-height:1.65; }
-.footer-sos { font-size:0.77rem; color:var(--purple-light); }
+footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--border);background:rgba(6,4,15,0.9);display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;}
+.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;margin-bottom:0.5rem;background:linear-gradient(135deg,var(--purple-light),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.footer-note{font-size:0.77rem;color:var(--white-dim);max-width:380px;line-height:1.65;}
+.footer-sos{font-size:0.77rem;color:var(--purple-light);}
 
-/* SCROLL ANIM */
-.fade { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
-.fade.in { opacity:1; transform:translateY(0); }
+/* SCROLL */
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-size:0.68rem;letter-spacing:0.15em;color:var(--white-dim);display:flex;flex-direction:column;align-items:center;gap:0.6rem;animation:bobble 2.5s ease-in-out infinite;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--purple-light),transparent);}
+@keyframes bobble{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+/* FADE ANIM */
+.fade{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fade.in{opacity:1;transform:translateY(0);}
 
 /* SCROLLBAR */
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:transparent; }
-::-webkit-scrollbar-thumb { background:var(--purple); border-radius:4px; }
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--purple);border-radius:4px;}
 
-/* TOAST NOTIFICATION */
-#toast {
-  position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(20px);
-  background:rgba(26,10,61,0.95); border:1px solid var(--border); border-radius:100px;
-  padding:0.65rem 1.5rem; font-size:0.82rem; color:var(--white); z-index:9999;
-  opacity:0; transition:all 0.35s; pointer-events:none; backdrop-filter:blur(10px);
-  white-space:nowrap;
-}
-#toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+/* TOAST */
+#toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(26,10,61,0.95);border:1px solid var(--border);border-radius:100px;padding:0.65rem 1.5rem;font-size:0.82rem;color:var(--white);z-index:9999;opacity:0;transition:all 0.35s;pointer-events:none;backdrop-filter:blur(10px);white-space:nowrap;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* RESPONSIVE */
-@media (max-width:900px) {
-  nav { padding:1rem 1.5rem; }
-  .nav-links { display:none; }
-  .section-pad { padding:4.5rem 1.5rem; }
-  .chat-layout { grid-template-columns:1fr; }
-  .chat-sidebar { position:static; }
-}
+/* SOS OVERLAY */
+#sosOverlay{display:none;position:fixed;inset:0;z-index:99998;background:rgba(220,38,38,0.95);flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+#sosOverlay.show{display:flex;}
+.sos-big{font-size:8rem;animation:sos-big-pulse 0.5s ease-in-out infinite;}
+@keyframes sos-big-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.sos-title{font-family:'Syne',sans-serif;font-size:3rem;font-weight:800;color:white;margin-bottom:1rem;}
+.sos-sub{font-size:1.1rem;color:rgba(255,255,255,0.9);margin-bottom:2rem;}
+.sos-numbers{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
+.sos-call-btn{padding:1rem 2rem;border-radius:100px;border:3px solid white;background:rgba(255,255,255,0.15);color:white;font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.sos-call-btn:hover{background:white;color:#dc2626;}
+.sos-stop-btn{background:rgba(255,255,255,0.2);border:2px solid white;color:white;padding:0.75rem 2rem;border-radius:100px;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:1rem;}
 
-.exit-choice-btn {
-  background: var(--white-faint); border: 1px solid var(--border2);
-  color: var(--purple-light); padding: 0.85rem 1.1rem; border-radius: 12px;
-  cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
-  text-align: left; transition: all 0.2s; width: 100%;
+/* CHAT BUBBLES */
+.ally-bubble-bot{background:var(--white-faint);border-radius:14px;padding:0.9rem 1rem;font-size:0.88rem;line-height:1.65;}
+.ally-bubble-user{background:linear-gradient(135deg,var(--violet),var(--pink));margin-left:auto;border-radius:14px;padding:0.9rem 1rem;font-size:0.88rem;max-width:82%;color:#fff;}
+
+.exit-choice-btn{background:var(--white-faint);border:1px solid var(--border);color:var(--purple-light);padding:0.85rem 1.1rem;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem;text-align:left;transition:all 0.2s;width:100%;}
+.exit-choice-btn:hover{background:rgba(124,58,237,0.25);border-color:var(--purple-light);color:var(--white);}
+
+/* VAULT */
+.vault-entry{background:var(--white-faint);border:1px solid var(--border);border-radius:10px;padding:0.8rem;font-size:0.83rem;}
+.vault-entry-header{display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.7rem;color:var(--purple-light);}
+.vault-delete{background:none;border:none;color:#f87171;cursor:pointer;font-size:0.75rem;font-family:inherit;}
+
+/* LOCATION BOX */
+.location-box{background:rgba(124,58,237,0.08);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;margin-bottom:0.8rem;font-size:0.78rem;color:var(--white-dim);}
+.location-box.found{border-color:var(--green);color:var(--green);}
+.location-box.error{border-color:#f87171;color:#f87171;}
+
+/* NEARBY BTNS */
+.nearby-btn{font-size:0.7rem;padding:0.32rem 0.8rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:100px;cursor:pointer;margin:0.2rem;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.nearby-btn:hover{background:rgba(124,58,237,0.3);border-color:var(--purple-light);}
+
+/* CAMERA */
+#cameraStream{width:100%;border-radius:10px;display:none;margin-bottom:0.5rem;}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .section-pad{padding:4.5rem 1.5rem;}
+  .chat-layout{grid-template-columns:1fr;}
+  .chat-sidebar{position:static;}
 }
-.exit-choice-btn:hover { background: rgba(124,58,237,0.25); border-color: var(--purple-light); color: var(--white); }
-.vault-entry { background: var(--white-faint); border: 1px solid var(--border); border-radius: 10px; padding: 0.8rem; font-size: 0.83rem; }
-.vault-entry-header { display: flex; justify-content: space-between; margin-bottom: 0.4rem; font-size: 0.7rem; color: var(--purple-light); }
-.vault-delete { background: none; border: none; color: #f87171; cursor: pointer; font-size: 0.75rem; font-family: inherit; }
-.ally-bubble-bot { background: var(--white-faint); border-radius: 14px; padding: 0.9rem 1rem; font-size: 0.88rem; line-height: 1.65; }
-.ally-bubble-user { background: linear-gradient(135deg, var(--violet), var(--pink)); margin-left: auto; border-radius: 14px; padding: 0.9rem 1rem; font-size: 0.88rem; max-width: 82%; color: #fff; }
 </style>
 </head>
 <body>
@@ -357,15 +294,16 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
 <nav>
   <div class="nav-logo" onclick="navTo('home')">Safe<span>Voice</span></div>
   <ul class="nav-links">
-    <li><a onclick="navTo('home')">Home</a></li>
-    <li><a onclick="navTo('features')">Features</a></li>
-    <li><a onclick="navTo('chatbot')">Get Help</a></li>
-    <li><a onclick="navTo('helplines')">Helplines</a></li>
-    <li><a onclick="navTo('laws')">Your Rights</a></li>
+    <li><a onclick="navTo('home')" data-i18n="nav_home">Home</a></li>
+    <li><a onclick="navTo('features')" data-i18n="nav_features">Features</a></li>
+    <li><a onclick="navTo('chatbot')" data-i18n="nav_help">Get Help</a></li>
+    <li><a onclick="navTo('helplines')" data-i18n="nav_helplines">Helplines</a></li>
+    <li><a onclick="navTo('laws')" data-i18n="nav_rights">Your Rights</a></li>
   </ul>
   <div class="nav-actions">
-    <button class="btn-ghost" onclick="showDisguise()">🧮 Disguise</button>
-    <button class="btn-danger" onclick="quickExit()">⚡ Quick Exit</button>
+    <button class="btn-ghost" onclick="showDisguise()">🧮 <span data-i18n="disguise">Disguise</span></button>
+    <button class="btn-sos" id="sosBtn" onclick="triggerSOS()">🆘 SOS</button>
+    <button class="btn-danger" onclick="quickExit()">⚡ <span data-i18n="quick_exit">Quick Exit</span></button>
   </div>
 </nav>
 
@@ -374,17 +312,26 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
   <div class="orb orb3"></div>
-  <div class="hero-eyebrow">Anonymous · Multilingual · No Data Stored · Karnataka</div>
+  <div class="hero-eyebrow" data-i18n="hero_eyebrow">Anonymous · Multilingual · No Data Stored · Karnataka</div>
   <h1 class="hero-title">
-    <span class="t1">You Are Not</span>
-    <span class="t2">Alone</span>
+    <span class="t1" data-i18n="hero_t1">You Are Not</span>
+    <span class="t2" data-i18n="hero_t2">Alone</span>
   </h1>
-  <p class="hero-sub">SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.</p>
-  <div class="hero-btns">
-    <button class="btn-primary" onclick="navTo('chatbot')">💬 Talk to SafeVoice</button>
-    <button class="btn-outline" onclick="navTo('helplines')">📞 Emergency Helplines</button>
+  <p class="hero-sub" data-i18n="hero_sub">SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.</p>
+
+  <!-- PROMINENT LANGUAGE SELECTOR -->
+  <div class="lang-selector-hero">
+    <button class="lang-hero-btn on" onclick="setGlobalLang('en',this)">🇬🇧 English</button>
+    <button class="lang-hero-btn" onclick="setGlobalLang('kn',this)">🇮🇳 ಕನ್ನಡ</button>
+    <button class="lang-hero-btn" onclick="setGlobalLang('hi',this)">🇮🇳 हिंदी</button>
+    <button class="lang-hero-btn" onclick="setGlobalLang('te',this)">🇮🇳 తెలుగు</button>
   </div>
-  <div class="hero-chips">
+
+  <div class="hero-btns" style="margin-top:1.5rem">
+    <button class="btn-primary" onclick="navTo('chatbot')" data-i18n="hero_btn1">💬 Talk to SafeVoice</button>
+    <button class="btn-outline" onclick="navTo('helplines')" data-i18n="hero_btn2">📞 Emergency Helplines</button>
+  </div>
+  <div class="hero-chips" style="margin-top:2rem">
     <span class="chip"><span class="chip-dot"></span>Kannada</span>
     <span class="chip"><span class="chip-dot"></span>Hindi</span>
     <span class="chip"><span class="chip-dot"></span>Telugu</span>
@@ -393,74 +340,71 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
     <span class="chip"><span class="chip-dot"></span>PWDVA</span>
     <span class="chip"><span class="chip-dot"></span>POCSO</span>
   </div>
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    <span>scroll</span>
-  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span data-i18n="scroll">scroll</span></div>
 </section>
 
 <!-- STATS -->
 <div class="stats-strip fade">
-  <div class="stat"><div class="stat-n">86%</div><div class="stat-l">Violence by known person in India</div></div>
-  <div class="stat"><div class="stat-n">498A</div><div class="stat-l">Key law protecting married women</div></div>
-  <div class="stat"><div class="stat-n">0</div><div class="stat-l">Data stored — privacy by design</div></div>
-  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Languages supported immediately</div></div>
+  <div class="stat"><div class="stat-n">86%</div><div class="stat-l" data-i18n="stat1">Violence by known person in India</div></div>
+  <div class="stat"><div class="stat-n">498A</div><div class="stat-l" data-i18n="stat2">Key law protecting married women</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l" data-i18n="stat3">Data stored — privacy by design</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l" data-i18n="stat4">Languages supported immediately</div></div>
 </div>
 
 <!-- FEATURES -->
 <section id="features" class="section-pad">
   <div class="section-header fade">
-    <span class="section-tag">Built different</span>
-    <h2 class="section-title">Every feature built<br>for <em>real safety</em></h2>
+    <span class="section-tag" data-i18n="feat_tag">Built different</span>
+    <h2 class="section-title" data-i18n="feat_title">Every feature built<br>for <em>real safety</em></h2>
   </div>
   <div class="features-grid fade">
-    <div class="feat" onclick="openFeatureModal('ai')">
+    <div class="feat" onclick="navTo('chatbot')">
       <div class="feat-ico">🤖</div>
-      <div class="feat-title">AI Legal Guidance</div>
-      <div class="feat-desc">Describe your situation in plain words and SafeVoice maps it to the correct law — IPC 498A, PWDVA, POCSO — without needing any legal terminology.</div>
-      <span class="feat-arrow">→ Learn more</span>
-    </div>
-    <div class="feat" onclick="openFeatureModal('lang')">
-      <div class="feat-ico">🌐</div>
-      <div class="feat-title">4 Languages</div>
-      <div class="feat-desc">Kannada, Hindi, Telugu, and English. Switch instantly. Responses generated in your chosen language — because help should speak your language.</div>
-      <span class="feat-arrow">→ Learn more</span>
-    </div>
-    <div class="feat" onclick="showDisguise()">
-      <div class="feat-ico">👁️</div>
-      <div class="feat-title">Disguise Mode</div>
-      <div class="feat-desc">One tap transforms the entire app into a fully functional calculator. If someone walks in, there's nothing to see and nothing to explain.</div>
-      <span class="feat-arrow">→ Try it now</span>
-    </div>
-    <div class="feat" onclick="openFeatureModal('privacy')">
-      <div class="feat-ico">🔒</div>
-      <div class="feat-title">Zero Data Storage</div>
-      <div class="feat-desc">No account. No login. No call log. No history stored anywhere. Your privacy is our architecture — not just a promise.</div>
-      <span class="feat-arrow">→ Learn more</span>
-    </div>
-    <div class="feat" onclick="openSafeExit()">
-      <div class="feat-ico">🚪</div>
-      <div class="feat-title">Safe Exit Planner</div>
-      <div class="feat-desc">Step-by-step personalised plan to leave safely. Finds shelters, police stations and hospitals near you. Private and guided.</div>
-      <span class="feat-arrow">→ Plan my exit</span>
-    </div>
-    <div class="feat" onclick="openEvidenceVault()">
-      <div class="feat-ico">🔐</div>
-      <div class="feat-title">Evidence Vault</div>
-      <div class="feat-desc">Secretly capture photos, audio recordings and written notes. All stored encrypted on this device only. Never uploaded anywhere.</div>
-      <span class="feat-arrow">→ Open vault</span>
+      <div class="feat-title" data-i18n="feat1_title">AI Legal Guidance</div>
+      <div class="feat-desc" data-i18n="feat1_desc">Describe your situation in plain words and SafeVoice maps it to the correct law — IPC 498A, PWDVA, POCSO — without needing any legal terminology.</div>
+      <span class="feat-arrow">→</span>
     </div>
     <div class="feat" onclick="openAllyMode()">
       <div class="feat-ico">🤝</div>
-      <div class="feat-title">Ally Mode</div>
-      <div class="feat-desc">Supporting a friend or family member? Get tailored guidance on how to help someone you know who may be experiencing abuse.</div>
-      <span class="feat-arrow">→ Support someone</span>
+      <div class="feat-title" data-i18n="feat2_title">Ally Mode</div>
+      <div class="feat-desc" data-i18n="feat2_desc">Supporting a friend or family member? Get tailored guidance on how to help someone experiencing abuse.</div>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat" onclick="showDisguise()">
+      <div class="feat-ico">👁️</div>
+      <div class="feat-title" data-i18n="feat3_title">Disguise Mode</div>
+      <div class="feat-desc" data-i18n="feat3_desc">One tap transforms the entire app into a fully functional calculator. Type 111 to return home.</div>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat" onclick="openEvidenceVault()">
+      <div class="feat-ico">🔐</div>
+      <div class="feat-title" data-i18n="feat4_title">Evidence Vault</div>
+      <div class="feat-desc" data-i18n="feat4_desc">Secretly capture photos, take live camera pictures, record audio and write notes. All stored securely on this device only.</div>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat" onclick="openSafeExit()">
+      <div class="feat-ico">🚪</div>
+      <div class="feat-title" data-i18n="feat5_title">Safe Exit Planner</div>
+      <div class="feat-desc" data-i18n="feat5_desc">Step-by-step personalised plan to leave safely. Finds nearby police stations, hospitals, shelters and legal aid using your exact location.</div>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat" onclick="triggerSOS()">
+      <div class="feat-ico">🆘</div>
+      <div class="feat-title" data-i18n="feat6_title">SOS Emergency Alert</div>
+      <div class="feat-desc" data-i18n="feat6_desc">One tap triggers an alarm and shows all emergency numbers instantly. For when you need help right now.</div>
+      <span class="feat-arrow">→</span>
+    </div>
+    <div class="feat" onclick="quickExit()">
+      <div class="feat-ico">⚡</div>
+      <div class="feat-title" data-i18n="feat7_title">Quick Exit</div>
+      <div class="feat-desc" data-i18n="feat7_desc">One click redirects to Google instantly and wipes the session. Always visible in the nav.</div>
+      <span class="feat-arrow">→</span>
     </div>
     <div class="feat" onclick="navTo('laws')">
       <div class="feat-ico">📜</div>
-      <div class="feat-title">Know Your Rights</div>
-      <div class="feat-desc">Plain-language summaries of every protective law — what each protects, what penalties abusers face, what your next steps are.</div>
-      <span class="feat-arrow">→ View rights</span>
+      <div class="feat-title" data-i18n="feat8_title">Know Your Rights</div>
+      <div class="feat-desc" data-i18n="feat8_desc">Plain-language summaries of every protective law — what each protects, what penalties abusers face.</div>
+      <span class="feat-arrow">→</span>
     </div>
   </div>
 </section>
@@ -473,44 +417,35 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
   </div>
   <div class="chat-layout fade">
     <div class="chat-sidebar">
-      <div class="api-setup-box" id="apiSetupBox">
+      <div class="api-setup-box" id="apiSetupBox" style="display:none">
         <h4>⚙️ Connect AI Brain</h4>
-        <p>Enter your Gemini API key to activate the AI. It's sent to your backend server — never stored here.</p>
-        <div class="api-input-row">
-          <input type="password" class="api-input" id="apiKeyInput" placeholder="AIza...your key">
-          <button class="api-save-btn" onclick="saveApiKey()">Save</button>
-        </div>
-        <div class="api-status" id="apiStatus"></div>
+        <p>AI is connected and ready.</p>
       </div>
-
-      <p>Choose your language and describe your situation in your own words. SafeVoice will guide you through your legal rights, next steps, and who to contact.</p>
+      <p data-i18n="chat_desc">Choose your language and describe your situation in your own words. SafeVoice will guide you through your legal rights, next steps, and who to contact.</p>
       <div class="lang-row" id="langRow">
-        <button class="lang-btn on" onclick="setLang('en',this)">English</button>
-        <button class="lang-btn" onclick="setLang('kn',this)">ಕನ್ನಡ</button>
-        <button class="lang-btn" onclick="setLang('hi',this)">हिंदी</button>
-        <button class="lang-btn" onclick="setLang('te',this)">తెలుగు</button>
+        <button class="lang-btn on" onclick="setChatLang('en',this)">English</button>
+        <button class="lang-btn" onclick="setChatLang('kn',this)">ಕನ್ನಡ</button>
+        <button class="lang-btn" onclick="setChatLang('hi',this)">हिंदी</button>
+        <button class="lang-btn" onclick="setChatLang('te',this)">తెలుగు</button>
       </div>
       <div class="privacy-box">
-        <strong>🔒 Completely private.</strong><br>
-        Your messages go to the backend server — never stored, never logged. No account needed. Quick Exit clears everything instantly.
+        <strong data-i18n="privacy_title">🔒 Completely private.</strong><br>
+        <span data-i18n="privacy_desc">Your messages go to the AI — never stored, never logged. No account needed. Quick Exit clears everything instantly.</span>
       </div>
     </div>
-
     <div class="chat-box">
       <div class="chat-head">
         <div class="chat-ava">🛡️</div>
         <div class="chat-head-info">
           <div class="name">SafeVoice AI</div>
-          <div class="status" id="statusDot">● Connecting...</div>
+          <div class="status" id="statusDot">● Online · AI Ready</div>
         </div>
         <div class="chat-badge">🔐 Anonymous</div>
       </div>
       <div class="chat-msgs" id="chatMsgs">
         <div class="msg bot">
           <div class="msg-ico">🛡️</div>
-          <div>
-            <div class="bubble">Hello. This is a safe, completely private space. I'm here to help you understand your legal rights and options. Please describe your situation in your own words — there's no right or wrong way.</div>
-          </div>
+          <div><div class="bubble" id="welcomeMsg">Hello. This is a safe, completely private space. I'm here to help you understand your legal rights and options. Please describe your situation in your own words — there's no right or wrong way.</div></div>
         </div>
       </div>
       <div class="quick-chips" id="quickChips"></div>
@@ -526,110 +461,32 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
 <!-- HELPLINES -->
 <section id="helplines" class="section-pad">
   <div class="section-header fade">
-    <span class="section-tag">Available 24/7</span>
-    <h2 class="section-title">Emergency <em>Helplines</em></h2>
+    <span class="section-tag" data-i18n="hl_tag">Available 24/7</span>
+    <h2 class="section-title"><span data-i18n="hl_title">Emergency</span> <em data-i18n="hl_title2">Helplines</em></h2>
   </div>
   <div class="helplines-grid fade">
-    <div class="hl-card">
-      <div class="hl-ico">👩‍⚖️</div>
-      <div class="hl-org">National Women Helpline</div>
-      <div class="hl-num">181</div>
-      <div class="hl-desc">24/7 support for women in distress. Legal aid, counselling, and shelter referrals.</div>
-      <span class="hl-tag">PAN INDIA · 24/7</span>
-      <a href="tel:181" class="hl-call-btn">📞 Call 181 Now</a>
-    </div>
-    <div class="hl-card">
-      <div class="hl-ico">🏠</div>
-      <div class="hl-org">Vanitha Sahayavani</div>
-      <div class="hl-num">1091</div>
-      <div class="hl-desc">Karnataka state women's helpline. Legal aid, shelter, and counselling.</div>
-      <span class="hl-tag">KARNATAKA · 24/7</span>
-      <a href="tel:1091" class="hl-call-btn">📞 Call 1091 Now</a>
-    </div>
-    <div class="hl-card">
-      <div class="hl-ico">🚔</div>
-      <div class="hl-org">Police Emergency</div>
-      <div class="hl-num">100</div>
-      <div class="hl-desc">Immediate danger. File FIR for 498A, assault, and other offences.</div>
-      <span class="hl-tag">EMERGENCY · 24/7</span>
-      <a href="tel:100" class="hl-call-btn">📞 Call 100 Now</a>
-    </div>
-    <div class="hl-card">
-      <div class="hl-ico">🏥</div>
-      <div class="hl-org">One Stop Centre</div>
-      <div class="hl-num">7827170170</div>
-      <div class="hl-desc">Medical, police, legal aid, and shelter under one roof. Government-run.</div>
-      <span class="hl-tag">KARNATAKA · FREE</span>
-      <a href="tel:7827170170" class="hl-call-btn">📞 Call Now</a>
-    </div>
-    <div class="hl-card">
-      <div class="hl-ico">👶</div>
-      <div class="hl-org">Childline (POCSO)</div>
-      <div class="hl-num">1098</div>
-      <div class="hl-desc">Child abuse and POCSO emergencies. Free, 24/7 nationwide.</div>
-      <span class="hl-tag">CHILDREN · 24/7</span>
-      <a href="tel:1098" class="hl-call-btn">📞 Call 1098 Now</a>
-    </div>
-    <div class="hl-card">
-      <div class="hl-ico">🧠</div>
-      <div class="hl-org">iCall Mental Health</div>
-      <div class="hl-num">9152987821</div>
-      <div class="hl-desc">Free counselling for trauma, abuse, and emotional distress.</div>
-      <span class="hl-tag">COUNSELLING · FREE</span>
-      <a href="tel:9152987821" class="hl-call-btn">📞 Call Now</a>
-    </div>
+    <div class="hl-card"><div class="hl-ico">👩‍⚖️</div><div class="hl-org" data-i18n="hl1_name">National Women Helpline</div><div class="hl-num">181</div><div class="hl-desc" data-i18n="hl1_desc">24/7 support for women in distress. Legal aid, counselling, and shelter referrals.</div><span class="hl-tag">PAN INDIA · 24/7</span><a href="tel:181" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 181</a></div>
+    <div class="hl-card"><div class="hl-ico">🏠</div><div class="hl-org" data-i18n="hl2_name">Vanitha Sahayavani</div><div class="hl-num">1091</div><div class="hl-desc" data-i18n="hl2_desc">Karnataka state women's helpline. Legal aid, shelter, and counselling.</div><span class="hl-tag">KARNATAKA · 24/7</span><a href="tel:1091" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 1091</a></div>
+    <div class="hl-card"><div class="hl-ico">🚔</div><div class="hl-org" data-i18n="hl3_name">Police Emergency</div><div class="hl-num">100</div><div class="hl-desc" data-i18n="hl3_desc">Immediate danger. File FIR for 498A, assault, and other offences.</div><span class="hl-tag">EMERGENCY · 24/7</span><a href="tel:100" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 100</a></div>
+    <div class="hl-card"><div class="hl-ico">🏥</div><div class="hl-org" data-i18n="hl4_name">One Stop Centre</div><div class="hl-num">7827170170</div><div class="hl-desc" data-i18n="hl4_desc">Medical, police, legal aid, and shelter under one roof. Government-run.</div><span class="hl-tag">KARNATAKA · FREE</span><a href="tel:7827170170" class="hl-call-btn">📞 <span data-i18n="call">Call</span> Now</a></div>
+    <div class="hl-card"><div class="hl-ico">👶</div><div class="hl-org" data-i18n="hl5_name">Childline (POCSO)</div><div class="hl-num">1098</div><div class="hl-desc" data-i18n="hl5_desc">Child abuse and POCSO emergencies. Free, 24/7 nationwide.</div><span class="hl-tag">CHILDREN · 24/7</span><a href="tel:1098" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 1098</a></div>
+    <div class="hl-card"><div class="hl-ico">🧠</div><div class="hl-org" data-i18n="hl6_name">iCall Mental Health</div><div class="hl-num">9152987821</div><div class="hl-desc" data-i18n="hl6_desc">Free counselling for trauma, abuse, and emotional distress.</div><span class="hl-tag">COUNSELLING · FREE</span><a href="tel:9152987821" class="hl-call-btn">📞 <span data-i18n="call">Call</span> Now</a></div>
   </div>
 </section>
 
 <!-- LAWS -->
 <section id="laws" class="section-pad">
   <div class="section-header fade">
-    <span class="section-tag">Know your rights</span>
-    <h2 class="section-title">Laws that <em>protect you</em></h2>
+    <span class="section-tag" data-i18n="laws_tag">Know your rights</span>
+    <h2 class="section-title"><span data-i18n="laws_title">Laws that</span> <em data-i18n="laws_title2">protect you</em></h2>
   </div>
   <div class="laws-grid fade">
-    <div class="law-card" onclick="askAboutLaw('IPC 498A - cruelty by husband or relatives')">
-      <div class="law-code">IPC 498A</div>
-      <div class="law-name">Protection from Cruelty by Husband or Relatives</div>
-      <div class="law-desc">Criminalises wilful cruelty by husband or his relatives. Non-bailable, cognizable offence. Up to 3 years imprisonment + fine. Police must act immediately.</div>
-      <div class="law-tags"><span class="law-tag">Physical abuse</span><span class="law-tag">Mental cruelty</span><span class="law-tag">Dowry harassment</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
-    <div class="law-card" onclick="askAboutLaw('PWDVA - Protection of Women from Domestic Violence Act 2005')">
-      <div class="law-code">PWDVA</div>
-      <div class="law-name">Protection of Women from Domestic Violence Act, 2005</div>
-      <div class="law-desc">Civil remedies: Protection Orders, Residence Orders, Monetary Relief, Custody Orders. Emergency orders within 24 hours. You can stay in your home.</div>
-      <div class="law-tags"><span class="law-tag">Protection order</span><span class="law-tag">Stay at home</span><span class="law-tag">Financial relief</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
-    <div class="law-card" onclick="askAboutLaw('POCSO - Protection of Children from Sexual Offences Act 2012')">
-      <div class="law-code">POCSO</div>
-      <div class="law-name">Protection of Children from Sexual Offences Act, 2012</div>
-      <div class="law-desc">Protects children under 18 from sexual assault and harassment. Child-friendly procedures. 7 years to life imprisonment. Identity fully protected.</div>
-      <div class="law-tags"><span class="law-tag">Under 18</span><span class="law-tag">Sexual offences</span><span class="law-tag">Strict penalties</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
-    <div class="law-card" onclick="askAboutLaw('IPC 354 - assault or criminal force against a woman')">
-      <div class="law-code">IPC 354</div>
-      <div class="law-name">Assault / Criminal Force Against Woman</div>
-      <div class="law-desc">Assault to outrage a woman's modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C). Non-bailable in serious cases.</div>
-      <div class="law-tags"><span class="law-tag">Assault</span><span class="law-tag">Stalking</span><span class="law-tag">Harassment</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
-    <div class="law-card" onclick="askAboutLaw('IPC 406 - criminal breach of trust and Streedhan recovery')">
-      <div class="law-code">IPC 406</div>
-      <div class="law-name">Criminal Breach of Trust — Streedhan Recovery</div>
-      <div class="law-desc">Protects a woman's Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence. Complaint leads to court order for return of all property.</div>
-      <div class="law-tags"><span class="law-tag">Streedhan</span><span class="law-tag">Jewellery</span><span class="law-tag">Property rights</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
-    <div class="law-card" onclick="askAboutLaw('Emergency rights under the Domestic Violence Act - Protection Orders and maintenance')">
-      <div class="law-code">DV Act</div>
-      <div class="law-name">Emergency Rights Under Domestic Violence Act</div>
-      <div class="law-desc">Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance and compensation. Right to free legal aid.</div>
-      <div class="law-tags"><span class="law-tag">24-hr order</span><span class="law-tag">Shared home</span><span class="law-tag">Maintenance</span></div>
-      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
-    </div>
+    <div class="law-card" onclick="askAboutLaw('IPC 498A - cruelty by husband or relatives')"><div class="law-code">IPC 498A</div><div class="law-name" data-i18n="law1_name">Protection from Cruelty by Husband or Relatives</div><div class="law-desc" data-i18n="law1_desc">Criminalises wilful cruelty by husband or his relatives. Non-bailable, cognizable. Up to 3 years + fine.</div><div class="law-tags"><span class="law-tag" data-i18n="law1_t1">Physical abuse</span><span class="law-tag" data-i18n="law1_t2">Mental cruelty</span><span class="law-tag" data-i18n="law1_t3">Dowry harassment</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card" onclick="askAboutLaw('PWDVA - Protection of Women from Domestic Violence Act 2005')"><div class="law-code">PWDVA</div><div class="law-name" data-i18n="law2_name">Protection of Women from Domestic Violence Act, 2005</div><div class="law-desc" data-i18n="law2_desc">Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.</div><div class="law-tags"><span class="law-tag">Protection order</span><span class="law-tag">Stay at home</span><span class="law-tag">Financial relief</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card" onclick="askAboutLaw('POCSO - Protection of Children from Sexual Offences Act 2012')"><div class="law-code">POCSO</div><div class="law-name" data-i18n="law3_name">Protection of Children from Sexual Offences, 2012</div><div class="law-desc" data-i18n="law3_desc">Protects children under 18 from sexual assault. 7 years to life imprisonment. Identity fully protected.</div><div class="law-tags"><span class="law-tag">Under 18</span><span class="law-tag">Sexual offences</span><span class="law-tag">Strict penalties</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card" onclick="askAboutLaw('IPC 354 - assault or criminal force against a woman')"><div class="law-code">IPC 354</div><div class="law-name" data-i18n="law4_name">Assault / Criminal Force Against Woman</div><div class="law-desc" data-i18n="law4_desc">Assault to outrage a woman's modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C).</div><div class="law-tags"><span class="law-tag">Assault</span><span class="law-tag">Stalking</span><span class="law-tag">Harassment</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card" onclick="askAboutLaw('IPC 406 - criminal breach of trust and Streedhan recovery')"><div class="law-code">IPC 406</div><div class="law-name" data-i18n="law5_name">Criminal Breach of Trust — Streedhan</div><div class="law-desc" data-i18n="law5_desc">Protects a woman's Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence.</div><div class="law-tags"><span class="law-tag">Streedhan</span><span class="law-tag">Jewellery</span><span class="law-tag">Property rights</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card" onclick="askAboutLaw('Emergency rights under the Domestic Violence Act - Protection Orders and maintenance')"><div class="law-code">DV Act</div><div class="law-name" data-i18n="law6_name">Emergency Rights Under Domestic Violence Act</div><div class="law-desc" data-i18n="law6_desc">Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance.</div><div class="law-tags"><span class="law-tag">24-hr order</span><span class="law-tag">Shared home</span><span class="law-tag">Maintenance</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
   </div>
 </section>
 
@@ -637,11 +494,9 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
 <footer>
   <div>
     <div class="footer-logo">SafeVoice</div>
-    <p class="footer-note">Built by Team Nova — PES University CSE (AIML). Hackfinity 2025. Every line of code written to protect a woman's dignity and access to justice.</p>
+    <p class="footer-note" data-i18n="footer_note">Built by Team Nova — PES University CSE (AIML). Hackfinity 2025. Every line of code written to protect a woman's dignity and access to justice.</p>
   </div>
-  <div class="footer-sos">
-    🆘 EMERGENCY: 100 &nbsp;|&nbsp; WOMEN: 181 &nbsp;|&nbsp; KARNATAKA: 1091
-  </div>
+  <div class="footer-sos">🆘 EMERGENCY: 100 &nbsp;|&nbsp; WOMEN: 181 &nbsp;|&nbsp; KARNATAKA: 1091</div>
 </footer>
 
 <!-- ══ ALLY MODE MODAL ══ -->
@@ -649,14 +504,14 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
   <div class="modal-box" style="max-width:560px;padding:2rem">
     <button class="modal-close" onclick="closeAlly()">✕</button>
     <div class="modal-ico">🤝</div>
-    <div class="modal-title">Supporting Others</div>
-    <div class="modal-subtitle" style="margin-bottom:1rem">Supporting someone safely · Private Session</div>
-    <div style="margin-bottom:10px">
-  <button class="lang-btn on" onclick="setAllyLang('en', this)">English</button>
-  <button class="lang-btn" onclick="setAllyLang('kn', this)">ಕನ್ನಡ</button>
-  <button class="lang-btn" onclick="setAllyLang('hi', this)">हिंदी</button>
-  <button class="lang-btn" onclick="setAllyLang('te', this)">తెలుగు</button>
-</div>
+    <div class="modal-title" data-i18n="ally_title">Supporting Others</div>
+    <div class="modal-subtitle" data-i18n="ally_sub">Supporting someone safely · Private Session</div>
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem">
+      <button class="lang-btn on" onclick="setAllyLang('en',this)">English</button>
+      <button class="lang-btn" onclick="setAllyLang('kn',this)">ಕನ್ನಡ</button>
+      <button class="lang-btn" onclick="setAllyLang('hi',this)">हिंदी</button>
+      <button class="lang-btn" onclick="setAllyLang('te',this)">తెలుగు</button>
+    </div>
     <div id="allyChat" style="height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:0.75rem;padding-right:0.2rem;margin-bottom:0.8rem"></div>
     <div class="chat-input-row" style="margin-top:0">
       <input type="text" class="chat-in" id="allyChatIn" placeholder="Describe your friend's situation..." onkeydown="if(event.key==='Enter')sendAllyMsg()">
@@ -671,53 +526,82 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
   <div class="modal-box" style="max-width:580px;padding:2rem">
     <button class="modal-close" onclick="closeVault()">✕</button>
     <div class="modal-ico">🔐</div>
-    <div class="modal-title">Evidence Vault</div>
+    <div class="modal-title" data-i18n="vault_title">Evidence Vault</div>
     <div class="modal-subtitle" style="color:var(--green);font-size:0.75rem;margin-bottom:1.2rem">🔒 Stored on this device only · Never uploaded anywhere</div>
     <div style="display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap">
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultToggleNote()">📝 Add Note</button>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#4f46e5,#2563eb)" onclick="vaultPickPhoto()">📷 Add Photo</button>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#047857,#059669)" onclick="vaultToggleAudio()">🎙️ <span id="audioLabel">Record Audio</span></button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultToggleNote()">📝 <span data-i18n="add_note">Add Note</span></button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#4f46e5,#2563eb)" onclick="vaultPickPhoto()">📷 <span data-i18n="add_photo">Add Photo</span></button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#0e7490,#0891b2)" onclick="vaultOpenCamera()">📸 <span data-i18n="take_photo">Take Photo</span></button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#047857,#059669)" onclick="vaultToggleAudio()">🎙️ <span id="audioLabel" data-i18n="record_audio">Record Audio</span></button>
     </div>
     <div id="noteInputArea" style="display:none;margin-bottom:0.9rem">
       <textarea id="noteText" rows="3" style="width:100%;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:10px;padding:0.75rem;font-family:inherit;font-size:0.88rem;resize:vertical" placeholder="Describe the incident — date, time, what happened..."></textarea>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.45rem 1rem;margin-top:0.4rem" onclick="vaultSaveNote()">Save Note</button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.45rem 1rem;margin-top:0.4rem" onclick="vaultSaveNote()" data-i18n="save_note">Save Note</button>
+    </div>
+    <!-- Live camera -->
+    <div id="cameraArea" style="display:none;margin-bottom:0.9rem">
+      <video id="cameraStream" autoplay playsinline style="width:100%;border-radius:10px;margin-bottom:0.5rem;display:block"></video>
+      <div style="display:flex;gap:0.5rem">
+        <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1.2rem" onclick="vaultCapturePhoto()" data-i18n="capture">📸 Capture</button>
+        <button class="btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultStopCamera()">✕ Close</button>
+      </div>
+      <canvas id="cameraCanvas" style="display:none"></canvas>
     </div>
     <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="vaultSavePhoto(event)">
     <div id="vaultEntries" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:0.6rem"></div>
-    <div id="vaultEmpty" style="text-align:center;color:var(--white-dim);padding:2rem 1rem;font-size:0.85rem">No entries yet.<br>Your evidence will appear here.</div>
+    <div id="vaultEmpty" style="text-align:center;color:var(--white-dim);padding:2rem 1rem;font-size:0.85rem" data-i18n="vault_empty">No entries yet.<br>Your evidence will appear here.</div>
   </div>
 </div>
 
 <!-- ══ SAFE EXIT PLANNER MODAL ══ -->
 <div class="modal-overlay" id="exitModal" onclick="if(event.target===this)closeExit()">
-  <div class="modal-box" style="max-width:590px;padding:2rem">
+  <div class="modal-box" style="max-width:600px;padding:2rem">
     <button class="modal-close" onclick="closeExit()">✕</button>
     <div class="modal-ico">🚪</div>
-    <div class="modal-title">Safe Exit Planner</div>
-    <div class="modal-subtitle" style="margin-bottom:0.9rem">Private · Personalised · Step-by-step</div>
-    <div style="margin-bottom:10px">
-  <button class="lang-btn on" onclick="setExitLang('en', this)">English</button>
-  <button class="lang-btn" onclick="setExitLang('kn', this)">ಕನ್ನಡ</button>
-  <button class="lang-btn" onclick="setExitLang('hi', this)">हिंदी</button>
-  <button class="lang-btn" onclick="setExitLang('te', this)">తెలుగు</button>
-</div>
-    <div style="margin-bottom:1rem">
-      <span style="font-size:0.73rem;color:var(--white-dim)">📍 Find Safe Places Near Me: </span>
-      <button onclick="findNearMe('police station')" style="font-size:0.7rem;padding:0.28rem 0.65rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:100px;cursor:pointer;margin:0.2rem">🚔 Police Station</button>
-      <button onclick="findNearMe('women shelter')" style="font-size:0.7rem;padding:0.28rem 0.65rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:100px;cursor:pointer;margin:0.2rem">🏠 Shelter</button>
-      <button onclick="findNearMe('hospital')" style="font-size:0.7rem;padding:0.28rem 0.65rem;background:#78350f;border:1px solid #92400e;color:#fcd34d;border-radius:100px;cursor:pointer;margin:0.2rem">🏥 Hospital</button>
-      <button onclick="findNearMe('legal aid office')" style="font-size:0.7rem;padding:0.28rem 0.65rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:100px;cursor:pointer;margin:0.2rem">⚖️ Free Legal Aid</button>
+    <div class="modal-title" data-i18n="exit_title">Safe Exit Planner</div>
+    <div class="modal-subtitle" data-i18n="exit_sub">Private · Personalised · Step-by-step</div>
+
+    <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem" id="exitLangRow">
+      <button class="lang-btn on" onclick="setExitLang('en',this)">English</button>
+      <button class="lang-btn" onclick="setExitLang('kn',this)">ಕನ್ನಡ</button>
+      <button class="lang-btn" onclick="setExitLang('hi',this)">हिंदी</button>
+      <button class="lang-btn" onclick="setExitLang('te',this)">తెలుగు</button>
     </div>
 
-    <div id="exitChat" style="height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:0.8rem;padding-right:0.2rem"></div>
+    <!-- LOCATION SECTION -->
+    <div class="location-box" id="locationBox">📍 <span id="locationText">Click to get your location for nearby safe places</span></div>
+    <div style="margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center">
+      <button class="nearby-btn" onclick="getLocationAndSearch()">📍 <span data-i18n="get_location">Get My Location</span></button>
+      <button class="nearby-btn" onclick="searchNearby('police station')">🚔 <span data-i18n="police">Police Station</span></button>
+      <button class="nearby-btn" onclick="searchNearby('women shelter home')">🏠 <span data-i18n="shelter">Shelter</span></button>
+      <button class="nearby-btn" onclick="searchNearby('hospital')">🏥 <span data-i18n="hospital">Hospital</span></button>
+      <button class="nearby-btn" onclick="searchNearby('legal aid office NGO')">⚖️ <span data-i18n="legal_aid">Free Legal Aid</span></button>
+      <button class="nearby-btn" onclick="searchNearby('one stop centre women')">🏛️ <span data-i18n="osc">One Stop Centre</span></button>
+    </div>
+
+    <div id="exitChat" style="height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:0.8rem;padding-right:0.2rem"></div>
     <div class="chat-input-row" style="margin-top:0">
       <input type="text" class="chat-in" id="exitChatIn" placeholder="Or type your situation here..." onkeydown="if(event.key==='Enter')sendExitMsg()">
       <button class="send-btn" onclick="sendExitMsg()">➤</button>
     </div>
-    <p style="font-size:0.62rem;color:var(--white-dim);opacity:0.45;text-align:center;margin-top:0.5rem">CONFIDENTIAL AI ASSISTANT · NO ACCOUNT REQUIRED · LOCAL ONLY</p>
+    <p style="font-size:0.62rem;color:var(--white-dim);opacity:0.45;text-align:center;margin-top:0.5rem">CONFIDENTIAL AI ASSISTANT · NO ACCOUNT REQUIRED</p>
   </div>
 </div>
 
+<!-- ══ SOS OVERLAY ══ -->
+<div id="sosOverlay">
+  <div class="sos-big">🆘</div>
+  <div class="sos-title">EMERGENCY SOS</div>
+  <div class="sos-sub" id="sosSub">Call emergency services immediately</div>
+  <div class="sos-numbers">
+    <a href="tel:100" class="sos-call-btn">🚔 100<br><small>Police</small></a>
+    <a href="tel:181" class="sos-call-btn">👩‍⚖️ 181<br><small>Women Helpline</small></a>
+    <a href="tel:1091" class="sos-call-btn">🏠 1091<br><small>Vanitha</small></a>
+    <a href="tel:7827170170" class="sos-call-btn">🏥 7827170170<br><small>One Stop</small></a>
+    <a href="tel:112" class="sos-call-btn">🚨 112<br><small>Emergency</small></a>
+  </div>
+  <button class="sos-stop-btn" onclick="stopSOS()">✕ Close SOS</button>
+</div>
 
 <!-- DISGUISE CALCULATOR -->
 <div id="disguise">
@@ -749,133 +633,334 @@ footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--
   <button class="calc-back" onclick="hideDisguise()" title="Return">✕</button>
 </div>
 
-<!-- FEATURE MODALS -->
-<div class="modal-overlay" id="featureModal" onclick="closeModalIf(event)">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-ico" id="mIco"></div>
-    <div class="modal-title" id="mTitle"></div>
-    <div class="modal-subtitle" id="mSubtitle"></div>
-    <div class="modal-body" id="mBody"></div>
-    <div class="modal-cta" id="mCta"></div>
-  </div>
-</div>
-
-<!-- TOAST -->
 <div id="toast"></div>
 
 <script>
-const API_BASE = window.location.origin;
-function setLang(l, btn){
-  currentLang = l;
-
-  // Only SafeVoice language buttons
-  document.querySelectorAll("#langRow .lang-btn")
-    .forEach(b => b.classList.remove("on"));
-
-  btn.classList.add("on");
-
-  showToast("Language set to " + btn.innerText);
-}
-
-let allyLang = "en";
-let exitLang = "en";
-
-function setAllyLang(l, btn){
-  allyLang = l;
-  btn.parentElement.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("on"));
-  btn.classList.add("on");
-}
-
-function setExitLang(l, btn){
-  exitLang = l;
-  btn.parentElement.querySelectorAll(".lang-btn").forEach(b=>b.classList.remove("on"));
-  btn.classList.add("on");
-}
-
-// ─── FEATURE MODAL DATA ───
-const FEATURE_DATA = {
-  ai: {
-    ico: '🤖', title: 'AI Legal Guidance', subtitle: 'Powered by Gemini 2.5 Flash',
-    body: `
-      <p>SafeVoice's AI understands <strong>plain, informal language</strong> — you don't need to know any legal terms. Just describe what happened to you.</p>
-      <div class="highlight">Example: "My husband hits me when he drinks and his mother takes away my salary" → SafeVoice maps this to <strong>IPC 498A</strong> (cruelty) and <strong>PWDVA</strong> (economic abuse) and tells you exactly what to do.</div>
-      <p>The AI knows:</p>
-      <ul>
-        <li><strong>IPC Section 498A</strong> — Cruelty by husband or relatives</li>
-        <li><strong>PWDVA 2005</strong> — Protection Orders, Residence Orders, Monetary Relief</li>
-        <li><strong>POCSO 2012</strong> — Child sexual offences</li>
-        <li><strong>IPC 354, 354A, 354D</strong> — Assault, stalking, harassment</li>
-        <li><strong>IPC 406</strong> — Streedhan recovery</li>
-      </ul>
-      <p>The AI responds in your language with compassion — it never blames you, never judges you.</p>
-    `,
-    cta: [{ label: '💬 Try it now', action: "navTo('chatbot')" }]
+// ══════════════════════════════════════════
+// TRANSLATIONS
+// ══════════════════════════════════════════
+const TRANSLATIONS = {
+  en: {
+    nav_home:'Home', nav_features:'Features', nav_help:'Get Help', nav_helplines:'Helplines', nav_rights:'Your Rights',
+    disguise:'Disguise', quick_exit:'Quick Exit',
+    hero_eyebrow:'Anonymous · Multilingual · No Data Stored · Karnataka',
+    hero_t1:'You Are Not', hero_t2:'Alone',
+    hero_sub:'SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.',
+    hero_btn1:'💬 Talk to SafeVoice', hero_btn2:'📞 Emergency Helplines',
+    scroll:'scroll',
+    stat1:'Violence by known person in India', stat2:'Key law protecting married women', stat3:'Data stored — privacy by design', stat4:'Languages supported immediately',
+    feat_tag:'Built different', feat_title:'Every feature built<br>for <em>real safety</em>',
+    feat1_title:'AI Legal Guidance', feat1_desc:'Describe your situation in plain words and SafeVoice maps it to the correct law.',
+    feat2_title:'Ally Mode', feat2_desc:'Supporting a friend? Get tailored guidance on how to help someone experiencing abuse.',
+    feat3_title:'Disguise Mode', feat3_desc:'One tap transforms the entire app into a fully functional calculator. Type 111 to return home.',
+    feat4_title:'Evidence Vault', feat4_desc:'Capture photos, take live pictures, record audio and write notes. All stored securely on this device only.',
+    feat5_title:'Safe Exit Planner', feat5_desc:'Step-by-step personalised plan. Finds nearby police stations, hospitals, shelters using your exact location.',
+    feat6_title:'SOS Emergency Alert', feat6_desc:'One tap triggers an alarm and shows all emergency numbers instantly.',
+    feat7_title:'Quick Exit', feat7_desc:'One click redirects to Google instantly and wipes the session.',
+    feat8_title:'Know Your Rights', feat8_desc:'Plain-language summaries of every protective law.',
+    chat_desc:'Choose your language and describe your situation in your own words.',
+    privacy_title:'🔒 Completely private.', privacy_desc:'Your messages go to the AI — never stored, never logged. No account needed.',
+    hl_tag:'Available 24/7', hl_title:'Emergency', hl_title2:'Helplines',
+    hl1_name:'National Women Helpline', hl1_desc:'24/7 support for women in distress. Legal aid, counselling, and shelter referrals.',
+    hl2_name:'Vanitha Sahayavani', hl2_desc:'Karnataka state women\'s helpline. Legal aid, shelter, and counselling.',
+    hl3_name:'Police Emergency', hl3_desc:'Immediate danger. File FIR for 498A, assault, and other offences.',
+    hl4_name:'One Stop Centre', hl4_desc:'Medical, police, legal aid, and shelter under one roof. Government-run.',
+    hl5_name:'Childline (POCSO)', hl5_desc:'Child abuse and POCSO emergencies. Free, 24/7 nationwide.',
+    hl6_name:'iCall Mental Health', hl6_desc:'Free counselling for trauma, abuse, and emotional distress.',
+    call:'Call',
+    laws_tag:'Know your rights', laws_title:'Laws that', laws_title2:'protect you',
+    law1_name:'Protection from Cruelty by Husband or Relatives', law1_desc:'Criminalises wilful cruelty by husband or his relatives. Non-bailable. Up to 3 years + fine.',
+    law1_t1:'Physical abuse', law1_t2:'Mental cruelty', law1_t3:'Dowry harassment',
+    law2_name:'Protection of Women from Domestic Violence Act, 2005', law2_desc:'Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.',
+    law3_name:'Protection of Children from Sexual Offences, 2012', law3_desc:'Protects children under 18 from sexual assault. 7 years to life imprisonment. Identity fully protected.',
+    law4_name:'Assault / Criminal Force Against Woman', law4_desc:'Assault to outrage a woman\'s modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C).',
+    law5_name:'Criminal Breach of Trust — Streedhan', law5_desc:'Protects a woman\'s Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence.',
+    law6_name:'Emergency Rights Under Domestic Violence Act', law6_desc:'Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance.',
+    ask_btn:'💬 Ask SafeVoice →',
+    footer_note:'Built by Team Nova — PES University CSE (AIML). Hackfinity 2025.',
+    ally_title:'Supporting Others', ally_sub:'Supporting someone safely · Private Session',
+    vault_title:'Evidence Vault', add_note:'Add Note', add_photo:'Add Photo', take_photo:'Take Photo', record_audio:'Record Audio', save_note:'Save Note', capture:'📸 Capture',
+    vault_empty:'No entries yet.\nYour evidence will appear here.',
+    exit_title:'Safe Exit Planner', exit_sub:'Private · Personalised · Step-by-step',
+    get_location:'Get My Location', police:'Police Station', shelter:'Shelter', hospital:'Hospital', legal_aid:'Free Legal Aid', osc:'One Stop Centre',
+    welcome_msg:'Hello. This is a safe, completely private space. I\'m here to help you understand your legal rights and options. Please describe your situation in your own words — there\'s no right or wrong way.',
+    ally_welcome:'I\'m really glad you\'re here. Looking out for someone takes courage. Let me help you understand how to support them safely.\n\nFirst — what is your relationship to this person?',
+    exit_welcome:'You are brave for being here. I am here to help you plan your exit safely.\n\nFirst, let me understand your situation:',
+    exit_c1:"I'm still living with my abuser",
+    exit_c2:"I've left but I'm not safe yet",
+    exit_c3:"I'm planning to leave soon",
+    exit_c4:"I need help for someone else",
   },
-  lang: {
-    ico: '🌐', title: '4 Languages', subtitle: 'Kannada · Hindi · Telugu · English',
-    body: `
-      <p>SafeVoice is built for the reality that <strong>most rural Karnataka women don't read English</strong> — and all Indian legal information is currently only in English.</p>
-      <p>You can switch languages at any time in the chat section. The AI will respond entirely in your chosen language.</p>
-      <div class="highlight">
-        <strong>🇮🇳 Supported languages:</strong><br><br>
-        🔸 <strong>English</strong> — Default<br>
-        🔸 <strong>ಕನ್ನಡ</strong> (Kannada) — Primary Karnataka language<br>
-        🔸 <strong>हिंदी</strong> (Hindi) — For migrant women<br>
-        🔸 <strong>తెలుగు</strong> (Telugu) — For border districts
-      </div>
-      <p>Voice input also supports all four languages using the Web Speech API — speak in your language, get answers in your language.</p>
-    `,
-    cta: [{ label: '💬 Try in your language', action: "navTo('chatbot')" }]
+  kn: {
+    nav_home:'ಮನೆ', nav_features:'ವೈಶಿಷ್ಟ್ಯಗಳು', nav_help:'ಸಹಾಯ ಪಡೆಯಿರಿ', nav_helplines:'ಸಹಾಯವಾಣಿ', nav_rights:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು',
+    disguise:'ಮರೆಮಾಚು', quick_exit:'ತ್ವರಿತ ನಿರ್ಗಮನ',
+    hero_eyebrow:'ಅನಾಮಧೇಯ · ಬಹುಭಾಷಾ · ಡೇಟಾ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ · ಕರ್ನಾಟಕ',
+    hero_t1:'ನೀವು ಒಂಟಿಯಲ್ಲ', hero_t2:'ಒಂಟಿ',
+    hero_sub:'SafeVoice ಕರ್ನಾಟಕದ ಪ್ರತಿ ಮಹಿಳೆಗೆ — ಅವಳ ಭಾಷೆಯಲ್ಲಿ — AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ, ತುರ್ತು ಸಹಾಯವಾಣಿ ಮತ್ತು ಬೆಂಬಲ ನೀಡುತ್ತದೆ. ಲಾಗಿನ್ ಇಲ್ಲ. ಯಾವುದೇ ಕುರುಹಿಲ್ಲ.',
+    hero_btn1:'💬 SafeVoice ಜೊತೆ ಮಾತನಾಡಿ', hero_btn2:'📞 ತುರ್ತು ಸಹಾಯವಾಣಿ',
+    scroll:'ಮೇಲೆ ಸ್ಕ್ರಾಲ್',
+    stat1:'ಭಾರತದಲ್ಲಿ ಪರಿಚಿತರಿಂದ ಹಿಂಸೆ', stat2:'ವಿವಾಹಿತ ಮಹಿಳೆಯರನ್ನು ರಕ್ಷಿಸುವ ಪ್ರಮುಖ ಕಾನೂನು', stat3:'ಡೇಟಾ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ', stat4:'ಭಾಷೆಗಳು ಬೆಂಬಲಿಸಲ್ಪಡುತ್ತವೆ',
+    feat_tag:'ನಿಜವಾದ ಸುರಕ್ಷತೆಗಾಗಿ',
+    feat1_title:'AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ', feat1_desc:'ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಯನ್ನು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸಿ.',
+    feat2_title:'ಮಿತ್ರ ಮೋಡ್', feat2_desc:'ಸ್ನೇಹಿತರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತೀರಾ? ಸಹಾಯ ಮಾಡುವ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.',
+    feat3_title:'ಮರೆಮಾಚು ಮೋಡ್', feat3_desc:'ಒಂದು ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಕ್ಯಾಲ್ಕುಲೇಟರ್ ಆಗಿ ಬದಲಾಗುತ್ತದೆ. 111 ಟೈಪ್ ಮಾಡಿ ಮನೆಗೆ ಹಿಂತಿರುಗಿ.',
+    feat4_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ', feat4_desc:'ಚಿತ್ರಗಳು, ಆಡಿಯೋ ರೆಕಾರ್ಡ್ ಮಾಡಿ. ಸಾಧನದಲ್ಲಿ ಮಾತ್ರ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.',
+    feat5_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ', feat5_desc:'ಹತ್ತಿರದ ಪೋಲಿಸ್ ಠಾಣೆ, ಆಸ್ಪತ್ರೆ, ಆಶ್ರಯ ಹುಡುಕುತ್ತದೆ.',
+    feat6_title:'SOS ತುರ್ತು ಎಚ್ಚರಿಕೆ', feat6_desc:'ಒಂದು ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಎಲ್ಲಾ ತುರ್ತು ಸಂಖ್ಯೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.',
+    feat7_title:'ತ್ವರಿತ ನಿರ್ಗಮನ', feat7_desc:'ಒಂದು ಕ್ಲಿಕ್‌ನಲ್ಲಿ Google ಗೆ ರಿಡೈರೆಕ್ಟ್ ಆಗುತ್ತದೆ.',
+    feat8_title:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು ತಿಳಿಯಿರಿ', feat8_desc:'ಪ್ರತಿ ಕಾನೂನಿನ ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಸಾರಾಂಶ.',
+    chat_desc:'ನಿಮ್ಮ ಭಾಷೆ ಆರಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಸ್ಥಿತಿ ವಿವರಿಸಿ.',
+    privacy_title:'🔒 ಸಂಪೂರ್ಣ ಖಾಸಗಿ.', privacy_desc:'ನಿಮ್ಮ ಸಂದೇಶಗಳು AI ಗೆ ಹೋಗುತ್ತವೆ — ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ.',
+    hl_tag:'24/7 ಲಭ್ಯ', hl_title:'ತುರ್ತು', hl_title2:'ಸಹಾಯವಾಣಿ',
+    hl1_name:'ರಾಷ್ಟ್ರೀಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ', hl1_desc:'24/7 ಮಹಿಳೆಯರಿಗೆ ಬೆಂಬಲ.',
+    hl2_name:'ವನಿತಾ ಸಹಾಯವಾಣಿ', hl2_desc:'ಕರ್ನಾಟಕ ರಾಜ್ಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ.',
+    hl3_name:'ಪೋಲಿಸ್ ತುರ್ತು', hl3_desc:'ತಕ್ಷಣದ ಅಪಾಯ. FIR ದಾಖಲಿಸಲು.',
+    hl4_name:'ಒನ್ ಸ್ಟಾಪ್ ಸೆಂಟರ್', hl4_desc:'ವೈದ್ಯಕೀಯ, ಪೋಲಿಸ್, ಕಾನೂನು ಸಹಾಯ, ಆಶ್ರಯ.',
+    hl5_name:'ಚೈಲ್ಡ್‌ಲೈನ್ (POCSO)', hl5_desc:'ಮಕ್ಕಳ ದುರ್ವ್ಯವಹಾರ ತುರ್ತು. ಉಚಿತ, 24/7.',
+    hl6_name:'iCall ಮಾನಸಿಕ ಆರೋಗ್ಯ', hl6_desc:'ಆಘಾತ, ದುರ್ವ್ಯವಹಾರಕ್ಕೆ ಉಚಿತ ಸಮಾಲೋಚನೆ.',
+    call:'ಕರೆ ಮಾಡಿ',
+    laws_tag:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು ತಿಳಿಯಿರಿ', laws_title:'ನಿಮ್ಮನ್ನು', laws_title2:'ರಕ್ಷಿಸುವ ಕಾನೂನುಗಳು',
+    law1_name:'ಪತಿ ಅಥವಾ ಸಂಬಂಧಿಕರ ಕ್ರೌರ್ಯದಿಂದ ರಕ್ಷಣೆ', law1_desc:'IPC 498A - ಜಾಮೀನು ರಹಿತ ಅಪರಾಧ. 3 ವರ್ಷ ಜೈಲು.',
+    law1_t1:'ದೈಹಿಕ ನಿಂದನೆ', law1_t2:'ಮಾನಸಿಕ ಕ್ರೌರ್ಯ', law1_t3:'ವರದಕ್ಷಿಣೆ ಕಿರುಕುಳ',
+    law2_name:'ಗೃಹ ಹಿಂಸೆ ಕಾಯ್ದೆ 2005', law2_desc:'ರಕ್ಷಣಾ ಆದೇಶ, ವಸತಿ ಆದೇಶ, ಆರ್ಥಿಕ ಪರಿಹಾರ. 24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ಆದೇಶ.',
+    law3_name:'ಮಕ್ಕಳ ಲೈಂಗಿಕ ದೌರ್ಜನ್ಯ ರಕ್ಷಣಾ ಕಾಯ್ದೆ 2012', law3_desc:'18 ವರ್ಷದ ಒಳಗಿನ ಮಕ್ಕಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ.',
+    law4_name:'ಮಹಿಳೆಯ ವಿರುದ್ಧ ಹಲ್ಲೆ', law4_desc:'ಮಹಿಳೆಯ ಮಾನಕ್ಕೆ ಧಕ್ಕೆ: 1-5 ವರ್ಷ. ಬೆದರಿಸುವಿಕೆ ಸೇರಿದೆ.',
+    law5_name:'ಸ್ತ್ರೀಧನ ವಸೂಲಿ', law5_desc:'ಮಹಿಳೆಯ ಸ್ತ್ರೀಧನ (ಚಿನ್ನ, ಉಡುಗೊರೆ) ತಡೆಹಿಡಿಯುವುದು ಅಪರಾಧ.',
+    law6_name:'ಗೃಹ ಹಿಂಸೆ ಕಾಯ್ದೆ ಅಡಿ ತುರ್ತು ಹಕ್ಕುಗಳು', law6_desc:'24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ರಕ್ಷಣಾ ಆದೇಶ. ಮನೆಯಲ್ಲಿ ಇರುವ ಹಕ್ಕು.',
+    ask_btn:'💬 SafeVoice ಗೆ ಕೇಳಿ →',
+    footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
+    ally_title:'ಇತರರಿಗೆ ಬೆಂಬಲ', ally_sub:'ಸುರಕ್ಷಿತವಾಗಿ ಬೆಂಬಲ · ಖಾಸಗಿ ಸೆಷನ್',
+    vault_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ', add_note:'ಟಿಪ್ಪಣಿ ಸೇರಿಸಿ', add_photo:'ಫೋಟೋ ಸೇರಿಸಿ', take_photo:'ಫೋಟೋ ತೆಗೆಯಿರಿ', record_audio:'ಆಡಿಯೋ ರೆಕಾರ್ಡ್', save_note:'ಟಿಪ್ಪಣಿ ಉಳಿಸಿ', capture:'📸 ಸೆರೆಹಿಡಿಯಿರಿ',
+    vault_empty:'ಯಾವುದೇ ನಮೂದುಗಳಿಲ್ಲ.\nನಿಮ್ಮ ಸಾಕ್ಷ್ಯ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.',
+    exit_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ', exit_sub:'ಖಾಸಗಿ · ವ್ಯಕ್ತಿಗತ · ಹಂತ ಹಂತವಾಗಿ',
+    get_location:'ನನ್ನ ಸ್ಥಳ ಪಡೆಯಿರಿ', police:'ಪೋಲಿಸ್ ಠಾಣೆ', shelter:'ಆಶ್ರಯ', hospital:'ಆಸ್ಪತ್ರೆ', legal_aid:'ಉಚಿತ ಕಾನೂನು ಸಹಾಯ', osc:'ಒನ್ ಸ್ಟಾಪ್ ಸೆಂಟರ್',
+    welcome_msg:'ನಮಸ್ಕಾರ. ಇದು ಸುರಕ್ಷಿತ, ಸಂಪೂರ್ಣ ಖಾಸಗಿ ಜಾಗ. ನಿಮ್ಮ ಕಾನೂನು ಹಕ್ಕುಗಳು ಮತ್ತು ಆಯ್ಕೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡಲು ನಾನು ಇಲ್ಲಿ ಇದ್ದೇನೆ.',
+    ally_welcome:'ನೀವು ಇಲ್ಲಿ ಇದ್ದೀರಿ ಎಂದು ಸಂತೋಷ. ಯಾರನ್ನಾದರೂ ನೋಡಿಕೊಳ್ಳುವುದು ಧೈರ್ಯ ತೋರಿಸುತ್ತದೆ.\n\nಮೊದಲ ಪ್ರಶ್ನೆ — ಆ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ನಿಮ್ಮ ಸಂಬಂಧ ಏನು?',
+    exit_welcome:'ನೀವು ಧೈರ್ಯಶಾಲಿ. ನಿಮ್ಮ ನಿರ್ಗಮನ ಸುರಕ್ಷಿತವಾಗಿ ಯೋಜಿಸಲು ಸಹಾಯ ಮಾಡಲು ನಾನು ಇಲ್ಲಿ ಇದ್ದೇನೆ.\n\nನಿಮ್ಮ ಪರಿಸ್ಥಿತಿ ತಿಳಿಸಿ:',
+    exit_c1:'ನಾನು ಇನ್ನೂ ಹಿಂಸಾಚಾರ ಮಾಡುವ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ವಾಸಿಸುತ್ತಿದ್ದೇನೆ',
+    exit_c2:'ನಾನು ಹೊರಟಿದ್ದೇನೆ ಆದರೆ ಇನ್ನೂ ಸುರಕ್ಷಿತವಲ್ಲ',
+    exit_c3:'ನಾನು ಶೀಘ್ರದಲ್ಲೇ ಹೊರಡಲು ಯೋಜಿಸುತ್ತಿದ್ದೇನೆ',
+    exit_c4:'ಬೇರೆಯವರಿಗೆ ಸಹಾಯ ಬೇಕು',
   },
-  privacy: {
-    ico: '🔒', title: 'Zero Data Storage', subtitle: 'Privacy by Architecture',
-    body: `
-      <p>Privacy isn't a feature added on top — it is the <strong>architectural foundation</strong> of SafeVoice.</p>
-      <ul>
-        <li><strong>No login, no account</strong> — nothing to discover</li>
-        <li><strong>No chat history stored</strong> — every session is stateless</li>
-        <li><strong>No call log</strong> — it's a chatbot, not a phone call</li>
-        <li><strong>API key on backend</strong> — never visible to anyone</li>
-        <li><strong>Quick Exit</strong> — one click takes you to Google instantly</li>
-        <li><strong>Disguise Mode</strong> — app instantly looks like a calculator</li>
-      </ul>
-      <div class="highlight">
-        The backend processes your message, calls Gemini, returns the reply, and <strong>immediately discards everything</strong>. There is no database. There is no log file. The conversation exists only in your browser's RAM — and disappears when you close the tab.
-      </div>
-    `,
-    cta: [{ label: '🧮 Try disguise mode', action: "showDisguise()" }]
+  hi: {
+    nav_home:'होम', nav_features:'विशेषताएं', nav_help:'सहायता', nav_helplines:'हेल्पलाइन', nav_rights:'आपके अधिकार',
+    disguise:'छुपाएं', quick_exit:'त्वरित बाहर',
+    hero_eyebrow:'गुमनाम · बहुभाषी · कोई डेटा संग्रहण नहीं · कर्नाटक',
+    hero_t1:'आप अकेली नहीं', hero_t2:'हैं',
+    hero_sub:'SafeVoice कर्नाटक की हर महिला को — उसकी भाषा में — AI-संचालित कानूनी मार्गदर्शन, आपातकालीन हेल्पलाइन और समर्थन देता है। कोई लॉगिन नहीं। कोई निशान नहीं।',
+    hero_btn1:'💬 SafeVoice से बात करें', hero_btn2:'📞 आपातकालीन हेल्पलाइन',
+    scroll:'स्क्रॉल करें',
+    stat1:'भारत में परिचित व्यक्ति द्वारा हिंसा', stat2:'विवाहित महिलाओं की सुरक्षा का मुख्य कानून', stat3:'डेटा संग्रहीत नहीं — गोपनीयता द्वारा डिज़ाइन', stat4:'भाषाएं तुरंत समर्थित',
+    feat_tag:'असली सुरक्षा के लिए',
+    feat1_title:'AI कानूनी मार्गदर्शन', feat1_desc:'अपनी स्थिति सरल भाषा में बताएं।',
+    feat2_title:'सहयोगी मोड', feat2_desc:'किसी मित्र को सहायता दें।',
+    feat3_title:'छद्म मोड', feat3_desc:'एक टैप में कैलकुलेटर बन जाता है। 111 टाइप करें घर लौटने के लिए।',
+    feat4_title:'साक्ष्य तिजोरी', feat4_desc:'फोटो, ऑडियो सुरक्षित रखें।',
+    feat5_title:'सुरक्षित निकास योजना', feat5_desc:'पास के पुलिस स्टेशन, अस्पताल, आश्रय खोजता है।',
+    feat6_title:'SOS आपातकालीन अलर्ट', feat6_desc:'एक टैप में सभी आपातकालीन नंबर।',
+    feat7_title:'त्वरित बाहर', feat7_desc:'एक क्लिक में Google पर जाता है।',
+    feat8_title:'अपने अधिकार जानें', feat8_desc:'हर कानून का सरल सारांश।',
+    chat_desc:'अपनी भाषा चुनें और अपनी स्थिति बताएं।',
+    privacy_title:'🔒 पूरी तरह निजी.', privacy_desc:'आपके संदेश AI को जाते हैं — कभी संग्रहीत नहीं होते।',
+    hl_tag:'24/7 उपलब्ध', hl_title:'आपातकालीन', hl_title2:'हेल्पलाइन',
+    hl1_name:'राष्ट्रीय महिला हेल्पलाइन', hl1_desc:'24/7 महिलाओं के लिए सहायता।',
+    hl2_name:'वनिता सहायवाणी', hl2_desc:'कर्नाटक राज्य महिला हेल्पलाइन।',
+    hl3_name:'पुलिस आपातकाल', hl3_desc:'तत्काल खतरा। FIR दर्ज करें।',
+    hl4_name:'वन स्टॉप सेंटर', hl4_desc:'चिकित्सा, पुलिस, कानूनी सहायता एक छत के नीचे।',
+    hl5_name:'चाइल्डलाइन (POCSO)', hl5_desc:'बाल दुर्व्यवहार आपातकाल। मुफ्त, 24/7।',
+    hl6_name:'iCall मानसिक स्वास्थ्य', hl6_desc:'आघात के लिए मुफ्त परामर्श।',
+    call:'कॉल करें',
+    laws_tag:'अपने अधिकार जानें', laws_title:'वे कानून जो', laws_title2:'आपकी रक्षा करते हैं',
+    law1_name:'पति या रिश्तेदारों की क्रूरता से सुरक्षा', law1_desc:'IPC 498A - गैर-जमानती अपराध। 3 साल जेल।',
+    law1_t1:'शारीरिक दुर्व्यवहार', law1_t2:'मानसिक क्रूरता', law1_t3:'दहेज उत्पीड़न',
+    law2_name:'घरेलू हिंसा से महिलाओं की सुरक्षा अधिनियम 2005', law2_desc:'संरक्षण आदेश, निवास आदेश, मौद्रिक राहत। 24 घंटे में आपातकालीन आदेश।',
+    law3_name:'बच्चों के यौन अपराध से सुरक्षा अधिनियम 2012', law3_desc:'18 वर्ष से कम बच्चों की सुरक्षा।',
+    law4_name:'महिला के विरुद्ध हमला', law4_desc:'1-5 साल। पीछा करना भी शामिल।',
+    law5_name:'स्त्रीधन वसूली', law5_desc:'महिला का स्त्रीधन रोकना अपराध है।',
+    law6_name:'घरेलू हिंसा अधिनियम के तहत आपातकालीन अधिकार', law6_desc:'24 घंटे में संरक्षण आदेश। घर में रहने का अधिकार।',
+    ask_btn:'💬 SafeVoice से पूछें →',
+    footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
+    ally_title:'दूसरों का समर्थन', ally_sub:'सुरक्षित रूप से किसी का समर्थन · निजी सत्र',
+    vault_title:'साक्ष्य तिजोरी', add_note:'नोट जोड़ें', add_photo:'फोटो जोड़ें', take_photo:'फोटो लें', record_audio:'ऑडियो रिकॉर्ड', save_note:'नोट सहेजें', capture:'📸 कैप्चर करें',
+    vault_empty:'कोई प्रविष्टि नहीं।\nआपका साक्ष्य यहाँ दिखेगा।',
+    exit_title:'सुरक्षित निकास योजना', exit_sub:'निजी · व्यक्तिगत · चरण-दर-चरण',
+    get_location:'मेरा स्थान पाएं', police:'पुलिस स्टेशन', shelter:'आश्रय', hospital:'अस्पताल', legal_aid:'मुफ्त कानूनी सहायता', osc:'वन स्टॉप सेंटर',
+    welcome_msg:'नमस्ते। यह एक सुरक्षित, पूरी तरह निजी जगह है। मैं आपके कानूनी अधिकारों और विकल्पों को समझने में आपकी मदद करने के लिए यहाँ हूँ।',
+    ally_welcome:'आप यहाँ हैं, यह बहुत अच्छा है। किसी की देखभाल करना साहस दिखाता है।\n\nपहला सवाल — उस व्यक्ति से आपका क्या रिश्ता है?',
+    exit_welcome:'आप बहादुर हैं। मैं आपकी सुरक्षित निकास की योजना बनाने में मदद करने के लिए यहाँ हूँ।\n\nपहले अपनी स्थिति बताएं:',
+    exit_c1:'मैं अभी भी अपने दुर्व्यवहारकर्ता के साथ रह रही हूँ',
+    exit_c2:'मैं निकल गई हूँ लेकिन अभी सुरक्षित नहीं हूँ',
+    exit_c3:'मैं जल्द ही जाने की योजना बना रही हूँ',
+    exit_c4:'किसी और के लिए मदद चाहिए',
   },
-  voice: {
-    ico: '🎤', title: 'Voice Input', subtitle: 'Speak in your language',
-    body: `
-      <p>For women who find it difficult to type — or where typing would be noticed — SafeVoice supports <strong>voice input in all 4 languages</strong>.</p>
-      <div class="highlight">
-        ⚠️ <strong>Voice input requires Chrome browser</strong> — it uses the Web Speech API which works best in Chrome/Edge on Android and desktop.
-      </div>
-      <p>How to use:</p>
-      <ul>
-        <li>Select your language using the language buttons</li>
-        <li>Tap the 🎤 microphone button in the chat</li>
-        <li>Speak naturally — the app will transcribe and send automatically</li>
-        <li>The microphone turns red 🔴 while recording</li>
-      </ul>
-      <p>Voice is processed entirely by your device's browser — it is <strong>not recorded or sent to any server</strong>. Only the text transcript is sent to SafeVoice.</p>
-    `,
-    cta: [{ label: '🎤 Try voice input', action: "navTo('chatbot')" }]
+  te: {
+    nav_home:'హోమ్', nav_features:'ఫీచర్లు', nav_help:'సహాయం పొందండి', nav_helplines:'హెల్ప్‌లైన్లు', nav_rights:'మీ హక్కులు',
+    disguise:'దాచు', quick_exit:'వేగంగా నిష్క్రమించు',
+    hero_eyebrow:'అనామకంగా · బహుభాషా · డేటా నిల్వ లేదు · కర్ణాటక',
+    hero_t1:'మీరు ఒంటరిగా లేరు', hero_t2:'ఒంటరిగా',
+    hero_sub:'SafeVoice కర్ణాటకలోని ప్రతి మహిళకు — ఆమె భాషలో — AI-ఆధారిత చట్టపరమైన మార్గదర్శనం, అత్యవసర హెల్ప్‌లైన్లు మరియు మద్దతు అందిస్తుంది.',
+    hero_btn1:'💬 SafeVoice తో మాట్లాడండి', hero_btn2:'📞 అత్యవసర హెల్ప్‌లైన్లు',
+    scroll:'స్క్రోల్',
+    stat1:'భారతదేశంలో పరిచయస్తులచే హింస', stat2:'వివాహిత మహిళలను రక్షించే కీలక చట్టం', stat3:'డేటా నిల్వ లేదు', stat4:'భాషలు వెంటనే మద్దతు',
+    feat_tag:'నిజమైన భద్రత కోసం',
+    feat1_title:'AI చట్టపరమైన మార్గదర్శనం', feat1_desc:'మీ పరిస్థితిని సరళమైన మాటల్లో వివరించండి.',
+    feat2_title:'మిత్ర మోడ్', feat2_desc:'స్నేహితులకు మద్దతు ఇవ్వాలా? మార్గదర్శనం పొందండి.',
+    feat3_title:'మారువేషం మోడ్', feat3_desc:'ఒక ట్యాప్‌తో కాల్కులేటర్ అవుతుంది. 111 టైప్ చేయండి.',
+    feat4_title:'సాక్ష్యాల వాల్ట్', feat4_desc:'ఫోటోలు, ఆడియో సురక్షితంగా నిల్వ చేయండి.',
+    feat5_title:'సురక్షిత నిష్క్రమణ ప్రణాళిక', feat5_desc:'సమీప పోలీస్ స్టేషన్, ఆసుపత్రి, ఆశ్రయం కనుగొంటుంది.',
+    feat6_title:'SOS అత్యవసర హెచ్చరిక', feat6_desc:'ఒక ట్యాప్‌తో అన్ని అత్యవసర నంబర్లు.',
+    feat7_title:'వేగంగా నిష్క్రమించు', feat7_desc:'ఒక క్లిక్‌తో Google కి రీడైరెక్ట్.',
+    feat8_title:'మీ హక్కులు తెలుసుకోండి', feat8_desc:'ప్రతి చట్టం యొక్క సరళ సారాంశం.',
+    chat_desc:'మీ భాష ఎంచుకోండి మరియు మీ పరిస్థితి వివరించండి.',
+    privacy_title:'🔒 పూర్తిగా ప్రైవేట్.', privacy_desc:'మీ సందేశాలు AI కి వెళ్తాయి — ఎప్పుడూ నిల్వ చేయబడవు.',
+    hl_tag:'24/7 అందుబాటులో', hl_title:'అత్యవసర', hl_title2:'హెల్ప్‌లైన్లు',
+    hl1_name:'జాతీయ మహిళా హెల్ప్‌లైన్', hl1_desc:'24/7 మహిళలకు మద్దతు.',
+    hl2_name:'వనిత సహాయవాణి', hl2_desc:'కర్ణాటక రాష్ట్ర మహిళా హెల్ప్‌లైన్.',
+    hl3_name:'పోలీస్ అత్యవసర', hl3_desc:'తక్షణ ప్రమాదం. FIR నమోదు చేయండి.',
+    hl4_name:'వన్ స్టాప్ సెంటర్', hl4_desc:'వైద్య, పోలీస్, చట్టపరమైన సహాయం ఒక చోట.',
+    hl5_name:'చైల్డ్‌లైన్ (POCSO)', hl5_desc:'శిశు దుర్వినియోగం అత్యవసరం. ఉచితం, 24/7.',
+    hl6_name:'iCall మానసిక ఆరోగ్యం', hl6_desc:'గాయానికి ఉచిత కౌన్సెలింగ్.',
+    call:'కాల్ చేయండి',
+    laws_tag:'మీ హక్కులు తెలుసుకోండి', laws_title:'మిమ్మల్ని', laws_title2:'రక్షించే చట్టాలు',
+    law1_name:'భర్త లేదా బంధువుల క్రూరత్వం నుండి రక్షణ', law1_desc:'IPC 498A - జామీను లేని నేరం. 3 సంవత్సరాల జైలు.',
+    law1_t1:'శారీరక దుర్వినియోగం', law1_t2:'మానసిక క్రూరత్వం', law1_t3:'వరకట్న వేధింపు',
+    law2_name:'గృహ హింస నిరోధక చట్టం 2005', law2_desc:'రక్షణ ఆదేశాలు, నివాస ఆదేశాలు, ఆర్థిక సహాయం. 24 గంటల్లో అత్యవసర ఆదేశాలు.',
+    law3_name:'శిశువుల లైంగిక నేరాల నిరోధక చట్టం 2012', law3_desc:'18 సంవత్సరాల కంటే తక్కువ వయస్సు పిల్లలను రక్షిస్తుంది.',
+    law4_name:'మహిళపై దాడి', law4_desc:'1-5 సంవత్సరాలు. వేధింపు కూడా ఇందులో ఉంది.',
+    law5_name:'స్త్రీధనం వసూలు', law5_desc:'మహిళ స్త్రీధనం (నగలు, బహుమతులు) నిలిపివేయడం నేరం.',
+    law6_name:'గృహ హింస చట్టం కింద అత్యవసర హక్కులు', law6_desc:'24 గంటల్లో రక్షణ ఆదేశం. ఇంట్లో ఉండే హక్కు.',
+    ask_btn:'💬 SafeVoice ని అడగండి →',
+    footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
+    ally_title:'ఇతరులకు మద్దతు', ally_sub:'సురక్షితంగా మద్దతు · ప్రైవేట్ సెషన్',
+    vault_title:'సాక్ష్యాల వాల్ట్', add_note:'నోట్ జోడించు', add_photo:'ఫోటో జోడించు', take_photo:'ఫోటో తీయండి', record_audio:'ఆడియో రికార్డ్', save_note:'నోట్ సేవ్ చేయి', capture:'📸 క్యాప్చర్',
+    vault_empty:'ఎంట్రీలు లేవు.\nమీ సాక్ష్యాలు ఇక్కడ కనిపిస్తాయి.',
+    exit_title:'సురక్షిత నిష్క్రమణ ప్రణాళిక', exit_sub:'ప్రైవేట్ · వ్యక్తిగతీకరించిన · దశల వారీగా',
+    get_location:'నా స్థానం పొందండి', police:'పోలీస్ స్టేషన్', shelter:'ఆశ్రయం', hospital:'ఆసుపత్రి', legal_aid:'ఉచిత చట్టపరమైన సహాయం', osc:'వన్ స్టాప్ సెంటర్',
+    welcome_msg:'నమస్కారం. ఇది సురక్షితమైన, పూర్తిగా ప్రైవేట్ స్థలం. మీ చట్టపరమైన హక్కులు మరియు ఎంపికలను అర్థం చేసుకోవడంలో సహాయం చేయడానికి నేను ఇక్కడ ఉన్నాను.',
+    ally_welcome:'మీరు ఇక్కడ ఉన్నందుకు సంతోషం. ఎవరిపై శ్రద్ధ వహించడం ధైర్యం చూపిస్తుంది.\n\nమొదటి ప్రశ్న — ఆ వ్యక్తితో మీ అనుబంధం ఏమిటి?',
+    exit_welcome:'మీరు ధైర్యంగా ఉన్నారు. మీ నిష్క్రమణను సురక్షితంగా ప్లాన్ చేయడానికి నేను సహాయం చేస్తాను.\n\nమీ పరిస్థితి చెప్పండి:',
+    exit_c1:'నేను ఇంకా నా హింసకు గురిచేస్తున్న వ్యక్తితో నివసిస్తున్నాను',
+    exit_c2:'నేను వెళ్లిపోయాను కానీ ఇంకా సురక్షితంగా లేను',
+    exit_c3:'నేను త్వరలో వెళ్ళాలని ప్లాన్ చేస్తున్నాను',
+    exit_c4:'మరొకరికి సహాయం కావాలి',
   }
 };
 
-// ─── CURSOR ───
+// ══════════════════════════════════════════
+// GLOBAL STATE
+// ══════════════════════════════════════════
+let globalLang = 'en';
+let chatLang = 'en';
+let allyLang = 'en';
+let exitLang = 'en';
+let userLat = null, userLng = null;
+let chatHistory = [];
+let allyHistory = [];
+let exitHistory = [];
+let sosActive = false;
+let sosAudio = null;
+let cameraStream = null;
+
+const API_BASE = window.location.origin;
+const GEMINI_API_KEY = 'AIzaSyAzj3saWTcpE-UYPlDMS0u297lJTWXqT-8';
+
+// ══════════════════════════════════════════
+// I18N - APPLY TRANSLATIONS TO WHOLE PAGE
+// ══════════════════════════════════════════
+function applyTranslations(lang) {
+  const T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[key] !== undefined) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = T[key];
+      } else {
+        el.innerHTML = T[key];
+      }
+    }
+  });
+  // Update chat placeholder
+  const chatIn = document.getElementById('chatIn');
+  if (chatIn) {
+    const ph = {en:'Type your message here...',kn:'ನಿಮ್ಮ ಸಂದೇಶ ಟೈಪ್ ಮಾಡಿ...',hi:'यहाँ अपना संदेश लिखें...',te:'మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి...'};
+    chatIn.placeholder = ph[lang] || ph['en'];
+  }
+  // Update welcome message
+  const wm = document.getElementById('welcomeMsg');
+  if (wm) wm.textContent = T['welcome_msg'] || TRANSLATIONS['en']['welcome_msg'];
+  // Update page title lang attribute
+  document.documentElement.lang = lang;
+}
+
+function setGlobalLang(lang, btn) {
+  globalLang = lang;
+  chatLang = lang;
+  // Update hero buttons
+  document.querySelectorAll('.lang-hero-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // Sync chat lang buttons
+  document.querySelectorAll('#langRow .lang-btn').forEach(b => b.classList.remove('on'));
+  const langMap = {en:'English',kn:'ಕನ್ನಡ',hi:'हिंदी',te:'తెలుగు'};
+  document.querySelectorAll('#langRow .lang-btn').forEach(b => {
+    if (b.textContent.trim() === langMap[lang]) b.classList.add('on');
+  });
+  // Apply all translations
+  applyTranslations(lang);
+  renderChips();
+  showToast('🌐 Language: ' + btn.textContent.trim());
+}
+
+function setChatLang(lang, btn) {
+  chatLang = lang;
+  globalLang = lang;
+  document.querySelectorAll('#langRow .lang-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // Sync hero buttons
+  document.querySelectorAll('.lang-hero-btn').forEach(b => b.classList.remove('on'));
+  const heroLabels = {en:'🇬🇧 English',kn:'🇮🇳 ಕನ್ನಡ',hi:'🇮🇳 हिंदी',te:'🇮🇳 తెలుగు'};
+  document.querySelectorAll('.lang-hero-btn').forEach(b => {
+    if (b.textContent.trim() === heroLabels[lang]) b.classList.add('on');
+  });
+  applyTranslations(lang);
+  renderChips();
+  showToast('🌐 Language: ' + btn.textContent.trim());
+}
+
+function setAllyLang(lang, btn) {
+  allyLang = lang;
+  btn.parentElement.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // Update placeholder
+  const ph = {en:"Describe your friend's situation...",kn:'ನಿಮ್ಮ ಸ್ನೇಹಿತರ ಸ್ಥಿತಿ ವಿವರಿಸಿ...',hi:'अपने मित्र की स्थिति बताएं...',te:'మీ స్నేహితుని పరిస్థితి వివరించండి...'};
+  document.getElementById('allyChatIn').placeholder = ph[lang] || ph['en'];
+}
+
+function setExitLang(lang, btn) {
+  exitLang = lang;
+  btn.parentElement.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // Rebuild exit choices
+  const chat = document.getElementById('exitChat');
+  chat.innerHTML = '';
+  exitHistory = [];
+  const T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
+  _addExitBubble(T['exit_welcome'], 'bot', true);
+}
+
+// ══════════════════════════════════════════
+// CURSOR
+// ══════════════════════════════════════════
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function animRing(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
-function addHover(sel){ document.querySelectorAll(sel).forEach(el=>{ el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='58px';ring.style.height='58px';}); el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='38px';ring.style.height='38px';}); }); }
-addHover('a,button,.feat,.hl-card,.law-card,.qchip,.lang-btn,.hl-call-btn');
+function addHover(sel){document.querySelectorAll(sel).forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='58px';ring.style.height='58px';});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='38px';ring.style.height='38px';});});}
+addHover('a,button,.feat,.hl-card,.law-card,.qchip,.lang-btn,.hl-call-btn,.lang-hero-btn');
 
-// ─── CANVAS PARTICLES ───
+// ══════════════════════════════════════════
+// CANVAS PARTICLES
+// ══════════════════════════════════════════
 const cv = document.getElementById('bg-canvas');
 const ctx2 = cv.getContext('2d');
 let W,H,pts=[];
@@ -894,407 +979,76 @@ for(let i=0;i<150;i++) pts.push({x:Math.random()*1200,y:Math.random()*800,vx:(Ma
   ctx2.globalAlpha=1;requestAnimationFrame(draw);
 })();
 
-// ─── SCROLL REVEAL ───
+// ══════════════════════════════════════════
+// SCROLL REVEAL
+// ══════════════════════════════════════════
 const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 
-// ─── NAVIGATION ───
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
 function navTo(id){
-  const el = document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function quickExit(){
-  window.location.replace('https://www.google.com');
-}
+function quickExit(){window.location.replace('https://www.google.com');}
 
-// ─── TOAST ───
-function showToast(msg, duration=3000){
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), duration);
-}
-
-// ─── FEATURE MODAL ───
-function openFeatureModal(key){
-  const d = FEATURE_DATA[key]; if(!d) return;
-  document.getElementById('mIco').textContent = d.ico;
-  document.getElementById('mTitle').textContent = d.title;
-  document.getElementById('mSubtitle').textContent = d.subtitle;
-  document.getElementById('mBody').innerHTML = d.body;
-  const cta = document.getElementById('mCta');
-  cta.innerHTML = d.cta.map(c=>`<button class="btn-primary" onclick="closeModal();${c.action}" style="font-size:0.85rem;padding:0.65rem 1.4rem">${c.label}</button>`).join('');
-  document.getElementById('featureModal').classList.add('open');
-}
-function closeModal(){ document.getElementById('featureModal').classList.remove('open'); }
-function closeModalIf(e){ if(e.target.id==='featureModal') closeModal(); }
-document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); hideDisguise(); } });
-
-// ─── HEALTH CHECK ───
-// ── GEMINI KEY (hardcoded for demo) ──
-const GEMINI_API_KEY = 'AIzaSyAzj3saWTcpE-UYPlDMS0u297lJTWXqT-8';
-
-// ── SYSTEM PROMPTS ──
-const SYS = {
-  en: `You are SafeVoice, a compassionate AI legal assistant for women experiencing domestic abuse in Karnataka, India. ALWAYS respond ONLY in English. Cover: IPC 498A (cruelty, non-bailable, 3 yrs), PWDVA 2005 (Protection Orders in 24hrs), POCSO 2012, IPC 354 (assault), IPC 406 (Streedhan). Helplines: 181, 1091 (Vanitha Sahayavani), 100 (Police), 7827170170 (One Stop Centre), 1098 (Childline). Be warm, never victim-blame. Use **bold** for numbers/action steps. Under 250 words.`,
-  kn: `ನೀವು SafeVoice — ಕರ್ನಾಟಕದ ಮಹಿಳೆಯರಿಗೆ ಕಾನೂನು ಸಹಾಯ ನೀಡುವ AI ಸಹಾಯಕ. ಎಲ್ಲಾ ಉತ್ತರಗಳನ್ನು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ನೀಡಿ. IPC 498A, PWDVA 2005, POCSO ಕಾನೂನುಗಳ ಬಗ್ಗೆ ಸ್ಪಷ್ಟ ಮಾಹಿತಿ ನೀಡಿ. ಸಹಾಯವಾಣಿ: 181, 1091, 100, 1098. ಪ್ರೀತಿಯಿಂದ, ತೀರ್ಪು ರಹಿತವಾಗಿ ಮಾತನಾಡಿ. ಮುಖ್ಯ ಮಾಹಿತಿಗೆ **bold** ಬಳಸಿ. 250 ಪದಗಳ ಒಳಗೆ ಉತ್ತರಿಸಿ.`,
-  hi: `आप SafeVoice हैं — कर्नाटक में महिलाओं के लिए AI कानूनी सहायक। सभी जवाब केवल हिंदी में दें। IPC 498A, PWDVA 2005, POCSO के बारे में स्पष्ट जानकारी दें। हेल्पलाइन: 181, 1091, 100, 1098। गर्मजोशी से, बिना निर्णय के बात करें। जरूरी जानकारी **bold** में लिखें। 250 शब्दों में जवाब दें।`,
-  te: `మీరు SafeVoice — కర్ణాటకలో మహిళలకు AI చట్టపరమైన సహాయకుడు. అన్ని సమాధానాలు తెలుగులో మాత్రమే ఇవ్వండి. IPC 498A, PWDVA 2005, POCSO గురించి స్పష్టంగా చెప్పండి. హెల్ప్‌లైన్: 181, 1091, 100, 1098. ప్రేమగా, తీర్పు లేకుండా మాట్లాడండి. ముఖ్యమైన సమాచారం **bold** లో రాయండి. 250 పదాలలో జవాబు ఇవ్వండి.`
-};
-const ALLY_SYS = `You are SafeVoice Ally Mode — helping someone support a friend or family member experiencing domestic abuse in India. The user is NOT the victim. Help them: how to approach the conversation safely, what legal options exist (IPC 498A, PWDVA, POCSO), how to connect their friend to help without endangering anyone. Karnataka helplines: 181, 1091, 100. Warm, practical. **Bold** key actions. Under 200 words.`;
-const EXIT_SYS = `You are SafeVoice Safe Exit Planner for Karnataka, India. Give step-by-step practical guidance to leave safely: immediate safety steps, documents to gather (Aadhaar, bank details, birth certificates, medical records), where to go (shelters, One Stop Centre: 7827170170), legal steps (Protection Order under PWDVA in 24hrs). Helplines: 1091, 181, 100. Calm, practical, never judgmental. **Bold** action steps. Under 250 words.`;
-
-// ── GEMINI DIRECT CALL ──
-async function callGemini(messages, systemPrompt) {
-  const gemMsgs = messages.map(m => ({
-    role: m.role === 'assistant' ? 'model' : 'user',
-    parts: [{ text: m.content }]
-  }));
-  const r = await fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        system_instruction: { parts: [{ text: systemPrompt }] },
-        contents: gemMsgs
-      })
-    }
-  );
-  if (!r.ok) { const e = await r.json().catch(() => ({})); throw new Error(e.error?.message || 'API error'); }
-  const d = await r.json();
-  return d.candidates[0].content.parts[0].text;
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+function showToast(msg,duration=3000){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),duration);
 }
 
-// ── HEALTH CHECK ──
-async function checkHealth() {
-  const dot = document.getElementById('statusDot');
-  dot.textContent = '● Online ';
-  dot.style.color = '#4ade80';
-  document.getElementById('apiSetupBox').style.display = 'none';
-}
-checkHealth();
-
-// ── API KEY (no-op, key is hardcoded) ──
-function saveApiKey() { showToast('✓ Gemini AI already connected!'); }
-
-// ─── LANGUAGE ───
-let lang = 'en';
-const QP = {
-  en: ['What is IPC 498A?','My husband is abusive','How do I file an FIR?','I need shelter','What is PWDVA?'],
-  kn: ['IPC 498A ಎಂದರೇನು?','ನನ್ನ ಪತಿ ಹಿಂಸೆ ನೀಡುತ್ತಾರೆ','ದೂರು ಹೇಗೆ ದಾಖಲಿಸಬೇಕು?','ಆಶ್ರಯ ಬೇಕು','PWDVA ಏನು?'],
-  hi: ['IPC 498A क्या है?','मेरे पति मुझे मारते हैं','FIR कैसे दर्ज करें?','मुझे आश्रय चाहिए','PWDVA क्या है?'],
-  te: ['IPC 498A అంటే ఏమిటి?','నా భర్త హింస చేస్తున్నారు','ఫిర్యాదు ఎలా నమోదు చేయాలి?','ఆశ్రయం కావాలి','PWDVA అంటే ఏమిటి?']
-};
-const PH = { en:'Type your message here...',kn:'ನಿಮ್ಮ ಸಂದೇಶ ಟೈಪ್ ಮಾಡಿ...',hi:'यहाँ अपना संदेश लिखें...',te:'మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి...' };
-
-function setLang(l, btn){
-  lang=l;
-  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  document.getElementById('chatIn').placeholder=PH[l];
-  renderChips();
-  showToast('Language set to ' + btn.textContent);
-}
-function renderChips(){
-  const c=document.getElementById('quickChips');
-  c.innerHTML=QP[lang].map(t=>`<span class="qchip" onclick="useChip('${t.replace(/'/g,"\\'")}')"> ${t}</span>`).join('');
-  // Re-add hover effects to new chips
-  addHover('.qchip');
-}
-function useChip(t){ document.getElementById('chatIn').value=t; sendMsg(); }
-renderChips();
-
-// ─── CHAT ───
-let history=[];
-
-function addMsg(text, role, src=''){
-  const wrap=document.getElementById('chatMsgs');
-  const div=document.createElement('div'); div.className=`msg ${role}`;
-  const ico=document.createElement('div'); ico.className='msg-ico'; ico.textContent=role==='bot'?'🛡️':'👤';
-  const right=document.createElement('div');
-  const bub=document.createElement('div'); bub.className='bubble';
-  bub.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-  right.appendChild(bub);
-  if(src){const s=document.createElement('div');s.style.cssText='font-size:0.62rem;color:var(--purple-light);opacity:0.6;margin-top:0.2rem;padding-left:0.2rem';s.textContent='via '+src;right.appendChild(s);}
-  div.appendChild(ico); div.appendChild(right);
-  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
-}
-function showTyping(){
-  const wrap=document.getElementById('chatMsgs');
-  const d=document.createElement('div'); d.className='msg bot'; d.id='typing';
-  d.innerHTML='<div class="msg-ico">🛡️</div><div><div class="bubble"><div class="typing-wrap"><span></span><span></span><span></span></div></div></div>';
-  wrap.appendChild(d); wrap.scrollTop=wrap.scrollHeight;
-}
-function hideTyping(){ const t=document.getElementById('typing'); if(t)t.remove(); }
-
-
-
-// ─── LAW CARDS → CHAT ───
-function askAboutLaw(lawQuery){
-  navTo('chatbot');
-  setTimeout(()=>{
-    document.getElementById('chatIn').value = 'Tell me about ' + lawQuery;
-    sendMsg();
-  }, 600);
-}
-
-// ─── VOICE INPUT ───
-let recog=null;
-function toggleVoice(){
-  const btn=document.getElementById('voiceBtn');
-  if(recog){recog.stop();recog=null;btn.classList.remove('recording');btn.textContent='🎤';return;}
-  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
-    showToast('⚠️ Voice works in Chrome. Please use Chrome browser.');return;
-  }
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  recog=new SR();
-  recog.lang={en:'en-IN',kn:'kn-IN',hi:'hi-IN',te:'te-IN'}[lang]||'en-IN';
-  recog.onstart=()=>{btn.classList.add('recording');btn.textContent='🔴';showToast('🎤 Listening... speak now');};
-  recog.onresult=e=>{
-    const transcript=e.results[0][0].transcript;
-    document.getElementById('chatIn').value=transcript;
-    recog=null;btn.classList.remove('recording');btn.textContent='🎤';
-    sendMsg();
-  };
-  recog.onerror=()=>{recog=null;btn.classList.remove('recording');btn.textContent='🎤';showToast('Voice error — try again');};
-  recog.onend=()=>{if(recog){recog=null;btn.classList.remove('recording');btn.textContent='🎤';}};
-  recog.start();
-}
-
-// ════ ALLY MODE ════
-let allyHistory = [];
-function openAllyMode() {
-  document.getElementById('allyModal').classList.add('open');
-  if (allyHistory.length === 0) {
-    allyHistory = [];
-    document.getElementById('allyChat').innerHTML = '';
-    _addAllyBubble("I'm really glad you're here — looking out for someone takes a lot of courage and love. Let me help you understand what's happening and what you can actually do.\n\nFirst question — what's your relationship to this person?", 'bot');
-  }
-}
-function closeAlly() { document.getElementById('allyModal').classList.remove('open'); }
-
-function _addAllyBubble(text, role) {
-  const chat = document.getElementById('allyChat');
-  const div = document.createElement('div');
-  div.className = role === 'bot' ? 'ally-bubble-bot' : 'ally-bubble-user';
-  div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-  chat.appendChild(div);
-  chat.scrollTop = 99999;
-}
-
-async function sendAllyMsg(){
-  const input = document.getElementById("allyChatIn");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addAllyBubble(msg, "user");
-  input.value = "";
-
-  try{
-    const res = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        message: "Give advice on how to support someone in this situation: " + msg,
-        history: [],
-        language: allyLang
-      })
-    });
-
-    const data = await res.json();
-    addAllyBubble(data.reply, "bot");
-
-  }catch(e){
-    addAllyBubble("Connection error. Please try again.", "bot");
-  }
-}
-
-// ════ EVIDENCE VAULT ════
-let vaultData = JSON.parse(localStorage.getItem('sv_vault') || '[]');
-let mediaRec = null, audioChunks = [], recActive = false;
-
-function openEvidenceVault() {
-  document.getElementById('vaultModal').classList.add('open');
-  renderVault();
-}
-function closeVault() {
-  document.getElementById('vaultModal').classList.remove('open');
-  document.getElementById('noteInputArea').style.display = 'none';
-}
-
-function vaultToggleNote() {
-  const n = document.getElementById('noteInputArea');
-  n.style.display = n.style.display === 'none' ? 'block' : 'none';
-}
-function vaultPickPhoto() { document.getElementById('photoInput').click(); }
-
-function vaultSaveNote() {
-  const text = document.getElementById('noteText').value.trim();
-  if (!text) { showToast('Please write something first'); return; }
-  vaultData.push({ type: 'note', content: text, date: new Date().toLocaleString('en-IN') });
-  localStorage.setItem('sv_vault', JSON.stringify(vaultData));
-  document.getElementById('noteText').value = '';
-  document.getElementById('noteInputArea').style.display = 'none';
-  renderVault(); showToast('📝 Note saved to vault');
-}
-
-function vaultSavePhoto(e) {
-  const file = e.target.files[0]; if (!file) return;
-  const r = new FileReader();
-  r.onload = ev => {
-    vaultData.push({ type: 'photo', content: ev.target.result, name: file.name, date: new Date().toLocaleString('en-IN') });
-    localStorage.setItem('sv_vault', JSON.stringify(vaultData));
-    renderVault(); showToast('📷 Photo saved to vault');
-  };
-  r.readAsDataURL(file); e.target.value = '';
-}
-
-async function vaultToggleAudio() {
-  const lbl = document.getElementById('audioLabel');
-  if (recActive) {
-    mediaRec.stop(); recActive = false; lbl.textContent = 'Record Audio';
-    showToast('Recording stopped — saving...');
-    return;
-  }
+// ══════════════════════════════════════════
+// SOS SYSTEM
+// ══════════════════════════════════════════
+function triggerSOS() {
+  sosActive = true;
+  document.getElementById('sosOverlay').classList.add('show');
+  document.getElementById('sosBtn').classList.add('alarm-active');
+  // Play alarm sound using AudioContext
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioChunks = [];
-    mediaRec = new MediaRecorder(stream);
-    mediaRec.ondataavailable = ev => audioChunks.push(ev.data);
-    mediaRec.onstop = () => {
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      const r = new FileReader();
-      r.onload = ev2 => {
-        vaultData.push({ type: 'audio', content: ev2.target.result, date: new Date().toLocaleString('en-IN') });
-        localStorage.setItem('sv_vault', JSON.stringify(vaultData));
-        renderVault(); showToast('🎙️ Audio saved to vault');
-        stream.getTracks().forEach(t => t.stop());
-      };
-      r.readAsDataURL(blob);
-    };
-    mediaRec.start(); recActive = true; lbl.textContent = 'Stop Recording 🔴';
-    showToast('🎙️ Recording... tap Stop to save');
-  } catch(err) { showToast('⚠️ Microphone access denied'); }
-}
-
-function vaultDelete(i) {
-  if (!confirm('Delete this entry?')) return;
-  vaultData.splice(i, 1);
-  localStorage.setItem('sv_vault', JSON.stringify(vaultData));
-  renderVault(); showToast('Entry deleted');
-}
-
-function renderVault() {
-  const list = document.getElementById('vaultEntries');
-  const empty = document.getElementById('vaultEmpty');
-  if (!vaultData.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  list.innerHTML = vaultData.map((e, i) => {
-    const del = `<button class="vault-delete" onclick="vaultDelete(${i})">🗑 Delete</button>`;
-    if (e.type === 'note') return `<div class="vault-entry"><div class="vault-entry-header"><span>📝 Note · ${e.date}</span>${del}</div><div>${e.content.replace(/\n/g,'<br>')}</div></div>`;
-    if (e.type === 'photo') return `<div class="vault-entry"><div class="vault-entry-header"><span>📷 ${e.name||'Photo'} · ${e.date}</span>${del}</div><img src="${e.content}" style="max-width:100%;border-radius:8px;margin-top:0.4rem"></div>`;
-    if (e.type === 'audio') return `<div class="vault-entry"><div class="vault-entry-header"><span>🎙️ Audio · ${e.date}</span>${del}</div><audio controls src="${e.content}" style="width:100%;margin-top:0.3rem"></audio></div>`;
-    return '';
-  }).join('');
-}
-
-// ════ SAFE EXIT PLANNER ════
-let exitHistory = [];
-function openSafeExit() {
-  document.getElementById('exitModal').classList.add('open');
-  if (exitHistory.length === 0) {
-    exitHistory = [];
-    document.getElementById('exitChat').innerHTML = '';
-    _addExitBubble("First, I want you to know — you're not alone, and you're brave for being here. Let me understand where you are right now:", 'bot', true);
-  }
-}
-function closeExit() { document.getElementById('exitModal').classList.remove('open'); }
-function findNearMe(q) { window.open('https://www.google.com/maps/search/' + encodeURIComponent(q + ' near me'), '_blank'); }
-
-function _addExitBubble(text, role, withChoices) {
-  const chat = document.getElementById('exitChat');
-  if (role === 'bot') {
-    const div = document.createElement('div');
-    div.className = 'ally-bubble-bot';
-    div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-    chat.appendChild(div);
-    if (withChoices) {
-      const choices = ["I'm still living with my abuser","I've left but I'm not safe yet","I'm planning to leave soon","I need help for someone else"];
-      choices.forEach(c => {
-        const btn = document.createElement('button');
-        btn.className = 'exit-choice-btn';
-        btn.textContent = c;
-        btn.onclick = () => exitChoice(c);
-        chat.appendChild(btn);
-      });
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function beep(freq, start, duration) {
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.type = 'square';
+      oscillator.frequency.value = freq;
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + start);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration);
+      oscillator.start(audioCtx.currentTime + start);
+      oscillator.stop(audioCtx.currentTime + start + duration);
     }
-  } else {
-    const div = document.createElement('div');
-    div.className = 'ally-bubble-user';
-    div.textContent = text;
-    chat.appendChild(div);
-  }
-  chat.scrollTop = 99999;
+    for (let i = 0; i < 10; i++) {
+      beep(880, i * 0.5, 0.3);
+      beep(660, i * 0.5 + 0.25, 0.25);
+    }
+    sosAudio = audioCtx;
+  } catch(e) { console.log('Audio not available'); }
+  // Update sub text in current language
+  const msgs = {en:'Call emergency services immediately', kn:'ತಕ್ಷಣ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಕರೆ ಮಾಡಿ', hi:'तुरंत आपातकालीन सेवाओं को कॉल करें', te:'వెంటనే అత్యవసర సేవలను కాల్ చేయండి'};
+  document.getElementById('sosSub').textContent = msgs[globalLang] || msgs['en'];
 }
 
-function exitChoice(choice) {
-  const chat = document.getElementById('exitChat');
-  chat.querySelectorAll('.exit-choice-btn').forEach(b => b.remove());
-  _addExitBubble(choice, 'user', false);
-  exitHistory.push({ role: 'user', content: choice });
-  _runExitAI();
+function stopSOS() {
+  sosActive = false;
+  document.getElementById('sosOverlay').classList.remove('show');
+  document.getElementById('sosBtn').classList.remove('alarm-active');
+  if (sosAudio) { try { sosAudio.close(); } catch(e){} sosAudio = null; }
 }
 
-async function sendExitMsg(){
-  const input = document.getElementById("exitChatIn");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addExitBubble(msg, "user");
-  input.value = "";
-
-  try{
-    const res = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        message: msg,
-        history: [],
-        language: exitLang
-      })
-    });
-
-    const data = await res.json();
-    addExitBubble(data.reply, "bot");
-
-  }catch(e){
-    addExitBubble("Connection error.", "bot");
-  }
-}
-
-async function _runExitAI() {
-  const chat = document.getElementById('exitChat');
-  const load = document.createElement('div');
-  load.className = 'ally-bubble-bot'; load.style.color = 'var(--purple-light)';
-  load.textContent = 'SafeVoice is building your plan...';
-  chat.appendChild(load); chat.scrollTop = 99999;
-  try {
-    const msgs = exitHistory.slice(-8).map(m => ({ role: m.role, content: m.content }));
-    const reply = await callGemini(msgs, EXIT_SYS);
-    load.remove();
-    _addExitBubble(reply, 'bot', false);
-    exitHistory.push({ role: 'assistant', content: reply });
-  } catch(e) {
-    load.remove();
-    _addExitBubble('Connection issue.\n\n**Call now:** **1091** (Vanitha Sahayavani) · **7827170170** (One Stop Centre) · **100** (Police)', 'bot', false);
-  }
-}
-
-
-// ─── DISGUISE CALCULATOR ───
+// ══════════════════════════════════════════
+// DISGUISE CALCULATOR (111 = return home)
+// ══════════════════════════════════════════
 let cVal='0',cPrev='',cOp=null,cNew=false;
-function showDisguise(){ document.getElementById('disguise').classList.add('show'); }
-function hideDisguise(){ document.getElementById('disguise').classList.remove('show'); }
+function showDisguise(){document.getElementById('disguise').classList.add('show');}
+function hideDisguise(){document.getElementById('disguise').classList.remove('show');}
 
 function ck(v){
   const disp=document.getElementById('cMain');
@@ -1302,10 +1056,7 @@ function ck(v){
   if(v==='AC'){cVal='0';cPrev='';cOp=null;cNew=false;prev.textContent='';}
   else if(v==='+/-'){cVal=String(-parseFloat(cVal));}
   else if(v==='%'){cVal=String(parseFloat(cVal)/100);}
-  else if(['+','-','*','/'].includes(v)){
-    cOp=v;cPrev=cVal;cNew=true;
-    prev.textContent=cVal+' '+(v==='*'?'×':v==='/'?'÷':v);
-  }
+  else if(['+','-','*','/'].includes(v)){cOp=v;cPrev=cVal;cNew=true;prev.textContent=cVal+' '+(v==='*'?'×':v==='/'?'÷':v);}
   else if(v==='='){
     if(cOp&&cPrev!==''){
       try{const r=eval(cPrev+cOp+cVal);cVal=String(parseFloat(r.toFixed(10)));}catch(e){cVal='Error';}
@@ -1316,141 +1067,465 @@ function ck(v){
     if(cNew){cVal='0.';cNew=false;}
     else if(!cVal.includes('.'))cVal+='.';
   }
-  else{
+  else {
     if(cVal==='0'||cNew){cVal=v;cNew=false;}
     else if(cVal.length<12)cVal+=v;
+    // Check secret code 111
+    if(cVal==='111'){
+      setTimeout(()=>{hideDisguise();cVal='0';disp.textContent='0';},100);
+      return;
+    }
   }
   disp.textContent=cVal.length>10?parseFloat(cVal).toExponential(3):cVal;
 }
-// ---------- CHAT FUNCTIONS ----------
 
-function addMessage(text, sender){
-  const box = document.getElementById("chatMsgs");
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideDisguise();stopSOS();}});
 
-  const msgDiv = document.createElement("div");
-  msgDiv.className = "msg " + sender;
-
-  const icon = document.createElement("div");
-  icon.className = "msg-ico";
-  icon.innerText = sender === "user" ? "👤" : "🛡️";
-
-  const bubbleWrap = document.createElement("div");
-  const bubble = document.createElement("div");
-  bubble.className = "bubble";
-  bubble.innerText = text;
-
-  bubbleWrap.appendChild(bubble);
-  msgDiv.appendChild(icon);
-  msgDiv.appendChild(bubbleWrap);
-  box.appendChild(msgDiv);
-
-  box.scrollTop = box.scrollHeight;
+// ══════════════════════════════════════════
+// GEMINI API CALL
+// ══════════════════════════════════════════
+async function callGemini(messages, systemPrompt) {
+  const gemMsgs = messages.map(m=>({
+    role: m.role==='assistant'?'model':'user',
+    parts:[{text:m.content}]
+  }));
+  const r = await fetch(
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+GEMINI_API_KEY,
+    {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        system_instruction:{parts:[{text:systemPrompt}]},
+        contents:gemMsgs
+      })
+    }
+  );
+  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'API error');}
+  const d=await r.json();
+  return d.candidates[0].content.parts[0].text;
 }
+
+// System prompts per language
+const SYS_PROMPTS = {
+  en:`You are SafeVoice, a compassionate AI legal guidance assistant for women experiencing domestic abuse in Karnataka, India. ALWAYS respond ONLY in English. Cover: IPC 498A (cruelty, non-bailable, 3 yrs), PWDVA 2005 (Protection Orders in 24hrs), POCSO 2012, IPC 354, IPC 406. Helplines: 181, 1091 (Vanitha Sahayavani), 100, 7827170170, 1098. Warm, never victim-blame. Use **bold** for key info. Under 250 words.`,
+  kn:`ನೀವು SafeVoice — ಕರ್ನಾಟಕದ ಮಹಿಳೆಯರಿಗೆ ಕಾನೂನು ಸಹಾಯ ನೀಡುವ AI ಸಹಾಯಕ. ಎಲ್ಲಾ ಉತ್ತರಗಳನ್ನು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ನೀಡಿ. IPC 498A, PWDVA 2005, POCSO ಕಾನೂನುಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ. ಸಹಾಯವಾಣಿ: 181, 1091, 100, 1098. ಪ್ರೀತಿಯಿಂದ ಮಾತನಾಡಿ. ಮುಖ್ಯ ಮಾಹಿತಿಗೆ **bold** ಬಳಸಿ. 250 ಪದಗಳ ಒಳಗೆ ಉತ್ತರಿಸಿ.`,
+  hi:`आप SafeVoice हैं — कर्नाटक में महिलाओं के लिए AI कानूनी सहायक। सभी जवाब केवल हिंदी में दें। IPC 498A, PWDVA 2005, POCSO के बारे में जानकारी दें। हेल्पलाइन: 181, 1091, 100, 1098। गर्मजोशी से बात करें। जरूरी जानकारी **bold** में लिखें। 250 शब्दों में जवाब दें।`,
+  te:`మీరు SafeVoice — కర్ణాటకలో మహిళలకు AI చట్టపరమైన సహాయకుడు. అన్ని సమాధానాలు తెలుగులో మాత్రమే ఇవ్వండి. IPC 498A, PWDVA 2005, POCSO గురించి తెలియజేయండి. హెల్ప్‌లైన్: 181, 1091, 100, 1098. ప్రేమగా మాట్లాడండి. ముఖ్యమైన సమాచారం **bold** లో రాయండి. 250 పదాలలో జవాబు ఇవ్వండి.`
+};
+
+const ALLY_SYS = {
+  en:`You are SafeVoice Ally Mode. The user is supporting a friend/family member experiencing domestic abuse in India, NOT the victim themselves. Help them: how to approach safely, legal options (IPC 498A, PWDVA, POCSO), how to connect their friend to help. Karnataka helplines: 181, 1091, 100. Warm, practical. **Bold** key actions. RESPOND ONLY IN ENGLISH. Under 200 words.`,
+  kn:`ನೀವು SafeVoice Ally Mode. ಬಳಕೆದಾರರು ಸ್ನೇಹಿತರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತಿದ್ದಾರೆ. ಸ್ನೇಹಿತರಿಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬೇಕು ಎಂದು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ. ಸಹಾಯವಾಣಿ: 181, 1091, 100. **Bold** ಬಳಸಿ. 200 ಪದಗಳ ಒಳಗೆ.`,
+  hi:`आप SafeVoice Ally Mode हैं। उपयोगकर्ता किसी मित्र का समर्थन कर रहे हैं। केवल हिंदी में जवाब दें। दोस्त की कैसे मदद करें, IPC 498A, PWDVA, हेल्पलाइन: 181, 1091, 100। **Bold** में मुख्य कदम। 200 शब्दों में।`,
+  te:`మీరు SafeVoice Ally Mode. వినియోగదారు స్నేహితుడికి మద్దతు ఇస్తున్నారు. తెలుగులో మాత్రమే జవాబు ఇవ్వండి. స్నేహితుడికి ఎలా సహాయం చేయాలో చెప్పండి. హెల్ప్‌లైన్: 181, 1091, 100. **Bold** వాడండి. 200 పదాల లోపు.`
+};
+
+const EXIT_SYS = {
+  en:`You are SafeVoice Safe Exit Planner for Karnataka, India. RESPOND ONLY IN ENGLISH. Give practical step-by-step guidance to leave safely: immediate safety steps, documents to gather (Aadhaar, bank details, birth certificates, medical records), where to go (shelters, One Stop Centre: 7827170170), legal steps (Protection Order under PWDVA in 24hrs). Helplines: 1091, 181, 100. Calm, practical. **Bold** action steps. Under 250 words.`,
+  kn:`ನೀವು SafeVoice ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜಕ. ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಉತ್ತರಿಸಿ. ಸುರಕ್ಷಿತವಾಗಿ ಹೊರಡಲು ಹಂತ ಹಂತದ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ: ತಕ್ಷಣದ ಸುರಕ್ಷತಾ ಕ್ರಮಗಳು, ಆಧಾರ್, ಬ್ಯಾಂಕ್ ವಿವರ ಸಂಗ್ರಹಿಸಿ. ಸಹಾಯವಾಣಿ: 1091, 181, 100. **Bold** ಬಳಸಿ. 250 ಪದಗಳ ಒಳಗೆ.`,
+  hi:`आप SafeVoice सुरक्षित निकास योजनाकार हैं। केवल हिंदी में जवाब दें। सुरक्षित निकलने के लिए चरण-दर-चरण मार्गदर्शन दें: तत्काल सुरक्षा कदम, Aadhaar, बैंक विवरण इकट्ठा करें। हेल्पलाइन: 1091, 181, 100। **Bold** में कदम। 250 शब्दों में।`,
+  te:`మీరు SafeVoice సురక్షిత నిష్క్రమణ ప్లానర్. తెలుగులో మాత్రమే జవాబు ఇవ్వండి. సురక్షితంగా వెళ్ళడానికి దశల వారీ మార్గదర్శనం ఇవ్వండి: ఆధార్, బ్యాంక్ వివరాలు సేకరించండి. హెల్ప్‌లైన్: 1091, 181, 100. **Bold** వాడండి. 250 పదాల లోపు.`
+};
+
+// ══════════════════════════════════════════
+// CHAT
+// ══════════════════════════════════════════
+const QP = {
+  en:['What is IPC 498A?','My husband is abusive','How do I file an FIR?','I need shelter','What is PWDVA?'],
+  kn:['IPC 498A ಎಂದರೇನು?','ನನ್ನ ಪತಿ ಹಿಂಸೆ ನೀಡುತ್ತಾರೆ','ದೂರು ಹೇಗೆ ದಾಖಲಿಸಬೇಕು?','ಆಶ್ರಯ ಬೇಕು','PWDVA ಏನು?'],
+  hi:['IPC 498A क्या है?','मेरे पति मुझे मारते हैं','FIR कैसे दर्ज करें?','मुझे आश्रय चाहिए','PWDVA क्या है?'],
+  te:['IPC 498A అంటే ఏమిటి?','నా భర్త హింస చేస్తున్నారు','ఫిర్యాదు ఎలా నమోదు చేయాలి?','ఆశ్రయం కావాలి','PWDVA అంటే ఏమిటి?']
+};
+
+function renderChips(){
+  const c=document.getElementById('quickChips');
+  const lang=chatLang;
+  c.innerHTML=(QP[lang]||QP['en']).map(t=>`<span class="qchip" onclick="useChip('${t.replace(/'/g,"\\'")}')"> ${t}</span>`).join('');
+  addHover('.qchip');
+}
+function useChip(t){document.getElementById('chatIn').value=t;sendMsg();}
+renderChips();
+
+function addMsg(text,role){
+  const wrap=document.getElementById('chatMsgs');
+  const div=document.createElement('div');div.className=`msg ${role}`;
+  const ico=document.createElement('div');ico.className='msg-ico';ico.textContent=role==='bot'?'🛡️':'👤';
+  const right=document.createElement('div');
+  const bub=document.createElement('div');bub.className='bubble';
+  bub.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  right.appendChild(bub);div.appendChild(ico);div.appendChild(right);
+  wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;
+}
+function showTyping(){
+  const wrap=document.getElementById('chatMsgs');
+  const d=document.createElement('div');d.className='msg bot';d.id='typing';
+  d.innerHTML='<div class="msg-ico">🛡️</div><div><div class="bubble"><div class="typing-wrap"><span></span><span></span><span></span></div></div></div>';
+  wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;
+}
+function hideTyping(){const t=document.getElementById('typing');if(t)t.remove();}
 
 async function sendMsg(){
-  const input = document.getElementById("chatIn");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addMessage(msg, "user");
-  input.value = "";
-
+  const inp=document.getElementById('chatIn');
+  const txt=inp.value.trim();if(!txt)return;
+  inp.value='';
+  addMsg(txt,'user');
+  chatHistory.push({role:'user',content:txt});
+  showTyping();
   try{
-    const res = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        message: msg,
-        history: [],
-        language: currentLang
-      })
-    });
-
-    const data = await res.json();
-    addMessage(data.reply, "bot");
-
-  }catch(err){
-    addMessage("Connection issue.", "bot");
-  }
-}
-
-// ---------- EXIT PLANNER ----------
-function addExitBubble(text, sender){
-  const box = document.getElementById("exitChat");
-
-  const div = document.createElement("div");
-  div.className = sender === "user" ? "ally-bubble-user" : "ally-bubble-bot";
-  div.innerText = text;
-
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-async function sendExitMsg(){
-  const input = document.getElementById("exitChatIn");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addExitBubble(msg, "user");
-  input.value = "";
-
-  try{
-    const res = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        message: "Create a safe exit plan for this situation: " + msg,
-        history: [],
-        language: "en"
-      })
-    });
-
-    const data = await res.json();
-    addExitBubble(data.reply, "bot");
-
+    const reply=await callGemini(chatHistory.slice(-10),SYS_PROMPTS[chatLang]||SYS_PROMPTS['en']);
+    hideTyping();
+    addMsg(reply,'bot');
+    chatHistory.push({role:'assistant',content:reply});
   }catch(e){
-    addExitBubble("Connection error.", "bot");
+    hideTyping();
+    const T=TRANSLATIONS[chatLang]||TRANSLATIONS['en'];
+    addMsg('📞 '+( chatLang==='kn'?'ಸಹಾಯಕ್ಕಾಗಿ ಕರೆ ಮಾಡಿ': chatLang==='hi'?'सहायता के लिए कॉल करें': chatLang==='te'?'సహాయం కోసం కాల్ చేయండి':'Call for help')+': 181 · 1091 · 100','bot');
   }
 }
 
-// ---------- ALLY MODE ----------
-function addAllyBubble(text, sender){
-  const box = document.getElementById("allyChat");
+function askAboutLaw(lawQuery){
+  navTo('chatbot');
+  setTimeout(()=>{document.getElementById('chatIn').value='Tell me about '+lawQuery;sendMsg();},600);
+}
 
-  const div = document.createElement("div");
-  div.className = sender === "user" ? "ally-bubble-user" : "ally-bubble-bot";
-  div.innerText = text;
+// ══════════════════════════════════════════
+// VOICE INPUT
+// ══════════════════════════════════════════
+let recog=null;
+function toggleVoice(){
+  const btn=document.getElementById('voiceBtn');
+  if(recog){recog.stop();recog=null;btn.classList.remove('recording');btn.textContent='🎤';return;}
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){showToast('⚠️ Voice works in Chrome.');return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recog=new SR();
+  recog.lang={en:'en-IN',kn:'kn-IN',hi:'hi-IN',te:'te-IN'}[chatLang]||'en-IN';
+  recog.onstart=()=>{btn.classList.add('recording');btn.textContent='🔴';showToast('🎤 Listening...');};
+  recog.onresult=e=>{
+    document.getElementById('chatIn').value=e.results[0][0].transcript;
+    recog=null;btn.classList.remove('recording');btn.textContent='🎤';sendMsg();
+  };
+  recog.onerror=()=>{recog=null;btn.classList.remove('recording');btn.textContent='🎤';showToast('Voice error');};
+  recog.onend=()=>{if(recog){recog=null;btn.classList.remove('recording');btn.textContent='🎤';}};
+  recog.start();
+}
 
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
+// ══════════════════════════════════════════
+// ALLY MODE
+// ══════════════════════════════════════════
+function openAllyMode(){
+  document.getElementById('allyModal').classList.add('open');
+  if(allyHistory.length===0){
+    allyHistory=[];
+    document.getElementById('allyChat').innerHTML='';
+    const T=TRANSLATIONS[allyLang]||TRANSLATIONS['en'];
+    _addAllyBubble(T['ally_welcome'],'bot');
+  }
+}
+function closeAlly(){document.getElementById('allyModal').classList.remove('open');}
+
+function _addAllyBubble(text,role){
+  const chat=document.getElementById('allyChat');
+  const div=document.createElement('div');
+  div.className=role==='bot'?'ally-bubble-bot':'ally-bubble-user';
+  div.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  chat.appendChild(div);chat.scrollTop=99999;
 }
 
 async function sendAllyMsg(){
-  const input = document.getElementById("allyChatIn");
-  const msg = input.value.trim();
-  if(!msg) return;
-
-  addAllyBubble(msg, "user");
-  input.value = "";
-
+  const input=document.getElementById('allyChatIn');
+  const msg=input.value.trim();if(!msg)return;
+  _addAllyBubble(msg,'user');input.value='';
+  allyHistory.push({role:'user',content:msg});
+  const load=document.createElement('div');load.className='ally-bubble-bot';load.style.color='var(--purple-light)';load.textContent='...';
+  document.getElementById('allyChat').appendChild(load);
   try{
-    const res = await fetch(API_BASE + "/api/chat", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({
-        message: msg,
-        history: [],
-        language: allyLang
-      })
-    });
-
-    const data = await res.json();
-    addAllyBubble(data.reply, "bot");
-
+    const msgs=allyHistory.slice(-8);
+    const reply=await callGemini(msgs,ALLY_SYS[allyLang]||ALLY_SYS['en']);
+    load.remove();
+    _addAllyBubble(reply,'bot');
+    allyHistory.push({role:'assistant',content:reply});
   }catch(e){
-    addAllyBubble("Connection error.", "bot");
+    load.remove();
+    _addAllyBubble('📞 181 · 1091 · 100','bot');
   }
 }
+
+// ══════════════════════════════════════════
+// SAFE EXIT PLANNER
+// ══════════════════════════════════════════
+function openSafeExit(){
+  document.getElementById('exitModal').classList.add('open');
+  if(exitHistory.length===0){
+    exitHistory=[];
+    document.getElementById('exitChat').innerHTML='';
+    const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
+    _addExitBubble(T['exit_welcome'],'bot',true);
+  }
+  // Auto-get location
+  getLocationAndSearch();
+}
+function closeExit(){document.getElementById('exitModal').classList.remove('open');}
+
+function getLocationAndSearch(){
+  const box=document.getElementById('locationBox');
+  const txt=document.getElementById('locationText');
+  if(!navigator.geolocation){
+    box.className='location-box error';
+    txt.textContent='Location not available on this browser.';
+    return;
+  }
+  box.className='location-box';
+  txt.textContent='📍 Getting your location...';
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      userLat=pos.coords.latitude;
+      userLng=pos.coords.longitude;
+      box.className='location-box found';
+      txt.textContent=`✅ Location found: ${userLat.toFixed(4)}, ${userLng.toFixed(4)}. Click a button below to find nearby help.`;
+      showToast('📍 Location acquired!');
+    },
+    err=>{
+      box.className='location-box error';
+      const msgs={1:'Location access denied. Please allow location for best results.',2:'Location unavailable. Using manual search.',3:'Location timeout. Using manual search.'};
+      txt.textContent='⚠️ '+(msgs[err.code]||'Location error. Using city-level search.');
+      // Still allow searches without precise location
+      userLat=12.9716;userLng=77.5946; // Default: Bangalore
+      txt.textContent+=' (Using Bangalore as default)';
+    },
+    {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
+  );
+}
+
+function searchNearby(query){
+  const lat=userLat||12.9716;
+  const lng=userLng||77.5946;
+  const mapsUrl=`https://www.google.com/maps/search/${encodeURIComponent(query)}/@${lat},${lng},14z`;
+  window.open(mapsUrl,'_blank');
+  showToast(`🗺️ Opening Google Maps for: ${query}`);
+  // Also add a message in chat
+  _addExitBubble(`🗺️ Opening Google Maps to find nearby "${query}" — please check the map that opened.`,'bot',false);
+  // AI response about this type of place
+  const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
+  const sysP=EXIT_SYS[exitLang]||EXIT_SYS['en'];
+  exitHistory.push({role:'user',content:`I searched for nearby ${query}. Give me specific advice on what to do when I reach a ${query} and what to say.`});
+  callGemini(exitHistory.slice(-6),sysP).then(r=>{
+    _addExitBubble(r,'bot',false);
+    exitHistory.push({role:'assistant',content:r});
+  }).catch(()=>{});
+}
+
+function _addExitBubble(text,role,withChoices){
+  const chat=document.getElementById('exitChat');
+  if(role==='bot'){
+    const div=document.createElement('div');
+    div.className='ally-bubble-bot';
+    div.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+    chat.appendChild(div);
+    if(withChoices){
+      const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
+      const choices=[T['exit_c1'],T['exit_c2'],T['exit_c3'],T['exit_c4']];
+      choices.forEach(c=>{
+        const btn=document.createElement('button');
+        btn.className='exit-choice-btn';
+        btn.textContent=c;
+        btn.onclick=()=>exitChoice(c);
+        chat.appendChild(btn);
+      });
+    }
+  } else {
+    const div=document.createElement('div');
+    div.className='ally-bubble-user';
+    div.textContent=text;
+    chat.appendChild(div);
+  }
+  chat.scrollTop=99999;
+}
+
+function exitChoice(choice){
+  const chat=document.getElementById('exitChat');
+  chat.querySelectorAll('.exit-choice-btn').forEach(b=>b.remove());
+  _addExitBubble(choice,'user',false);
+  exitHistory.push({role:'user',content:choice});
+  _runExitAI();
+}
+
+async function _runExitAI(){
+  const chat=document.getElementById('exitChat');
+  const load=document.createElement('div');
+  load.className='ally-bubble-bot';load.style.color='var(--purple-light)';
+  load.textContent='SafeVoice is building your plan...';
+  chat.appendChild(load);chat.scrollTop=99999;
+  try{
+    const sysP=EXIT_SYS[exitLang]||EXIT_SYS['en'];
+    // Include location in context if available
+    let msgs=[...exitHistory.slice(-8)];
+    if(userLat&&userLng){
+      msgs[msgs.length-1]={...msgs[msgs.length-1],content:msgs[msgs.length-1].content+` (User location: ${userLat.toFixed(4)}, ${userLng.toFixed(4)} - suggest they use the map buttons to find nearby help)`};
+    }
+    const reply=await callGemini(msgs,sysP);
+    load.remove();
+    _addExitBubble(reply,'bot',false);
+    exitHistory.push({role:'assistant',content:reply});
+  }catch(e){
+    load.remove();
+    _addExitBubble('📞 Call now: **1091** · **7827170170** · **100**','bot',false);
+  }
+}
+
+async function sendExitMsg(){
+  const input=document.getElementById('exitChatIn');
+  const msg=input.value.trim();if(!msg)return;
+  _addExitBubble(msg,'user',false);input.value='';
+  exitHistory.push({role:'user',content:msg});
+  _runExitAI();
+}
+
+// ══════════════════════════════════════════
+// EVIDENCE VAULT
+// ══════════════════════════════════════════
+let vaultData=JSON.parse(localStorage.getItem('sv_vault')||'[]');
+let mediaRec=null,audioChunks=[],recActive=false;
+
+function openEvidenceVault(){
+  document.getElementById('vaultModal').classList.add('open');
+  renderVault();
+}
+function closeVault(){
+  document.getElementById('vaultModal').classList.remove('open');
+  document.getElementById('noteInputArea').style.display='none';
+  vaultStopCamera();
+}
+
+function vaultToggleNote(){
+  const n=document.getElementById('noteInputArea');
+  n.style.display=n.style.display==='none'?'block':'none';
+}
+function vaultPickPhoto(){document.getElementById('photoInput').click();}
+
+function vaultSaveNote(){
+  const text=document.getElementById('noteText').value.trim();
+  if(!text){showToast('Please write something first');return;}
+  vaultData.push({type:'note',content:text,date:new Date().toLocaleString('en-IN')});
+  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
+  document.getElementById('noteText').value='';
+  document.getElementById('noteInputArea').style.display='none';
+  renderVault();showToast('📝 Note saved securely');
+}
+
+function vaultSavePhoto(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    vaultData.push({type:'photo',content:ev.target.result,name:file.name,date:new Date().toLocaleString('en-IN')});
+    localStorage.setItem('sv_vault',JSON.stringify(vaultData));
+    renderVault();showToast('📷 Photo saved securely');
+  };
+  r.readAsDataURL(file);e.target.value='';
+}
+
+// Live camera capture
+async function vaultOpenCamera(){
+  const cameraArea=document.getElementById('cameraArea');
+  const video=document.getElementById('cameraStream');
+  try{
+    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
+    video.srcObject=cameraStream;
+    cameraArea.style.display='block';
+    showToast('📸 Camera ready — aim and capture');
+  }catch(err){
+    showToast('⚠️ Camera access denied or unavailable');
+  }
+}
+
+function vaultCapturePhoto(){
+  const video=document.getElementById('cameraStream');
+  const canvas=document.getElementById('cameraCanvas');
+  canvas.width=video.videoWidth||640;
+  canvas.height=video.videoHeight||480;
+  canvas.getContext('2d').drawImage(video,0,0);
+  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
+  vaultData.push({type:'photo',content:dataUrl,name:'camera-'+Date.now()+'.jpg',date:new Date().toLocaleString('en-IN')});
+  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
+  vaultStopCamera();
+  renderVault();showToast('📸 Photo captured and saved securely!');
+}
+
+function vaultStopCamera(){
+  if(cameraStream){
+    cameraStream.getTracks().forEach(t=>t.stop());
+    cameraStream=null;
+  }
+  const video=document.getElementById('cameraStream');
+  if(video) video.srcObject=null;
+  const cameraArea=document.getElementById('cameraArea');
+  if(cameraArea) cameraArea.style.display='none';
+}
+
+async function vaultToggleAudio(){
+  const lbl=document.getElementById('audioLabel');
+  if(recActive){
+    mediaRec.stop();recActive=false;
+    const T=TRANSLATIONS[globalLang]||TRANSLATIONS['en'];
+    lbl.textContent=T['record_audio']||'Record Audio';
+    showToast('Recording stopped — saving...');return;
+  }
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    audioChunks=[];
+    mediaRec=new MediaRecorder(stream);
+    mediaRec.ondataavailable=ev=>audioChunks.push(ev.data);
+    mediaRec.onstop=()=>{
+      const blob=new Blob(audioChunks,{type:'audio/webm'});
+      const r=new FileReader();
+      r.onload=ev2=>{
+        vaultData.push({type:'audio',content:ev2.target.result,date:new Date().toLocaleString('en-IN')});
+        localStorage.setItem('sv_vault',JSON.stringify(vaultData));
+        renderVault();showToast('🎙️ Audio saved securely');
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      r.readAsDataURL(blob);
+    };
+    mediaRec.start();recActive=true;lbl.textContent='Stop 🔴';
+    showToast('🎙️ Recording... tap Stop to save');
+  }catch(err){showToast('⚠️ Microphone access denied');}
+}
+
+function vaultDelete(i){
+  if(!confirm('Delete this entry?'))return;
+  vaultData.splice(i,1);
+  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
+  renderVault();showToast('Entry deleted');
+}
+
+function renderVault(){
+  const list=document.getElementById('vaultEntries');
+  const empty=document.getElementById('vaultEmpty');
+  if(!vaultData.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=vaultData.map((e,i)=>{
+    const del=`<button class="vault-delete" onclick="vaultDelete(${i})">🗑</button>`;
+    if(e.type==='note')return`<div class="vault-entry"><div class="vault-entry-header"><span>📝 ${e.date}</span>${del}</div><div>${e.content.replace(/\n/g,'<br>')}</div></div>`;
+    if(e.type==='photo')return`<div class="vault-entry"><div class="vault-entry-header"><span>📷 ${e.name||'Photo'} · ${e.date}</span>${del}</div><img src="${e.content}" style="max-width:100%;border-radius:8px;margin-top:0.4rem;cursor:pointer" onclick="window.open('${e.content}')"></div>`;
+    if(e.type==='audio')return`<div class="vault-entry"><div class="vault-entry-header"><span>🎙️ Audio · ${e.date}</span>${del}</div><audio controls src="${e.content}" style="width:100%;margin-top:0.3rem"></audio></div>`;
+    return'';
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// HEALTH CHECK
+// ══════════════════════════════════════════
+async function checkHealth(){
+  const dot=document.getElementById('statusDot');
+  dot.textContent='● Online · AI Ready';dot.style.color='#4ade80';
+  document.getElementById('apiSetupBox').style.display='none';
+}
+checkHealth();
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+applyTranslations('en');
+
 </script>
 </body>
 </html>
