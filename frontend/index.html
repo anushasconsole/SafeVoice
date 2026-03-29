@@ -45,8 +45,6 @@ nav{position:fixed;top:0;width:100%;z-index:500;padding:1.1rem 3rem;display:flex
 .btn-ghost:hover{background:rgba(255,255,255,0.08);color:var(--white);}
 .btn-danger{background:linear-gradient(135deg,#7f1d1d,#dc2626);color:white;padding:0.42rem 1.1rem;border-radius:100px;font-size:0.74rem;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.25s;font-weight:500;}
 .btn-danger:hover{transform:scale(1.05);box-shadow:0 0 22px rgba(220,38,38,0.5);}
-
-/* SOS BUTTON */
 .btn-sos{background:linear-gradient(135deg,#dc2626,#991b1b);color:white;padding:0.42rem 1.1rem;border-radius:100px;font-size:0.74rem;border:2px solid #ef4444;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;animation:sos-pulse 2s ease-in-out infinite;letter-spacing:0.05em;}
 @keyframes sos-pulse{0%,100%{box-shadow:0 0 8px rgba(239,68,68,0.4)}50%{box-shadow:0 0 25px rgba(239,68,68,0.8),0 0 50px rgba(239,68,68,0.3)}}
 .btn-sos:hover{transform:scale(1.08);}
@@ -82,14 +80,15 @@ section{position:relative;z-index:2;}
 @keyframes shimmer{0%,100%{filter:brightness(1)}50%{filter:brightness(1.15)}}
 .hero-sub{font-size:1.08rem;color:var(--white-dim);max-width:520px;line-height:1.75;margin:1.8rem auto 2.8rem;}
 .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.hero-chips{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:3.5rem;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:1.2rem;justify-content:center;margin-top:2rem;}
 .chip{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--white-dim);display:flex;align-items:center;gap:0.5rem;}
 .chip-dot{width:4px;height:4px;border-radius:50%;background:var(--purple-light);}
-
-/* LANGUAGE SELECTOR - PROMINENT */
 .lang-selector-hero{display:flex;gap:0.8rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
 .lang-hero-btn{padding:0.6rem 1.4rem;border-radius:100px;border:2px solid var(--border);background:rgba(124,58,237,0.1);color:var(--white-dim);font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.3s;font-weight:500;}
 .lang-hero-btn:hover,.lang-hero-btn.on{background:linear-gradient(135deg,var(--violet),var(--pink));border-color:transparent;color:white;transform:scale(1.05);box-shadow:0 0 20px var(--glow);}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-size:0.68rem;letter-spacing:0.15em;color:var(--white-dim);display:flex;flex-direction:column;align-items:center;gap:0.6rem;animation:bobble 2.5s ease-in-out infinite;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--purple-light),transparent);}
+@keyframes bobble{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
 /* STATS */
 .stats-strip{position:relative;z-index:2;display:flex;justify-content:center;flex-wrap:wrap;background:rgba(18,10,36,0.5);border-top:1px solid var(--border);border-bottom:1px solid var(--border);backdrop-filter:blur(10px);}
@@ -119,9 +118,13 @@ section{position:relative;z-index:2;}
 .lang-btn.on{background:linear-gradient(135deg,var(--violet),var(--pink));border-color:transparent;color:white;}
 .privacy-box{background:rgba(124,58,237,0.09);border:1px solid var(--border);border-radius:12px;padding:1rem 1.1rem;font-size:0.77rem;color:var(--white-dim);line-height:1.65;}
 .privacy-box strong{color:var(--purple-light);}
-.api-setup-box{background:rgba(124,58,237,0.08);border:1px solid var(--border);border-radius:16px;padding:1.4rem;margin-bottom:1.2rem;}
-.api-setup-box h4{font-family:'Syne',sans-serif;font-size:0.85rem;margin-bottom:0.5rem;color:var(--purple-light);}
-.api-setup-box p{font-size:0.77rem;color:var(--white-dim);margin-bottom:0.8rem;}
+
+/* Evidence attach button */
+.vault-attach-btn{background:rgba(124,58,237,0.12);border:1px solid var(--border);color:var(--purple-light);padding:0.4rem 0.9rem;border-radius:100px;font-size:0.72rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap;}
+.vault-attach-btn:hover{background:rgba(124,58,237,0.25);}
+.attached-badge{background:rgba(124,58,237,0.2);border:1px solid var(--purple-mid);border-radius:8px;padding:0.3rem 0.7rem;font-size:0.7rem;color:var(--purple-light);display:inline-flex;align-items:center;gap:0.4rem;margin:0 0.4rem 0.4rem 0;}
+.attached-badge .rm{cursor:pointer;opacity:0.6;}
+.attached-badge .rm:hover{opacity:1;}
 
 /* CHAT BOX */
 .chat-box{background:var(--glass);border:1px solid var(--border);border-radius:20px;overflow:hidden;backdrop-filter:blur(20px);box-shadow:0 0 70px rgba(124,58,237,0.12);}
@@ -130,8 +133,8 @@ section{position:relative;z-index:2;}
 .chat-head-info .name{font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;}
 .chat-head-info .status{font-size:0.7rem;color:var(--green);}
 .chat-badge{margin-left:auto;font-size:0.63rem;color:var(--purple-light);letter-spacing:0.08em;}
-.chat-msgs{height:370px;overflow-y:auto;padding:1.4rem;display:flex;flex-direction:column;gap:1rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
-.msg{display:flex;gap:0.6rem;align-items:flex-start;max-width:88%;}
+.chat-msgs{height:400px;overflow-y:auto;padding:1.4rem;display:flex;flex-direction:column;gap:1rem;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.msg{display:flex;gap:0.6rem;align-items:flex-start;max-width:92%;}
 .msg.user{margin-left:auto;flex-direction:row-reverse;}
 .msg-ico{width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:0.72rem;}
 .msg.user .msg-ico{background:rgba(255,255,255,0.08);border:1px solid var(--border);}
@@ -146,14 +149,16 @@ section{position:relative;z-index:2;}
 .quick-chips{display:flex;flex-wrap:wrap;gap:0.4rem;padding:0.6rem 1.4rem 0.7rem;}
 .qchip{font-size:0.7rem;padding:0.28rem 0.75rem;background:var(--white-faint);border:1px solid var(--border);border-radius:100px;color:var(--white-dim);cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
 .qchip:hover{background:rgba(124,58,237,0.2);color:var(--purple-light);}
-.chat-input-row{display:flex;gap:0.5rem;padding:0.9rem 1.2rem;border-top:1px solid var(--border);background:rgba(0,0,0,0.25);align-items:center;}
+.chat-input-area{border-top:1px solid var(--border);background:rgba(0,0,0,0.25);}
+.attached-docs-bar{display:flex;flex-wrap:wrap;padding:0.5rem 1rem 0;gap:0.3rem;}
+.chat-input-row{display:flex;gap:0.5rem;padding:0.7rem 1.2rem 0.9rem;align-items:center;}
 .chat-in{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:100px;padding:0.58rem 1.2rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.84rem;outline:none;transition:border-color 0.25s;}
 .chat-in::placeholder{color:rgba(248,244,255,0.28);}
 .chat-in:focus{border-color:var(--purple-light);}
-.send-btn,.voice-btn{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;}
+.send-btn,.voice-btn,.attach-btn{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s;}
 .send-btn{background:linear-gradient(135deg,var(--violet),var(--pink));}
 .send-btn:hover{transform:scale(1.1);box-shadow:0 0 20px var(--glow);}
-.voice-btn{background:var(--white-faint);border:1px solid var(--border);}
+.voice-btn,.attach-btn{background:var(--white-faint);border:1px solid var(--border);}
 .voice-btn.recording{background:rgba(220,38,38,0.3);border-color:#dc2626;animation:pulse-rec 0.8s ease-in-out infinite;}
 @keyframes pulse-rec{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 
@@ -170,6 +175,9 @@ section{position:relative;z-index:2;}
 .hl-tag{display:inline-block;margin-top:0.5rem;font-size:0.62rem;letter-spacing:0.08em;padding:0.22rem 0.6rem;border-radius:100px;background:rgba(124,58,237,0.14);color:var(--purple-light);border:1px solid var(--border);}
 .hl-call-btn{display:block;width:100%;margin-top:0.9rem;background:linear-gradient(135deg,var(--violet),var(--pink));border:none;border-radius:100px;padding:0.5rem;cursor:pointer;color:white;font-size:0.78rem;font-family:'DM Sans',sans-serif;font-weight:500;transition:all 0.25s;text-align:center;text-decoration:none;}
 .hl-call-btn:hover{transform:scale(1.03);box-shadow:0 4px 20px var(--glow);}
+/* Trusted contact card */
+.hl-card.trusted{border-color:rgba(74,222,128,0.3);}
+.hl-card.trusted::after{background:linear-gradient(90deg,#4ade80,#22d3ee);}
 
 /* LAWS */
 .laws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;max-width:1100px;margin:0 auto;}
@@ -182,11 +190,13 @@ section{position:relative;z-index:2;}
 .law-tag{font-size:0.62rem;padding:0.2rem 0.6rem;border-radius:100px;background:rgba(124,58,237,0.12);color:var(--purple-light);border:1px solid var(--border);letter-spacing:0.05em;}
 .law-ask-btn{margin-top:1.2rem;font-size:0.75rem;color:var(--purple-light);background:rgba(124,58,237,0.12);border:1px solid var(--border);border-radius:100px;padding:0.35rem 0.9rem;cursor:pointer;transition:all 0.25s;font-family:'DM Sans',sans-serif;}
 .law-ask-btn:hover{background:rgba(124,58,237,0.25);}
+.law-full-btn{margin-top:0.5rem;margin-left:0.5rem;font-size:0.75rem;color:var(--green);background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:100px;padding:0.35rem 0.9rem;cursor:pointer;transition:all 0.25s;font-family:'DM Sans',sans-serif;}
+.law-full-btn:hover{background:rgba(74,222,128,0.2);}
 
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(6,4,15,0.88);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:2rem;}
 .modal-overlay.open{display:flex;}
-.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:24px;max-width:580px;width:100%;padding:2.5rem;position:relative;animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:24px;max-width:640px;width:100%;padding:2.5rem;position:relative;animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);max-height:90vh;overflow-y:auto;}
 @keyframes modalIn{from{opacity:0;transform:scale(0.92) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-close{position:absolute;top:1rem;right:1.2rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white-dim);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
 .modal-close:hover{background:rgba(255,255,255,0.1);color:var(--white);}
@@ -196,9 +206,11 @@ section{position:relative;z-index:2;}
 .modal-body{font-size:0.88rem;color:var(--white-dim);line-height:1.75;}
 .modal-body p{margin-bottom:1rem;}
 .modal-body ul{padding-left:1.2rem;margin-bottom:1rem;}
-.modal-body li{margin-bottom:0.4rem;}
+.modal-body li{margin-bottom:0.5rem;}
 .modal-body strong{color:var(--white);}
 .modal-body .highlight{background:rgba(124,58,237,0.12);border:1px solid var(--border);border-radius:10px;padding:0.9rem 1.1rem;margin:1rem 0;font-size:0.83rem;}
+.modal-body .step-box{background:rgba(74,222,128,0.07);border:1px solid rgba(74,222,128,0.2);border-radius:10px;padding:1rem 1.2rem;margin:1rem 0;font-size:0.84rem;}
+.modal-body .step-box h4{color:var(--green);font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem;}
 .modal-cta{margin-top:1.5rem;display:flex;gap:0.7rem;flex-wrap:wrap;}
 
 /* DISGUISE CALCULATOR */
@@ -213,7 +225,7 @@ section{position:relative;z-index:2;}
 .ck.fn{background:#a5a5a5;color:#1c1c1e;}
 .ck.op,.ck.eq{background:#ff9f0a;}
 .ck.zero{grid-column:span 2;justify-content:flex-start;padding-left:1.8rem;}
-.calc-back{position:fixed;bottom:16px;right:16px;background:rgba(255,255,255,0.06);border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;color:rgba(255,255,255,0.2);font-size:0.7rem;display:flex;align-items:center;justify-content:center;}
+.calc-back{position:fixed;bottom:16px;right:16px;background:rgba(255,255,255,0.06);border:none;border-radius:50%;width:38px;height:38px;cursor:pointer;color:rgba(255,255,255,0.18);font-size:0.68rem;display:flex;align-items:center;justify-content:center;}
 
 /* FOOTER */
 footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--border);background:rgba(6,4,15,0.9);display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2rem;}
@@ -221,16 +233,9 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
 .footer-note{font-size:0.77rem;color:var(--white-dim);max-width:380px;line-height:1.65;}
 .footer-sos{font-size:0.77rem;color:var(--purple-light);}
 
-/* SCROLL */
-.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);font-size:0.68rem;letter-spacing:0.15em;color:var(--white-dim);display:flex;flex-direction:column;align-items:center;gap:0.6rem;animation:bobble 2.5s ease-in-out infinite;}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--purple-light),transparent);}
-@keyframes bobble{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
-
 /* FADE ANIM */
 .fade{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .fade.in{opacity:1;transform:translateY(0);}
-
-/* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:var(--purple);border-radius:4px;}
@@ -249,31 +254,34 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
 .sos-numbers{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem;}
 .sos-call-btn{padding:1rem 2rem;border-radius:100px;border:3px solid white;background:rgba(255,255,255,0.15);color:white;font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.2s;}
 .sos-call-btn:hover{background:white;color:#dc2626;}
+.sos-trusted{border-color:rgba(255,255,200,0.8);background:rgba(255,255,150,0.15);}
 .sos-stop-btn{background:rgba(255,255,255,0.2);border:2px solid white;color:white;padding:0.75rem 2rem;border-radius:100px;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:1rem;}
 
-/* CHAT BUBBLES */
+/* CHAT BUBBLES - modal chats */
 .ally-bubble-bot{background:var(--white-faint);border-radius:14px;padding:0.9rem 1rem;font-size:0.88rem;line-height:1.65;}
 .ally-bubble-user{background:linear-gradient(135deg,var(--violet),var(--pink));margin-left:auto;border-radius:14px;padding:0.9rem 1rem;font-size:0.88rem;max-width:82%;color:#fff;}
-
 .exit-choice-btn{background:var(--white-faint);border:1px solid var(--border);color:var(--purple-light);padding:0.85rem 1.1rem;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:0.9rem;text-align:left;transition:all 0.2s;width:100%;}
 .exit-choice-btn:hover{background:rgba(124,58,237,0.25);border-color:var(--purple-light);color:var(--white);}
 
 /* VAULT */
 .vault-entry{background:var(--white-faint);border:1px solid var(--border);border-radius:10px;padding:0.8rem;font-size:0.83rem;}
 .vault-entry-header{display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.7rem;color:var(--purple-light);}
+.vault-entry-header .actions{display:flex;gap:0.5rem;align-items:center;}
 .vault-delete{background:none;border:none;color:#f87171;cursor:pointer;font-size:0.75rem;font-family:inherit;}
+.vault-select-cb{cursor:pointer;accent-color:var(--violet);}
 
-/* LOCATION BOX */
+/* LOCATION */
 .location-box{background:rgba(124,58,237,0.08);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1rem;margin-bottom:0.8rem;font-size:0.78rem;color:var(--white-dim);}
 .location-box.found{border-color:var(--green);color:var(--green);}
 .location-box.error{border-color:#f87171;color:#f87171;}
-
-/* NEARBY BTNS */
 .nearby-btn{font-size:0.7rem;padding:0.32rem 0.8rem;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:100px;cursor:pointer;margin:0.2rem;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
 .nearby-btn:hover{background:rgba(124,58,237,0.3);border-color:var(--purple-light);}
+#cameraStream{width:100%;border-radius:10px;display:block;margin-bottom:0.5rem;}
 
-/* CAMERA */
-#cameraStream{width:100%;border-radius:10px;display:none;margin-bottom:0.5rem;}
+/* Trusted contact modal */
+.input-field{width:100%;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;padding:0.7rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.25s;margin-bottom:0.7rem;}
+.input-field:focus{border-color:var(--purple-light);}
+.input-label{font-size:0.75rem;color:var(--purple-light);margin-bottom:0.3rem;display:block;letter-spacing:0.05em;}
 
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
@@ -318,15 +326,12 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <span class="t2" data-i18n="hero_t2">Alone</span>
   </h1>
   <p class="hero-sub" data-i18n="hero_sub">SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.</p>
-
-  <!-- PROMINENT LANGUAGE SELECTOR -->
   <div class="lang-selector-hero">
     <button class="lang-hero-btn on" onclick="setGlobalLang('en',this)">🇬🇧 English</button>
     <button class="lang-hero-btn" onclick="setGlobalLang('kn',this)">🇮🇳 ಕನ್ನಡ</button>
     <button class="lang-hero-btn" onclick="setGlobalLang('hi',this)">🇮🇳 हिंदी</button>
     <button class="lang-hero-btn" onclick="setGlobalLang('te',this)">🇮🇳 తెలుగు</button>
   </div>
-
   <div class="hero-btns" style="margin-top:1.5rem">
     <button class="btn-primary" onclick="navTo('chatbot')" data-i18n="hero_btn1">💬 Talk to SafeVoice</button>
     <button class="btn-outline" onclick="navTo('helplines')" data-i18n="hero_btn2">📞 Emergency Helplines</button>
@@ -355,82 +360,45 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
 <section id="features" class="section-pad">
   <div class="section-header fade">
     <span class="section-tag" data-i18n="feat_tag">Built different</span>
-    <h2 class="section-title" data-i18n="feat_title">Every feature built<br>for <em>real safety</em></h2>
+    <h2 class="section-title" data-i18n="feat_title_html">Every feature built for <em>real safety</em></h2>
   </div>
   <div class="features-grid fade">
-    <div class="feat" onclick="navTo('chatbot')">
-      <div class="feat-ico">🤖</div>
-      <div class="feat-title" data-i18n="feat1_title">AI Legal Guidance</div>
-      <div class="feat-desc" data-i18n="feat1_desc">Describe your situation in plain words and SafeVoice maps it to the correct law — IPC 498A, PWDVA, POCSO — without needing any legal terminology.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="openAllyMode()">
-      <div class="feat-ico">🤝</div>
-      <div class="feat-title" data-i18n="feat2_title">Ally Mode</div>
-      <div class="feat-desc" data-i18n="feat2_desc">Supporting a friend or family member? Get tailored guidance on how to help someone experiencing abuse.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="showDisguise()">
-      <div class="feat-ico">👁️</div>
-      <div class="feat-title" data-i18n="feat3_title">Disguise Mode</div>
-      <div class="feat-desc" data-i18n="feat3_desc">One tap transforms the entire app into a fully functional calculator. Type 111 to return home.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="openEvidenceVault()">
-      <div class="feat-ico">🔐</div>
-      <div class="feat-title" data-i18n="feat4_title">Evidence Vault</div>
-      <div class="feat-desc" data-i18n="feat4_desc">Secretly capture photos, take live camera pictures, record audio and write notes. All stored securely on this device only.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="openSafeExit()">
-      <div class="feat-ico">🚪</div>
-      <div class="feat-title" data-i18n="feat5_title">Safe Exit Planner</div>
-      <div class="feat-desc" data-i18n="feat5_desc">Step-by-step personalised plan to leave safely. Finds nearby police stations, hospitals, shelters and legal aid using your exact location.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="triggerSOS()">
-      <div class="feat-ico">🆘</div>
-      <div class="feat-title" data-i18n="feat6_title">SOS Emergency Alert</div>
-      <div class="feat-desc" data-i18n="feat6_desc">One tap triggers an alarm and shows all emergency numbers instantly. For when you need help right now.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="quickExit()">
-      <div class="feat-ico">⚡</div>
-      <div class="feat-title" data-i18n="feat7_title">Quick Exit</div>
-      <div class="feat-desc" data-i18n="feat7_desc">One click redirects to Google instantly and wipes the session. Always visible in the nav.</div>
-      <span class="feat-arrow">→</span>
-    </div>
-    <div class="feat" onclick="navTo('laws')">
-      <div class="feat-ico">📜</div>
-      <div class="feat-title" data-i18n="feat8_title">Know Your Rights</div>
-      <div class="feat-desc" data-i18n="feat8_desc">Plain-language summaries of every protective law — what each protects, what penalties abusers face.</div>
-      <span class="feat-arrow">→</span>
-    </div>
+    <div class="feat" onclick="navTo('chatbot')"><div class="feat-ico">🤖</div><div class="feat-title" data-i18n="feat1_title">AI Legal Guidance</div><div class="feat-desc" data-i18n="feat1_desc">Describe your situation in plain words. SafeVoice provides emotional support and maps it to the correct law — IPC 498A, PWDVA, POCSO.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="openAllyMode()"><div class="feat-ico">🤝</div><div class="feat-title" data-i18n="feat2_title">Ally Mode</div><div class="feat-desc" data-i18n="feat2_desc">Supporting a friend? Get tailored guidance on how to help someone experiencing abuse, safely and effectively.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="showDisguise()"><div class="feat-ico">👁️</div><div class="feat-title" data-i18n="feat3_title">Disguise Mode</div><div class="feat-desc" data-i18n="feat3_desc">App opens as a calculator. Type 111 to enter SafeVoice. Disguise button returns to calculator instantly.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="openEvidenceVault()"><div class="feat-ico">🔐</div><div class="feat-title" data-i18n="feat4_title">Evidence Vault</div><div class="feat-desc" data-i18n="feat4_desc">Secretly capture photos, record audio, write notes. Attach evidence to chat for AI analysis. Device-only storage.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="openSafeExit()"><div class="feat-ico">🚪</div><div class="feat-title" data-i18n="feat5_title">Safe Exit Planner</div><div class="feat-desc" data-i18n="feat5_desc">Step-by-step personalised escape plan. Finds nearby police stations, hospitals, shelters using your location.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="triggerSOS()"><div class="feat-ico">🆘</div><div class="feat-title" data-i18n="feat6_title">SOS Emergency Alert</div><div class="feat-desc" data-i18n="feat6_desc">One tap triggers a loud alarm and shows all emergency numbers including your trusted contact.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="quickExit()"><div class="feat-ico">⚡</div><div class="feat-title" data-i18n="feat7_title">Quick Exit</div><div class="feat-desc" data-i18n="feat7_desc">One click redirects to Google instantly. Always visible in the nav.</div><span class="feat-arrow">→</span></div>
+    <div class="feat" onclick="navTo('laws')"><div class="feat-ico">📜</div><div class="feat-title" data-i18n="feat8_title">Know Your Rights</div><div class="feat-desc" data-i18n="feat8_desc">Full details of every protective law — how to file, what relief you can get, step-by-step legal actions.</div><span class="feat-arrow">→</span></div>
   </div>
 </section>
 
 <!-- CHATBOT -->
 <section id="chatbot" class="section-pad">
   <div class="section-header fade">
-    <span class="section-tag">AI-Powered · Gemini 2.5 Flash</span>
+    <span class="section-tag">AI-Powered · Gemini 2.0 Flash</span>
     <h2 class="section-title">Talk to <em>SafeVoice</em></h2>
   </div>
   <div class="chat-layout fade">
     <div class="chat-sidebar">
-      <div class="api-setup-box" id="apiSetupBox" style="display:none">
-        <h4>⚙️ Connect AI Brain</h4>
-        <p>AI is connected and ready.</p>
-      </div>
-      <p data-i18n="chat_desc">Choose your language and describe your situation in your own words. SafeVoice will guide you through your legal rights, next steps, and who to contact.</p>
+      <p data-i18n="chat_desc">Choose your language and describe your situation. SafeVoice will listen, support you emotionally, and guide you through your legal rights.</p>
       <div class="lang-row" id="langRow">
         <button class="lang-btn on" onclick="setChatLang('en',this)">English</button>
         <button class="lang-btn" onclick="setChatLang('kn',this)">ಕನ್ನಡ</button>
         <button class="lang-btn" onclick="setChatLang('hi',this)">हिंदी</button>
         <button class="lang-btn" onclick="setChatLang('te',this)">తెలుగు</button>
       </div>
+      <!-- Evidence attach section -->
+      <div style="background:rgba(124,58,237,0.08);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:1rem;">
+        <div style="font-size:0.78rem;color:var(--purple-light);font-weight:600;margin-bottom:0.5rem;">📎 Attach Evidence to Chat</div>
+        <div style="font-size:0.72rem;color:var(--white-dim);margin-bottom:0.6rem;">Select items from your Evidence Vault to share with the AI for analysis.</div>
+        <button class="vault-attach-btn" onclick="openVaultSelector()">🔐 Select from Evidence Vault</button>
+        <div id="attachedDocs" style="margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;"></div>
+      </div>
       <div class="privacy-box">
-        <strong data-i18n="privacy_title">🔒 Completely private.</strong><br>
-        <span data-i18n="privacy_desc">Your messages go to the AI — never stored, never logged. No account needed. Quick Exit clears everything instantly.</span>
+        <strong>🔒 Completely private.</strong><br>
+        <span data-i18n="privacy_desc">Your messages go to the AI — never stored, never logged. No account needed.</span>
       </div>
     </div>
     <div class="chat-box">
@@ -445,14 +413,17 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
       <div class="chat-msgs" id="chatMsgs">
         <div class="msg bot">
           <div class="msg-ico">🛡️</div>
-          <div><div class="bubble" id="welcomeMsg">Hello. This is a safe, completely private space. I'm here to help you understand your legal rights and options. Please describe your situation in your own words — there's no right or wrong way.</div></div>
+          <div><div class="bubble" id="welcomeMsg">Hello. This is a completely safe and private space. I'm here for you. 💜 Please take a deep breath — you are not alone, and reaching out took real courage. Tell me what's been happening. You can describe it in your own words, as much or as little as you feel comfortable sharing.</div></div>
         </div>
       </div>
       <div class="quick-chips" id="quickChips"></div>
-      <div class="chat-input-row">
-        <input type="text" class="chat-in" id="chatIn" placeholder="Type your message here..." onkeydown="if(event.key==='Enter')sendMsg()">
-        <button class="send-btn" onclick="sendMsg()" title="Send">➤</button>
-        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice input">🎤</button>
+      <div class="chat-input-area">
+        <div class="attached-docs-bar" id="chatAttachedBar"></div>
+        <div class="chat-input-row">
+          <input type="text" class="chat-in" id="chatIn" placeholder="Tell me what happened..." onkeydown="if(event.key==='Enter')sendMsg()">
+          <button class="send-btn" onclick="sendMsg()" title="Send">➤</button>
+          <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice input">🎤</button>
+        </div>
       </div>
     </div>
   </div>
@@ -464,7 +435,10 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <span class="section-tag" data-i18n="hl_tag">Available 24/7</span>
     <h2 class="section-title"><span data-i18n="hl_title">Emergency</span> <em data-i18n="hl_title2">Helplines</em></h2>
   </div>
-  <div class="helplines-grid fade">
+  <div style="text-align:center;margin-bottom:1.5rem;">
+    <button class="btn-primary" style="font-size:0.85rem;padding:0.65rem 1.4rem" onclick="openTrustedContact()">👤 <span data-i18n="add_trusted">Add Trusted Contact</span></button>
+  </div>
+  <div class="helplines-grid fade" id="helplinesGrid">
     <div class="hl-card"><div class="hl-ico">👩‍⚖️</div><div class="hl-org" data-i18n="hl1_name">National Women Helpline</div><div class="hl-num">181</div><div class="hl-desc" data-i18n="hl1_desc">24/7 support for women in distress. Legal aid, counselling, and shelter referrals.</div><span class="hl-tag">PAN INDIA · 24/7</span><a href="tel:181" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 181</a></div>
     <div class="hl-card"><div class="hl-ico">🏠</div><div class="hl-org" data-i18n="hl2_name">Vanitha Sahayavani</div><div class="hl-num">1091</div><div class="hl-desc" data-i18n="hl2_desc">Karnataka state women's helpline. Legal aid, shelter, and counselling.</div><span class="hl-tag">KARNATAKA · 24/7</span><a href="tel:1091" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 1091</a></div>
     <div class="hl-card"><div class="hl-ico">🚔</div><div class="hl-org" data-i18n="hl3_name">Police Emergency</div><div class="hl-num">100</div><div class="hl-desc" data-i18n="hl3_desc">Immediate danger. File FIR for 498A, assault, and other offences.</div><span class="hl-tag">EMERGENCY · 24/7</span><a href="tel:100" class="hl-call-btn">📞 <span data-i18n="call">Call</span> 100</a></div>
@@ -481,12 +455,12 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <h2 class="section-title"><span data-i18n="laws_title">Laws that</span> <em data-i18n="laws_title2">protect you</em></h2>
   </div>
   <div class="laws-grid fade">
-    <div class="law-card" onclick="askAboutLaw('IPC 498A - cruelty by husband or relatives')"><div class="law-code">IPC 498A</div><div class="law-name" data-i18n="law1_name">Protection from Cruelty by Husband or Relatives</div><div class="law-desc" data-i18n="law1_desc">Criminalises wilful cruelty by husband or his relatives. Non-bailable, cognizable. Up to 3 years + fine.</div><div class="law-tags"><span class="law-tag" data-i18n="law1_t1">Physical abuse</span><span class="law-tag" data-i18n="law1_t2">Mental cruelty</span><span class="law-tag" data-i18n="law1_t3">Dowry harassment</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
-    <div class="law-card" onclick="askAboutLaw('PWDVA - Protection of Women from Domestic Violence Act 2005')"><div class="law-code">PWDVA</div><div class="law-name" data-i18n="law2_name">Protection of Women from Domestic Violence Act, 2005</div><div class="law-desc" data-i18n="law2_desc">Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.</div><div class="law-tags"><span class="law-tag">Protection order</span><span class="law-tag">Stay at home</span><span class="law-tag">Financial relief</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
-    <div class="law-card" onclick="askAboutLaw('POCSO - Protection of Children from Sexual Offences Act 2012')"><div class="law-code">POCSO</div><div class="law-name" data-i18n="law3_name">Protection of Children from Sexual Offences, 2012</div><div class="law-desc" data-i18n="law3_desc">Protects children under 18 from sexual assault. 7 years to life imprisonment. Identity fully protected.</div><div class="law-tags"><span class="law-tag">Under 18</span><span class="law-tag">Sexual offences</span><span class="law-tag">Strict penalties</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
-    <div class="law-card" onclick="askAboutLaw('IPC 354 - assault or criminal force against a woman')"><div class="law-code">IPC 354</div><div class="law-name" data-i18n="law4_name">Assault / Criminal Force Against Woman</div><div class="law-desc" data-i18n="law4_desc">Assault to outrage a woman's modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C).</div><div class="law-tags"><span class="law-tag">Assault</span><span class="law-tag">Stalking</span><span class="law-tag">Harassment</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
-    <div class="law-card" onclick="askAboutLaw('IPC 406 - criminal breach of trust and Streedhan recovery')"><div class="law-code">IPC 406</div><div class="law-name" data-i18n="law5_name">Criminal Breach of Trust — Streedhan</div><div class="law-desc" data-i18n="law5_desc">Protects a woman's Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence.</div><div class="law-tags"><span class="law-tag">Streedhan</span><span class="law-tag">Jewellery</span><span class="law-tag">Property rights</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
-    <div class="law-card" onclick="askAboutLaw('Emergency rights under the Domestic Violence Act - Protection Orders and maintenance')"><div class="law-code">DV Act</div><div class="law-name" data-i18n="law6_name">Emergency Rights Under Domestic Violence Act</div><div class="law-desc" data-i18n="law6_desc">Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance.</div><div class="law-tags"><span class="law-tag">24-hr order</span><span class="law-tag">Shared home</span><span class="law-tag">Maintenance</span></div><button class="law-ask-btn" data-i18n="ask_btn">💬 Ask SafeVoice →</button></div>
+    <div class="law-card"><div class="law-code">IPC 498A</div><div class="law-name" data-i18n="law1_name">Protection from Cruelty by Husband or Relatives</div><div class="law-desc" data-i18n="law1_desc">Criminalises wilful cruelty by husband or his relatives. Non-bailable, cognizable. Up to 3 years + fine.</div><div class="law-tags"><span class="law-tag" data-i18n="law1_t1">Physical abuse</span><span class="law-tag" data-i18n="law1_t2">Mental cruelty</span><span class="law-tag" data-i18n="law1_t3">Dowry harassment</span></div><button class="law-ask-btn" onclick="askAboutLaw('IPC 498A')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('498a')">📖 Full Details →</button></div>
+    <div class="law-card"><div class="law-code">PWDVA</div><div class="law-name" data-i18n="law2_name">Protection of Women from Domestic Violence Act, 2005</div><div class="law-desc" data-i18n="law2_desc">Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.</div><div class="law-tags"><span class="law-tag">Protection order</span><span class="law-tag">Stay at home</span><span class="law-tag">Financial relief</span></div><button class="law-ask-btn" onclick="askAboutLaw('PWDVA 2005')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('pwdva')">📖 Full Details →</button></div>
+    <div class="law-card"><div class="law-code">POCSO</div><div class="law-name" data-i18n="law3_name">Protection of Children from Sexual Offences, 2012</div><div class="law-desc" data-i18n="law3_desc">Protects children under 18 from sexual assault. 7 years to life imprisonment. Identity fully protected.</div><div class="law-tags"><span class="law-tag">Under 18</span><span class="law-tag">Sexual offences</span><span class="law-tag">Strict penalties</span></div><button class="law-ask-btn" onclick="askAboutLaw('POCSO 2012')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('pocso')">📖 Full Details →</button></div>
+    <div class="law-card"><div class="law-code">IPC 354</div><div class="law-name" data-i18n="law4_name">Assault / Criminal Force Against Woman</div><div class="law-desc" data-i18n="law4_desc">Assault to outrage a woman's modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C).</div><div class="law-tags"><span class="law-tag">Assault</span><span class="law-tag">Stalking</span><span class="law-tag">Harassment</span></div><button class="law-ask-btn" onclick="askAboutLaw('IPC 354')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('ipc354')">📖 Full Details →</button></div>
+    <div class="law-card"><div class="law-code">IPC 406</div><div class="law-name" data-i18n="law5_name">Criminal Breach of Trust — Streedhan</div><div class="law-desc" data-i18n="law5_desc">Protects a woman's Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence.</div><div class="law-tags"><span class="law-tag">Streedhan</span><span class="law-tag">Jewellery</span><span class="law-tag">Property rights</span></div><button class="law-ask-btn" onclick="askAboutLaw('IPC 406 Streedhan')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('ipc406')">📖 Full Details →</button></div>
+    <div class="law-card"><div class="law-code">DV Act</div><div class="law-name" data-i18n="law6_name">Emergency Rights Under Domestic Violence Act</div><div class="law-desc" data-i18n="law6_desc">Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance.</div><div class="law-tags"><span class="law-tag">24-hr order</span><span class="law-tag">Shared home</span><span class="law-tag">Maintenance</span></div><button class="law-ask-btn" onclick="askAboutLaw('DV Act emergency rights')" data-i18n="ask_btn">💬 Ask SafeVoice →</button><button class="law-full-btn" onclick="openLawDetail('dvact')">📖 Full Details →</button></div>
   </div>
 </section>
 
@@ -513,7 +487,7 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
       <button class="lang-btn" onclick="setAllyLang('te',this)">తెలుగు</button>
     </div>
     <div id="allyChat" style="height:320px;overflow-y:auto;display:flex;flex-direction:column;gap:0.75rem;padding-right:0.2rem;margin-bottom:0.8rem"></div>
-    <div class="chat-input-row" style="margin-top:0">
+    <div class="chat-input-row" style="margin-top:0;padding:0">
       <input type="text" class="chat-in" id="allyChatIn" placeholder="Describe your friend's situation..." onkeydown="if(event.key==='Enter')sendAllyMsg()">
       <button class="send-btn" onclick="sendAllyMsg()">➤</button>
     </div>
@@ -529,27 +503,38 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <div class="modal-title" data-i18n="vault_title">Evidence Vault</div>
     <div class="modal-subtitle" style="color:var(--green);font-size:0.75rem;margin-bottom:1.2rem">🔒 Stored on this device only · Never uploaded anywhere</div>
     <div style="display:flex;gap:0.6rem;margin-bottom:1rem;flex-wrap:wrap">
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultToggleNote()">📝 <span data-i18n="add_note">Add Note</span></button>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#4f46e5,#2563eb)" onclick="vaultPickPhoto()">📷 <span data-i18n="add_photo">Add Photo</span></button>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#0e7490,#0891b2)" onclick="vaultOpenCamera()">📸 <span data-i18n="take_photo">Take Photo</span></button>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#047857,#059669)" onclick="vaultToggleAudio()">🎙️ <span id="audioLabel" data-i18n="record_audio">Record Audio</span></button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultToggleNote()">📝 Add Note</button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#4f46e5,#2563eb)" onclick="vaultPickPhoto()">📷 Add Photo</button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#0e7490,#0891b2)" onclick="vaultOpenCamera()">📸 Take Photo</button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1rem;background:linear-gradient(135deg,#047857,#059669)" onclick="vaultToggleAudio()">🎙️ <span id="audioLabel">Record Audio</span></button>
     </div>
     <div id="noteInputArea" style="display:none;margin-bottom:0.9rem">
       <textarea id="noteText" rows="3" style="width:100%;background:var(--white-faint);border:1px solid var(--border);color:var(--white);border-radius:10px;padding:0.75rem;font-family:inherit;font-size:0.88rem;resize:vertical" placeholder="Describe the incident — date, time, what happened..."></textarea>
-      <button class="btn-primary" style="font-size:0.8rem;padding:0.45rem 1rem;margin-top:0.4rem" onclick="vaultSaveNote()" data-i18n="save_note">Save Note</button>
+      <button class="btn-primary" style="font-size:0.8rem;padding:0.45rem 1rem;margin-top:0.4rem" onclick="vaultSaveNote()">Save Note</button>
     </div>
-    <!-- Live camera -->
     <div id="cameraArea" style="display:none;margin-bottom:0.9rem">
-      <video id="cameraStream" autoplay playsinline style="width:100%;border-radius:10px;margin-bottom:0.5rem;display:block"></video>
+      <video id="cameraStream" autoplay playsinline></video>
       <div style="display:flex;gap:0.5rem">
-        <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1.2rem" onclick="vaultCapturePhoto()" data-i18n="capture">📸 Capture</button>
+        <button class="btn-primary" style="font-size:0.8rem;padding:0.5rem 1.2rem" onclick="vaultCapturePhoto()">📸 Capture</button>
         <button class="btn-outline" style="font-size:0.8rem;padding:0.5rem 1rem" onclick="vaultStopCamera()">✕ Close</button>
       </div>
       <canvas id="cameraCanvas" style="display:none"></canvas>
     </div>
     <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="vaultSavePhoto(event)">
     <div id="vaultEntries" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:0.6rem"></div>
-    <div id="vaultEmpty" style="text-align:center;color:var(--white-dim);padding:2rem 1rem;font-size:0.85rem" data-i18n="vault_empty">No entries yet.<br>Your evidence will appear here.</div>
+    <div id="vaultEmpty" style="text-align:center;color:var(--white-dim);padding:2rem 1rem;font-size:0.85rem">No entries yet.<br>Your evidence will appear here.</div>
+  </div>
+</div>
+
+<!-- ══ VAULT SELECTOR (for chat attach) ══ -->
+<div class="modal-overlay" id="vaultSelectorModal" onclick="if(event.target===this)closeVaultSelector()">
+  <div class="modal-box" style="max-width:500px;padding:2rem">
+    <button class="modal-close" onclick="closeVaultSelector()">✕</button>
+    <div class="modal-ico" style="font-size:1.5rem">📎</div>
+    <div class="modal-title" style="font-size:1.3rem">Attach Evidence to Chat</div>
+    <div class="modal-subtitle">Select items to share with SafeVoice AI for analysis</div>
+    <div id="vaultSelectorList" style="max-height:350px;overflow-y:auto;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1rem"></div>
+    <button class="btn-primary" onclick="confirmVaultAttach()">📎 Attach Selected</button>
   </div>
 </div>
 
@@ -560,31 +545,58 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <div class="modal-ico">🚪</div>
     <div class="modal-title" data-i18n="exit_title">Safe Exit Planner</div>
     <div class="modal-subtitle" data-i18n="exit_sub">Private · Personalised · Step-by-step</div>
-
     <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem" id="exitLangRow">
       <button class="lang-btn on" onclick="setExitLang('en',this)">English</button>
       <button class="lang-btn" onclick="setExitLang('kn',this)">ಕನ್ನಡ</button>
       <button class="lang-btn" onclick="setExitLang('hi',this)">हिंदी</button>
       <button class="lang-btn" onclick="setExitLang('te',this)">తెలుగు</button>
     </div>
-
-    <!-- LOCATION SECTION -->
     <div class="location-box" id="locationBox">📍 <span id="locationText">Click to get your location for nearby safe places</span></div>
     <div style="margin-bottom:1rem;display:flex;flex-wrap:wrap;gap:0.4rem;align-items:center">
-      <button class="nearby-btn" onclick="getLocationAndSearch()">📍 <span data-i18n="get_location">Get My Location</span></button>
-      <button class="nearby-btn" onclick="searchNearby('police station')">🚔 <span data-i18n="police">Police Station</span></button>
-      <button class="nearby-btn" onclick="searchNearby('women shelter home')">🏠 <span data-i18n="shelter">Shelter</span></button>
-      <button class="nearby-btn" onclick="searchNearby('hospital')">🏥 <span data-i18n="hospital">Hospital</span></button>
-      <button class="nearby-btn" onclick="searchNearby('legal aid office NGO')">⚖️ <span data-i18n="legal_aid">Free Legal Aid</span></button>
-      <button class="nearby-btn" onclick="searchNearby('one stop centre women')">🏛️ <span data-i18n="osc">One Stop Centre</span></button>
+      <button class="nearby-btn" onclick="getLocationAndSearch()">📍 Get My Location</button>
+      <button class="nearby-btn" onclick="searchNearby('police station')">🚔 Police Station</button>
+      <button class="nearby-btn" onclick="searchNearby('women shelter home')">🏠 Shelter</button>
+      <button class="nearby-btn" onclick="searchNearby('hospital')">🏥 Hospital</button>
+      <button class="nearby-btn" onclick="searchNearby('legal aid office NGO')">⚖️ Free Legal Aid</button>
+      <button class="nearby-btn" onclick="searchNearby('one stop centre women')">🏛️ One Stop Centre</button>
     </div>
-
-    <div id="exitChat" style="height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:0.8rem;padding-right:0.2rem"></div>
-    <div class="chat-input-row" style="margin-top:0">
-      <input type="text" class="chat-in" id="exitChatIn" placeholder="Or type your situation here..." onkeydown="if(event.key==='Enter')sendExitMsg()">
+    <div id="exitChat" style="height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:0.8rem;padding-right:0.2rem"></div>
+    <div class="chat-input-row" style="margin-top:0;padding:0">
+      <input type="text" class="chat-in" id="exitChatIn" placeholder="Type your situation here..." onkeydown="if(event.key==='Enter')sendExitMsg()">
       <button class="send-btn" onclick="sendExitMsg()">➤</button>
     </div>
     <p style="font-size:0.62rem;color:var(--white-dim);opacity:0.45;text-align:center;margin-top:0.5rem">CONFIDENTIAL AI ASSISTANT · NO ACCOUNT REQUIRED</p>
+  </div>
+</div>
+
+<!-- ══ LAW DETAIL MODAL ══ -->
+<div class="modal-overlay" id="lawDetailModal" onclick="if(event.target===this)closeLawDetail()">
+  <div class="modal-box" style="max-width:680px">
+    <button class="modal-close" onclick="closeLawDetail()">✕</button>
+    <div class="modal-ico" id="lawDetailIco">📜</div>
+    <div class="modal-title" id="lawDetailTitle"></div>
+    <div class="modal-subtitle" id="lawDetailSubtitle"></div>
+    <div class="modal-body" id="lawDetailBody"></div>
+    <div class="modal-cta">
+      <button class="btn-primary" style="font-size:0.85rem;padding:0.65rem 1.4rem" onclick="closeLawDetail();navTo('chatbot');setTimeout(()=>{document.getElementById('chatIn').value='I need help with '+document.getElementById('lawDetailTitle').textContent;sendMsg();},600)">💬 Ask SafeVoice About This</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TRUSTED CONTACT MODAL ══ -->
+<div class="modal-overlay" id="trustedModal" onclick="if(event.target===this)closeTrustedContact()">
+  <div class="modal-box" style="max-width:460px;padding:2rem">
+    <button class="modal-close" onclick="closeTrustedContact()">✕</button>
+    <div class="modal-ico">👤</div>
+    <div class="modal-title">Trusted Contact</div>
+    <div class="modal-subtitle">This person will appear in your SOS screen. Stored on device only.</div>
+    <label class="input-label">Full Name</label>
+    <input type="text" class="input-field" id="trustedName" placeholder="e.g. Priya, Amma, Akka...">
+    <label class="input-label">Phone Number</label>
+    <input type="tel" class="input-field" id="trustedPhone" placeholder="e.g. 9876543210">
+    <label class="input-label">Relationship</label>
+    <input type="text" class="input-field" id="trustedRelation" placeholder="e.g. Sister, Friend, Mother...">
+    <button class="btn-primary" onclick="saveTrustedContact()">💾 Save Trusted Contact</button>
   </div>
 </div>
 
@@ -593,7 +605,7 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
   <div class="sos-big">🆘</div>
   <div class="sos-title">EMERGENCY SOS</div>
   <div class="sos-sub" id="sosSub">Call emergency services immediately</div>
-  <div class="sos-numbers">
+  <div class="sos-numbers" id="sosNumbers">
     <a href="tel:100" class="sos-call-btn">🚔 100<br><small>Police</small></a>
     <a href="tel:181" class="sos-call-btn">👩‍⚖️ 181<br><small>Women Helpline</small></a>
     <a href="tel:1091" class="sos-call-btn">🏠 1091<br><small>Vanitha</small></a>
@@ -630,218 +642,203 @@ footer{position:relative;z-index:2;padding:3rem;border-top:1px solid var(--borde
     <button class="ck" onclick="ck('.')">.</button>
     <button class="ck eq" onclick="ck('=')">=</button>
   </div>
-  <button class="calc-back" onclick="hideDisguise()" title="Return">✕</button>
+  <button class="calc-back" onclick="hideDisguise()" title="Return to SafeVoice">✕</button>
 </div>
 
 <div id="toast"></div>
 
 <script>
 // ══════════════════════════════════════════
-// TRANSLATIONS
+// TRANSLATIONS  (hero_t1/t2 fixed — no duplicate)
 // ══════════════════════════════════════════
 const TRANSLATIONS = {
-  en: {
-    nav_home:'Home', nav_features:'Features', nav_help:'Get Help', nav_helplines:'Helplines', nav_rights:'Your Rights',
-    disguise:'Disguise', quick_exit:'Quick Exit',
+  en:{
+    nav_home:'Home',nav_features:'Features',nav_help:'Get Help',nav_helplines:'Helplines',nav_rights:'Your Rights',
+    disguise:'Disguise',quick_exit:'Quick Exit',
     hero_eyebrow:'Anonymous · Multilingual · No Data Stored · Karnataka',
-    hero_t1:'You Are Not', hero_t2:'Alone',
+    hero_t1:'You Are Not',hero_t2:'Alone',
     hero_sub:'SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.',
-    hero_btn1:'💬 Talk to SafeVoice', hero_btn2:'📞 Emergency Helplines',
-    scroll:'scroll',
-    stat1:'Violence by known person in India', stat2:'Key law protecting married women', stat3:'Data stored — privacy by design', stat4:'Languages supported immediately',
-    feat_tag:'Built different', feat_title:'Every feature built<br>for <em>real safety</em>',
-    feat1_title:'AI Legal Guidance', feat1_desc:'Describe your situation in plain words and SafeVoice maps it to the correct law.',
-    feat2_title:'Ally Mode', feat2_desc:'Supporting a friend? Get tailored guidance on how to help someone experiencing abuse.',
-    feat3_title:'Disguise Mode', feat3_desc:'One tap transforms the entire app into a fully functional calculator. Type 111 to return home.',
-    feat4_title:'Evidence Vault', feat4_desc:'Capture photos, take live pictures, record audio and write notes. All stored securely on this device only.',
-    feat5_title:'Safe Exit Planner', feat5_desc:'Step-by-step personalised plan. Finds nearby police stations, hospitals, shelters using your exact location.',
-    feat6_title:'SOS Emergency Alert', feat6_desc:'One tap triggers an alarm and shows all emergency numbers instantly.',
-    feat7_title:'Quick Exit', feat7_desc:'One click redirects to Google instantly and wipes the session.',
-    feat8_title:'Know Your Rights', feat8_desc:'Plain-language summaries of every protective law.',
-    chat_desc:'Choose your language and describe your situation in your own words.',
-    privacy_title:'🔒 Completely private.', privacy_desc:'Your messages go to the AI — never stored, never logged. No account needed.',
-    hl_tag:'Available 24/7', hl_title:'Emergency', hl_title2:'Helplines',
-    hl1_name:'National Women Helpline', hl1_desc:'24/7 support for women in distress. Legal aid, counselling, and shelter referrals.',
-    hl2_name:'Vanitha Sahayavani', hl2_desc:'Karnataka state women\'s helpline. Legal aid, shelter, and counselling.',
-    hl3_name:'Police Emergency', hl3_desc:'Immediate danger. File FIR for 498A, assault, and other offences.',
-    hl4_name:'One Stop Centre', hl4_desc:'Medical, police, legal aid, and shelter under one roof. Government-run.',
-    hl5_name:'Childline (POCSO)', hl5_desc:'Child abuse and POCSO emergencies. Free, 24/7 nationwide.',
-    hl6_name:'iCall Mental Health', hl6_desc:'Free counselling for trauma, abuse, and emotional distress.',
-    call:'Call',
-    laws_tag:'Know your rights', laws_title:'Laws that', laws_title2:'protect you',
-    law1_name:'Protection from Cruelty by Husband or Relatives', law1_desc:'Criminalises wilful cruelty by husband or his relatives. Non-bailable. Up to 3 years + fine.',
-    law1_t1:'Physical abuse', law1_t2:'Mental cruelty', law1_t3:'Dowry harassment',
-    law2_name:'Protection of Women from Domestic Violence Act, 2005', law2_desc:'Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.',
-    law3_name:'Protection of Children from Sexual Offences, 2012', law3_desc:'Protects children under 18 from sexual assault. 7 years to life imprisonment. Identity fully protected.',
-    law4_name:'Assault / Criminal Force Against Woman', law4_desc:'Assault to outrage a woman\'s modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C).',
-    law5_name:'Criminal Breach of Trust — Streedhan', law5_desc:'Protects a woman\'s Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence.',
-    law6_name:'Emergency Rights Under Domestic Violence Act', law6_desc:'Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance.',
+    hero_btn1:'💬 Talk to SafeVoice',hero_btn2:'📞 Emergency Helplines',
+    scroll:'scroll',stat1:'Violence by known person in India',stat2:'Key law protecting married women',stat3:'Data stored — privacy by design',stat4:'Languages supported immediately',
+    feat_tag:'Built different',
+    feat1_title:'AI Legal Guidance',feat1_desc:'Describe your situation in plain words. SafeVoice provides emotional support and maps it to the correct law.',
+    feat2_title:'Ally Mode',feat2_desc:'Supporting a friend? Get tailored guidance on how to help someone experiencing abuse.',
+    feat3_title:'Disguise Mode',feat3_desc:'App opens as a calculator. Type 111 to enter SafeVoice. Disguise button returns to calculator.',
+    feat4_title:'Evidence Vault',feat4_desc:'Capture photos, record audio, write notes. Attach to chat for AI analysis. Device-only storage.',
+    feat5_title:'Safe Exit Planner',feat5_desc:'Step-by-step escape plan. Finds nearby police, hospitals, shelters using your location.',
+    feat6_title:'SOS Emergency Alert',feat6_desc:'One tap triggers a loud alarm and shows all emergency numbers including your trusted contact.',
+    feat7_title:'Quick Exit',feat7_desc:'One click redirects to Google instantly and wipes the session.',
+    feat8_title:'Know Your Rights',feat8_desc:'Full details of every protective law — how to file, what relief you can get.',
+    chat_desc:'Choose your language and describe your situation. SafeVoice will listen, support you, and guide you through your legal rights.',
+    privacy_desc:'Your messages go to the AI — never stored, never logged. No account needed.',
+    hl_tag:'Available 24/7',hl_title:'Emergency',hl_title2:'Helplines',
+    hl1_name:'National Women Helpline',hl1_desc:'24/7 support for women in distress. Legal aid, counselling, and shelter referrals.',
+    hl2_name:'Vanitha Sahayavani',hl2_desc:"Karnataka state women's helpline. Legal aid, shelter, and counselling.",
+    hl3_name:'Police Emergency',hl3_desc:'Immediate danger. File FIR for 498A, assault, and other offences.',
+    hl4_name:'One Stop Centre',hl4_desc:'Medical, police, legal aid, and shelter under one roof. Government-run.',
+    hl5_name:'Childline (POCSO)',hl5_desc:'Child abuse and POCSO emergencies. Free, 24/7 nationwide.',
+    hl6_name:'iCall Mental Health',hl6_desc:'Free counselling for trauma, abuse, and emotional distress.',
+    call:'Call',add_trusted:'Add Trusted Contact',
+    laws_tag:'Know your rights',laws_title:'Laws that',laws_title2:'protect you',
+    law1_name:'Protection from Cruelty by Husband or Relatives',law1_desc:'Criminalises wilful cruelty by husband or his relatives. Non-bailable. Up to 3 years + fine.',
+    law1_t1:'Physical abuse',law1_t2:'Mental cruelty',law1_t3:'Dowry harassment',
+    law2_name:'Protection of Women from Domestic Violence Act, 2005',law2_desc:'Civil remedies: Protection Orders, Residence Orders, Monetary Relief. Emergency orders within 24 hours.',
+    law3_name:'Protection of Children from Sexual Offences, 2012',law3_desc:'Protects children under 18 from sexual assault. 7 years to life imprisonment.',
+    law4_name:'Assault / Criminal Force Against Woman',law4_desc:"Assault to outrage a woman's modesty: 1–5 years. Also covers stalking and voyeurism.",
+    law5_name:'Criminal Breach of Trust — Streedhan',law5_desc:"Protects a woman's Streedhan. In-laws withholding it is a criminal offence.",
+    law6_name:'Emergency Rights Under Domestic Violence Act',law6_desc:'Emergency protection orders in 24 hours. Right to live in shared household.',
     ask_btn:'💬 Ask SafeVoice →',
     footer_note:'Built by Team Nova — PES University CSE (AIML). Hackfinity 2025.',
-    ally_title:'Supporting Others', ally_sub:'Supporting someone safely · Private Session',
-    vault_title:'Evidence Vault', add_note:'Add Note', add_photo:'Add Photo', take_photo:'Take Photo', record_audio:'Record Audio', save_note:'Save Note', capture:'📸 Capture',
-    vault_empty:'No entries yet.\nYour evidence will appear here.',
-    exit_title:'Safe Exit Planner', exit_sub:'Private · Personalised · Step-by-step',
-    get_location:'Get My Location', police:'Police Station', shelter:'Shelter', hospital:'Hospital', legal_aid:'Free Legal Aid', osc:'One Stop Centre',
-    welcome_msg:'Hello. This is a safe, completely private space. I\'m here to help you understand your legal rights and options. Please describe your situation in your own words — there\'s no right or wrong way.',
-    ally_welcome:'I\'m really glad you\'re here. Looking out for someone takes courage. Let me help you understand how to support them safely.\n\nFirst — what is your relationship to this person?',
-    exit_welcome:'You are brave for being here. I am here to help you plan your exit safely.\n\nFirst, let me understand your situation:',
-    exit_c1:"I'm still living with my abuser",
-    exit_c2:"I've left but I'm not safe yet",
-    exit_c3:"I'm planning to leave soon",
-    exit_c4:"I need help for someone else",
+    ally_title:'Supporting Others',ally_sub:'Supporting someone safely · Private Session',
+    vault_title:'Evidence Vault',
+    exit_title:'Safe Exit Planner',exit_sub:'Private · Personalised · Step-by-step',
+    welcome_msg:'Hello. This is a completely safe and private space. I\'m here for you. 💜 Please take a deep breath — you are not alone, and reaching out took real courage. Tell me what\'s been happening. You can describe it in your own words, as much or as little as you feel comfortable sharing.',
+    ally_welcome:'I\'m so glad you\'re here — it takes real strength to support someone through this.\n\nI\'m here to help you help your friend safely. First, can you tell me:\n• What is your relationship to this person? (friend, sister, colleague...)\n• What kind of abuse are they experiencing?\n• Do they know you are seeking help on their behalf?',
+    exit_welcome:'You are incredibly brave for being here. I am going to help you build a personalised safe exit plan.\n\nFirst, please tell me about your current situation:',
+    exit_c1:"I'm still living with my abuser",exit_c2:"I've left but I'm not safe yet",exit_c3:"I'm planning to leave soon",exit_c4:"I need help for someone else",
   },
-  kn: {
-    nav_home:'ಮನೆ', nav_features:'ವೈಶಿಷ್ಟ್ಯಗಳು', nav_help:'ಸಹಾಯ ಪಡೆಯಿರಿ', nav_helplines:'ಸಹಾಯವಾಣಿ', nav_rights:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು',
-    disguise:'ಮರೆಮಾಚು', quick_exit:'ತ್ವರಿತ ನಿರ್ಗಮನ',
-    hero_eyebrow:'ಅನಾಮಧೇಯ · ಬಹುಭಾಷಾ · ಡೇಟಾ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ · ಕರ್ನಾಟಕ',
-    hero_t1:'ನೀವು ಒಂಟಿಯಲ್ಲ', hero_t2:'ಒಂಟಿ',
-    hero_sub:'SafeVoice ಕರ್ನಾಟಕದ ಪ್ರತಿ ಮಹಿಳೆಗೆ — ಅವಳ ಭಾಷೆಯಲ್ಲಿ — AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ, ತುರ್ತು ಸಹಾಯವಾಣಿ ಮತ್ತು ಬೆಂಬಲ ನೀಡುತ್ತದೆ. ಲಾಗಿನ್ ಇಲ್ಲ. ಯಾವುದೇ ಕುರುಹಿಲ್ಲ.',
-    hero_btn1:'💬 SafeVoice ಜೊತೆ ಮಾತನಾಡಿ', hero_btn2:'📞 ತುರ್ತು ಸಹಾಯವಾಣಿ',
-    scroll:'ಮೇಲೆ ಸ್ಕ್ರಾಲ್',
-    stat1:'ಭಾರತದಲ್ಲಿ ಪರಿಚಿತರಿಂದ ಹಿಂಸೆ', stat2:'ವಿವಾಹಿತ ಮಹಿಳೆಯರನ್ನು ರಕ್ಷಿಸುವ ಪ್ರಮುಖ ಕಾನೂನು', stat3:'ಡೇಟಾ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ', stat4:'ಭಾಷೆಗಳು ಬೆಂಬಲಿಸಲ್ಪಡುತ್ತವೆ',
+  kn:{
+    nav_home:'ಮನೆ',nav_features:'ವೈಶಿಷ್ಟ್ಯಗಳು',nav_help:'ಸಹಾಯ ಪಡೆಯಿರಿ',nav_helplines:'ಸಹಾಯವಾಣಿ',nav_rights:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು',
+    disguise:'ಮರೆಮಾಚು',quick_exit:'ತ್ವರಿತ ನಿರ್ಗಮನ',
+    hero_eyebrow:'ಅನಾಮಧೇಯ · ಬಹುಭಾಷಾ · ಡೇಟಾ ಸಂಗ್ರಹಿಲ್ಲ · ಕರ್ನಾಟಕ',
+    hero_t1:'ನೀವು ಒಂಟಿಯಲ್ಲ',hero_t2:'ನಮ್ಮೊಂದಿಗಿದ್ದೀರಿ',
+    hero_sub:'SafeVoice ಕರ್ನಾಟಕದ ಪ್ರತಿ ಮಹಿಳೆಗೆ — ಅವಳ ಭಾಷೆಯಲ್ಲಿ — AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ ಮತ್ತು ಬೆಂಬಲ ನೀಡುತ್ತದೆ. ಲಾಗಿನ್ ಇಲ್ಲ. ಕುರುಹಿಲ್ಲ.',
+    hero_btn1:'💬 SafeVoice ಜೊತೆ ಮಾತನಾಡಿ',hero_btn2:'📞 ತುರ್ತು ಸಹಾಯವಾಣಿ',
+    scroll:'ಸ್ಕ್ರಾಲ್',stat1:'ಭಾರತದಲ್ಲಿ ಪರಿಚಿತರಿಂದ ಹಿಂಸೆ',stat2:'ವಿವಾಹಿತ ಮಹಿಳೆಯರ ರಕ್ಷಣಾ ಕಾನೂನು',stat3:'ಡೇಟಾ ಸಂಗ್ರಹಿಲ್ಲ',stat4:'ಭಾಷೆಗಳು ಬೆಂಬಲಿಸಲ್ಪಡುತ್ತವೆ',
     feat_tag:'ನಿಜವಾದ ಸುರಕ್ಷತೆಗಾಗಿ',
-    feat1_title:'AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ', feat1_desc:'ನಿಮ್ಮ ಪರಿಸ್ಥಿತಿಯನ್ನು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ವಿವರಿಸಿ.',
-    feat2_title:'ಮಿತ್ರ ಮೋಡ್', feat2_desc:'ಸ್ನೇಹಿತರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತೀರಾ? ಸಹಾಯ ಮಾಡುವ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.',
-    feat3_title:'ಮರೆಮಾಚು ಮೋಡ್', feat3_desc:'ಒಂದು ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಕ್ಯಾಲ್ಕುಲೇಟರ್ ಆಗಿ ಬದಲಾಗುತ್ತದೆ. 111 ಟೈಪ್ ಮಾಡಿ ಮನೆಗೆ ಹಿಂತಿರುಗಿ.',
-    feat4_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ', feat4_desc:'ಚಿತ್ರಗಳು, ಆಡಿಯೋ ರೆಕಾರ್ಡ್ ಮಾಡಿ. ಸಾಧನದಲ್ಲಿ ಮಾತ್ರ ಸಂಗ್ರಹಿಸಲಾಗುತ್ತದೆ.',
-    feat5_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ', feat5_desc:'ಹತ್ತಿರದ ಪೋಲಿಸ್ ಠಾಣೆ, ಆಸ್ಪತ್ರೆ, ಆಶ್ರಯ ಹುಡುಕುತ್ತದೆ.',
-    feat6_title:'SOS ತುರ್ತು ಎಚ್ಚರಿಕೆ', feat6_desc:'ಒಂದು ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಎಲ್ಲಾ ತುರ್ತು ಸಂಖ್ಯೆಗಳನ್ನು ತೋರಿಸುತ್ತದೆ.',
-    feat7_title:'ತ್ವರಿತ ನಿರ್ಗಮನ', feat7_desc:'ಒಂದು ಕ್ಲಿಕ್‌ನಲ್ಲಿ Google ಗೆ ರಿಡೈರೆಕ್ಟ್ ಆಗುತ್ತದೆ.',
-    feat8_title:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು ತಿಳಿಯಿರಿ', feat8_desc:'ಪ್ರತಿ ಕಾನೂನಿನ ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಸಾರಾಂಶ.',
+    feat1_title:'AI ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ',feat1_desc:'ನಿಮ್ಮ ಸ್ಥಿತಿ ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಹೇಳಿ. SafeVoice ಭಾವನಾತ್ಮಕ ಬೆಂಬಲ ಮತ್ತು ಕಾನೂನು ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತದೆ.',
+    feat2_title:'ಮಿತ್ರ ಮೋಡ್',feat2_desc:'ಸ್ನೇಹಿತರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತೀರಾ? ಸಹಾಯ ಮಾಡುವ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.',
+    feat3_title:'ಮರೆಮಾಚು ಮೋಡ್',feat3_desc:'ಆಪ್ ಕ್ಯಾಲ್ಕುಲೇಟರ್‌ನಂತೆ ತೆರೆಯುತ್ತದೆ. 111 ಟೈಪ್ ಮಾಡಿ SafeVoice ಪ್ರವೇಶಿಸಿ.',
+    feat4_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ',feat4_desc:'ಚಿತ್ರಗಳು, ಆಡಿಯೋ, ಟಿಪ್ಪಣಿ. AI ವಿಶ್ಲೇಷಣೆಗಾಗಿ ಚಾಟ್‌ಗೆ ಲಗತ್ತಿಸಿ.',
+    feat5_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ',feat5_desc:'ಹಂತ ಹಂತದ ಸ್ಥಳಾಂತರ ಯೋಜನೆ.',
+    feat6_title:'SOS ತುರ್ತು ಎಚ್ಚರಿಕೆ',feat6_desc:'ಒಂದು ಟ್ಯಾಪ್‌ನಲ್ಲಿ ಜೋರಾದ ಅಲಾರಂ ಮತ್ತು ತುರ್ತು ಸಂಖ್ಯೆಗಳು.',
+    feat7_title:'ತ್ವರಿತ ನಿರ್ಗಮನ',feat7_desc:'ಒಂದು ಕ್ಲಿಕ್‌ನಲ್ಲಿ Google ಗೆ ರಿಡೈರೆಕ್ಟ್.',
+    feat8_title:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು',feat8_desc:'ಪ್ರತಿ ಕಾನೂನಿನ ಸಂಪೂರ್ಣ ವಿವರ.',
     chat_desc:'ನಿಮ್ಮ ಭಾಷೆ ಆರಿಸಿ ಮತ್ತು ನಿಮ್ಮ ಸ್ಥಿತಿ ವಿವರಿಸಿ.',
-    privacy_title:'🔒 ಸಂಪೂರ್ಣ ಖಾಸಗಿ.', privacy_desc:'ನಿಮ್ಮ ಸಂದೇಶಗಳು AI ಗೆ ಹೋಗುತ್ತವೆ — ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ.',
-    hl_tag:'24/7 ಲಭ್ಯ', hl_title:'ತುರ್ತು', hl_title2:'ಸಹಾಯವಾಣಿ',
-    hl1_name:'ರಾಷ್ಟ್ರೀಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ', hl1_desc:'24/7 ಮಹಿಳೆಯರಿಗೆ ಬೆಂಬಲ.',
-    hl2_name:'ವನಿತಾ ಸಹಾಯವಾಣಿ', hl2_desc:'ಕರ್ನಾಟಕ ರಾಜ್ಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ.',
-    hl3_name:'ಪೋಲಿಸ್ ತುರ್ತು', hl3_desc:'ತಕ್ಷಣದ ಅಪಾಯ. FIR ದಾಖಲಿಸಲು.',
-    hl4_name:'ಒನ್ ಸ್ಟಾಪ್ ಸೆಂಟರ್', hl4_desc:'ವೈದ್ಯಕೀಯ, ಪೋಲಿಸ್, ಕಾನೂನು ಸಹಾಯ, ಆಶ್ರಯ.',
-    hl5_name:'ಚೈಲ್ಡ್‌ಲೈನ್ (POCSO)', hl5_desc:'ಮಕ್ಕಳ ದುರ್ವ್ಯವಹಾರ ತುರ್ತು. ಉಚಿತ, 24/7.',
-    hl6_name:'iCall ಮಾನಸಿಕ ಆರೋಗ್ಯ', hl6_desc:'ಆಘಾತ, ದುರ್ವ್ಯವಹಾರಕ್ಕೆ ಉಚಿತ ಸಮಾಲೋಚನೆ.',
-    call:'ಕರೆ ಮಾಡಿ',
-    laws_tag:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು ತಿಳಿಯಿರಿ', laws_title:'ನಿಮ್ಮನ್ನು', laws_title2:'ರಕ್ಷಿಸುವ ಕಾನೂನುಗಳು',
-    law1_name:'ಪತಿ ಅಥವಾ ಸಂಬಂಧಿಕರ ಕ್ರೌರ್ಯದಿಂದ ರಕ್ಷಣೆ', law1_desc:'IPC 498A - ಜಾಮೀನು ರಹಿತ ಅಪರಾಧ. 3 ವರ್ಷ ಜೈಲು.',
-    law1_t1:'ದೈಹಿಕ ನಿಂದನೆ', law1_t2:'ಮಾನಸಿಕ ಕ್ರೌರ್ಯ', law1_t3:'ವರದಕ್ಷಿಣೆ ಕಿರುಕುಳ',
-    law2_name:'ಗೃಹ ಹಿಂಸೆ ಕಾಯ್ದೆ 2005', law2_desc:'ರಕ್ಷಣಾ ಆದೇಶ, ವಸತಿ ಆದೇಶ, ಆರ್ಥಿಕ ಪರಿಹಾರ. 24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ಆದೇಶ.',
-    law3_name:'ಮಕ್ಕಳ ಲೈಂಗಿಕ ದೌರ್ಜನ್ಯ ರಕ್ಷಣಾ ಕಾಯ್ದೆ 2012', law3_desc:'18 ವರ್ಷದ ಒಳಗಿನ ಮಕ್ಕಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ.',
-    law4_name:'ಮಹಿಳೆಯ ವಿರುದ್ಧ ಹಲ್ಲೆ', law4_desc:'ಮಹಿಳೆಯ ಮಾನಕ್ಕೆ ಧಕ್ಕೆ: 1-5 ವರ್ಷ. ಬೆದರಿಸುವಿಕೆ ಸೇರಿದೆ.',
-    law5_name:'ಸ್ತ್ರೀಧನ ವಸೂಲಿ', law5_desc:'ಮಹಿಳೆಯ ಸ್ತ್ರೀಧನ (ಚಿನ್ನ, ಉಡುಗೊರೆ) ತಡೆಹಿಡಿಯುವುದು ಅಪರಾಧ.',
-    law6_name:'ಗೃಹ ಹಿಂಸೆ ಕಾಯ್ದೆ ಅಡಿ ತುರ್ತು ಹಕ್ಕುಗಳು', law6_desc:'24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ರಕ್ಷಣಾ ಆದೇಶ. ಮನೆಯಲ್ಲಿ ಇರುವ ಹಕ್ಕು.',
+    privacy_desc:'ನಿಮ್ಮ ಸಂದೇಶಗಳು AI ಗೆ ಹೋಗುತ್ತವೆ — ಎಂದಿಗೂ ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ.',
+    hl_tag:'24/7 ಲಭ್ಯ',hl_title:'ತುರ್ತು',hl_title2:'ಸಹಾಯವಾಣಿ',
+    hl1_name:'ರಾಷ್ಟ್ರೀಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ',hl1_desc:'24/7 ಮಹಿಳೆಯರಿಗೆ ಬೆಂಬಲ.',
+    hl2_name:'ವನಿತಾ ಸಹಾಯವಾಣಿ',hl2_desc:'ಕರ್ನಾಟಕ ರಾಜ್ಯ ಮಹಿಳಾ ಸಹಾಯವಾಣಿ.',
+    hl3_name:'ಪೋಲಿಸ್ ತುರ್ತು',hl3_desc:'ತಕ್ಷಣದ ಅಪಾಯ. FIR ದಾಖಲಿಸಲು.',
+    hl4_name:'ಒನ್ ಸ್ಟಾಪ್ ಸೆಂಟರ್',hl4_desc:'ವೈದ್ಯಕೀಯ, ಪೋಲಿಸ್, ಕಾನೂನು ಸಹಾಯ.',
+    hl5_name:'ಚೈಲ್ಡ್‌ಲೈನ್',hl5_desc:'ಮಕ್ಕಳ ದುರ್ವ್ಯವಹಾರ. ಉಚಿತ, 24/7.',
+    hl6_name:'iCall ಮಾನಸಿಕ ಆರೋಗ್ಯ',hl6_desc:'ಉಚಿತ ಸಮಾಲೋಚನೆ.',
+    call:'ಕರೆ ಮಾಡಿ',add_trusted:'ವಿಶ್ವಾಸಾರ್ಹ ಸಂಪರ್ಕ ಸೇರಿಸಿ',
+    laws_tag:'ನಿಮ್ಮ ಹಕ್ಕುಗಳು',laws_title:'ನಿಮ್ಮನ್ನು',laws_title2:'ರಕ್ಷಿಸುವ ಕಾನೂನುಗಳು',
+    law1_name:'ಪತಿ ಅಥವಾ ಸಂಬಂಧಿಕರ ಕ್ರೌರ್ಯದಿಂದ ರಕ್ಷಣೆ',law1_desc:'IPC 498A - ಜಾಮೀನು ರಹಿತ. 3 ವರ್ಷ ಜೈಲು.',
+    law1_t1:'ದೈಹಿಕ ನಿಂದನೆ',law1_t2:'ಮಾನಸಿಕ ಕ್ರೌರ್ಯ',law1_t3:'ವರದಕ್ಷಿಣೆ ಕಿರುಕುಳ',
+    law2_name:'ಗೃಹ ಹಿಂಸೆ ಕಾಯ್ದೆ 2005',law2_desc:'ರಕ್ಷಣಾ ಆದೇಶ, ವಸತಿ ಆದೇಶ. 24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ಆದೇಶ.',
+    law3_name:'ಮಕ್ಕಳ ರಕ್ಷಣಾ ಕಾಯ್ದೆ 2012',law3_desc:'18 ವರ್ಷದ ಒಳಗಿನ ಮಕ್ಕಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ.',
+    law4_name:'ಮಹಿಳೆಯ ವಿರುದ್ಧ ಹಲ್ಲೆ',law4_desc:'1-5 ವರ್ಷ. ಬೆದರಿಸುವಿಕೆ ಸೇರಿದೆ.',
+    law5_name:'ಸ್ತ್ರೀಧನ ವಸೂಲಿ',law5_desc:'ಮಹಿಳೆಯ ಸ್ತ್ರೀಧನ ತಡೆಹಿಡಿಯುವುದು ಅಪರಾಧ.',
+    law6_name:'ತುರ್ತು ರಕ್ಷಣಾ ಹಕ್ಕುಗಳು',law6_desc:'24 ಗಂಟೆಯಲ್ಲಿ ತುರ್ತು ರಕ್ಷಣಾ ಆದೇಶ.',
     ask_btn:'💬 SafeVoice ಗೆ ಕೇಳಿ →',
     footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
-    ally_title:'ಇತರರಿಗೆ ಬೆಂಬಲ', ally_sub:'ಸುರಕ್ಷಿತವಾಗಿ ಬೆಂಬಲ · ಖಾಸಗಿ ಸೆಷನ್',
-    vault_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ', add_note:'ಟಿಪ್ಪಣಿ ಸೇರಿಸಿ', add_photo:'ಫೋಟೋ ಸೇರಿಸಿ', take_photo:'ಫೋಟೋ ತೆಗೆಯಿರಿ', record_audio:'ಆಡಿಯೋ ರೆಕಾರ್ಡ್', save_note:'ಟಿಪ್ಪಣಿ ಉಳಿಸಿ', capture:'📸 ಸೆರೆಹಿಡಿಯಿರಿ',
-    vault_empty:'ಯಾವುದೇ ನಮೂದುಗಳಿಲ್ಲ.\nನಿಮ್ಮ ಸಾಕ್ಷ್ಯ ಇಲ್ಲಿ ಕಾಣಿಸುತ್ತದೆ.',
-    exit_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ', exit_sub:'ಖಾಸಗಿ · ವ್ಯಕ್ತಿಗತ · ಹಂತ ಹಂತವಾಗಿ',
-    get_location:'ನನ್ನ ಸ್ಥಳ ಪಡೆಯಿರಿ', police:'ಪೋಲಿಸ್ ಠಾಣೆ', shelter:'ಆಶ್ರಯ', hospital:'ಆಸ್ಪತ್ರೆ', legal_aid:'ಉಚಿತ ಕಾನೂನು ಸಹಾಯ', osc:'ಒನ್ ಸ್ಟಾಪ್ ಸೆಂಟರ್',
-    welcome_msg:'ನಮಸ್ಕಾರ. ಇದು ಸುರಕ್ಷಿತ, ಸಂಪೂರ್ಣ ಖಾಸಗಿ ಜಾಗ. ನಿಮ್ಮ ಕಾನೂನು ಹಕ್ಕುಗಳು ಮತ್ತು ಆಯ್ಕೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡಲು ನಾನು ಇಲ್ಲಿ ಇದ್ದೇನೆ.',
-    ally_welcome:'ನೀವು ಇಲ್ಲಿ ಇದ್ದೀರಿ ಎಂದು ಸಂತೋಷ. ಯಾರನ್ನಾದರೂ ನೋಡಿಕೊಳ್ಳುವುದು ಧೈರ್ಯ ತೋರಿಸುತ್ತದೆ.\n\nಮೊದಲ ಪ್ರಶ್ನೆ — ಆ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ನಿಮ್ಮ ಸಂಬಂಧ ಏನು?',
-    exit_welcome:'ನೀವು ಧೈರ್ಯಶಾಲಿ. ನಿಮ್ಮ ನಿರ್ಗಮನ ಸುರಕ್ಷಿತವಾಗಿ ಯೋಜಿಸಲು ಸಹಾಯ ಮಾಡಲು ನಾನು ಇಲ್ಲಿ ಇದ್ದೇನೆ.\n\nನಿಮ್ಮ ಪರಿಸ್ಥಿತಿ ತಿಳಿಸಿ:',
+    ally_title:'ಇತರರಿಗೆ ಬೆಂಬಲ',ally_sub:'ಸುರಕ್ಷಿತವಾಗಿ ಬೆಂಬಲ · ಖಾಸಗಿ ಸೆಷನ್',
+    vault_title:'ಸಾಕ್ಷ್ಯ ಭಂಡಾರ',
+    exit_title:'ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜನೆ',exit_sub:'ಖಾಸಗಿ · ವ್ಯಕ್ತಿಗತ · ಹಂತ ಹಂತವಾಗಿ',
+    welcome_msg:'ನಮಸ್ಕಾರ. ಇದು ಸಂಪೂರ್ಣ ಸುರಕ್ಷಿತ ಮತ್ತು ಖಾಸಗಿ ಜಾಗ. ನೀವು ಒಂಟಿಯಲ್ಲ. 💜 ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮನಸ್ಸಿನಲ್ಲಿರುವುದನ್ನು ಹೇಳಿ. ನಿಮಗೆ ಯಾವ ರೀತಿ ಬೇಕಾದರೂ ಹೇಳಬಹುದು.',
+    ally_welcome:'ನೀವು ಇಲ್ಲಿ ಇದ್ದೀರಿ ಎಂದು ತುಂಬಾ ಸಂತೋಷ. ಯಾರನ್ನಾದರೂ ನೋಡಿಕೊಳ್ಳಲು ಧೈರ್ಯ ಬೇಕು.\n\nನನಗೆ ಹೇಳಿ:\n• ಆ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ನಿಮ್ಮ ಸಂಬಂಧ ಏನು?\n• ಅವರಿಗೆ ಯಾವ ರೀತಿಯ ಹಿಂಸೆ ಆಗುತ್ತಿದೆ?\n• ನೀವು ಸಹಾಯ ಕೋರುತ್ತಿದ್ದೀರಿ ಎಂದು ಅವರಿಗೆ ಗೊತ್ತಿದೆಯೇ?',
+    exit_welcome:'ನೀವು ತುಂಬಾ ಧೈರ್ಯಶಾಲಿ. ನಿಮ್ಮ ನಿರ್ಗಮನ ಸುರಕ್ಷಿತವಾಗಿ ಯೋಜಿಸಲು ಸಹಾಯ ಮಾಡಲು ನಾನು ಇಲ್ಲಿ ಇದ್ದೇನೆ.\n\nನಿಮ್ಮ ಪ್ರಸ್ತುತ ಸ್ಥಿತಿ ತಿಳಿಸಿ:',
     exit_c1:'ನಾನು ಇನ್ನೂ ಹಿಂಸಾಚಾರ ಮಾಡುವ ವ್ಯಕ್ತಿಯೊಂದಿಗೆ ವಾಸಿಸುತ್ತಿದ್ದೇನೆ',
-    exit_c2:'ನಾನು ಹೊರಟಿದ್ದೇನೆ ಆದರೆ ಇನ್ನೂ ಸುರಕ್ಷಿತವಲ್ಲ',
-    exit_c3:'ನಾನು ಶೀಘ್ರದಲ್ಲೇ ಹೊರಡಲು ಯೋಜಿಸುತ್ತಿದ್ದೇನೆ',
+    exit_c2:'ನಾನು ಹೊರಟಿದ್ದೇನೆ ಆದರೆ ಸುರಕ್ಷಿತವಲ್ಲ',
+    exit_c3:'ಶೀಘ್ರದಲ್ಲೇ ಹೊರಡಲು ಯೋಜಿಸುತ್ತಿದ್ದೇನೆ',
     exit_c4:'ಬೇರೆಯವರಿಗೆ ಸಹಾಯ ಬೇಕು',
   },
-  hi: {
-    nav_home:'होम', nav_features:'विशेषताएं', nav_help:'सहायता', nav_helplines:'हेल्पलाइन', nav_rights:'आपके अधिकार',
-    disguise:'छुपाएं', quick_exit:'त्वरित बाहर',
-    hero_eyebrow:'गुमनाम · बहुभाषी · कोई डेटा संग्रहण नहीं · कर्नाटक',
-    hero_t1:'आप अकेली नहीं', hero_t2:'हैं',
-    hero_sub:'SafeVoice कर्नाटक की हर महिला को — उसकी भाषा में — AI-संचालित कानूनी मार्गदर्शन, आपातकालीन हेल्पलाइन और समर्थन देता है। कोई लॉगिन नहीं। कोई निशान नहीं।',
-    hero_btn1:'💬 SafeVoice से बात करें', hero_btn2:'📞 आपातकालीन हेल्पलाइन',
-    scroll:'स्क्रॉल करें',
-    stat1:'भारत में परिचित व्यक्ति द्वारा हिंसा', stat2:'विवाहित महिलाओं की सुरक्षा का मुख्य कानून', stat3:'डेटा संग्रहीत नहीं — गोपनीयता द्वारा डिज़ाइन', stat4:'भाषाएं तुरंत समर्थित',
-    feat_tag:'असली सुरक्षा के लिए',
-    feat1_title:'AI कानूनी मार्गदर्शन', feat1_desc:'अपनी स्थिति सरल भाषा में बताएं।',
-    feat2_title:'सहयोगी मोड', feat2_desc:'किसी मित्र को सहायता दें।',
-    feat3_title:'छद्म मोड', feat3_desc:'एक टैप में कैलकुलेटर बन जाता है। 111 टाइप करें घर लौटने के लिए।',
-    feat4_title:'साक्ष्य तिजोरी', feat4_desc:'फोटो, ऑडियो सुरक्षित रखें।',
-    feat5_title:'सुरक्षित निकास योजना', feat5_desc:'पास के पुलिस स्टेशन, अस्पताल, आश्रय खोजता है।',
-    feat6_title:'SOS आपातकालीन अलर्ट', feat6_desc:'एक टैप में सभी आपातकालीन नंबर।',
-    feat7_title:'त्वरित बाहर', feat7_desc:'एक क्लिक में Google पर जाता है।',
-    feat8_title:'अपने अधिकार जानें', feat8_desc:'हर कानून का सरल सारांश।',
-    chat_desc:'अपनी भाषा चुनें और अपनी स्थिति बताएं।',
-    privacy_title:'🔒 पूरी तरह निजी.', privacy_desc:'आपके संदेश AI को जाते हैं — कभी संग्रहीत नहीं होते।',
-    hl_tag:'24/7 उपलब्ध', hl_title:'आपातकालीन', hl_title2:'हेल्पलाइन',
-    hl1_name:'राष्ट्रीय महिला हेल्पलाइन', hl1_desc:'24/7 महिलाओं के लिए सहायता।',
-    hl2_name:'वनिता सहायवाणी', hl2_desc:'कर्नाटक राज्य महिला हेल्पलाइन।',
-    hl3_name:'पुलिस आपातकाल', hl3_desc:'तत्काल खतरा। FIR दर्ज करें।',
-    hl4_name:'वन स्टॉप सेंटर', hl4_desc:'चिकित्सा, पुलिस, कानूनी सहायता एक छत के नीचे।',
-    hl5_name:'चाइल्डलाइन (POCSO)', hl5_desc:'बाल दुर्व्यवहार आपातकाल। मुफ्त, 24/7।',
-    hl6_name:'iCall मानसिक स्वास्थ्य', hl6_desc:'आघात के लिए मुफ्त परामर्श।',
-    call:'कॉल करें',
-    laws_tag:'अपने अधिकार जानें', laws_title:'वे कानून जो', laws_title2:'आपकी रक्षा करते हैं',
-    law1_name:'पति या रिश्तेदारों की क्रूरता से सुरक्षा', law1_desc:'IPC 498A - गैर-जमानती अपराध। 3 साल जेल।',
-    law1_t1:'शारीरिक दुर्व्यवहार', law1_t2:'मानसिक क्रूरता', law1_t3:'दहेज उत्पीड़न',
-    law2_name:'घरेलू हिंसा से महिलाओं की सुरक्षा अधिनियम 2005', law2_desc:'संरक्षण आदेश, निवास आदेश, मौद्रिक राहत। 24 घंटे में आपातकालीन आदेश।',
-    law3_name:'बच्चों के यौन अपराध से सुरक्षा अधिनियम 2012', law3_desc:'18 वर्ष से कम बच्चों की सुरक्षा।',
-    law4_name:'महिला के विरुद्ध हमला', law4_desc:'1-5 साल। पीछा करना भी शामिल।',
-    law5_name:'स्त्रीधन वसूली', law5_desc:'महिला का स्त्रीधन रोकना अपराध है।',
-    law6_name:'घरेलू हिंसा अधिनियम के तहत आपातकालीन अधिकार', law6_desc:'24 घंटे में संरक्षण आदेश। घर में रहने का अधिकार।',
+  hi:{
+    nav_home:'होम',nav_features:'विशेषताएं',nav_help:'सहायता',nav_helplines:'हेल्पलाइन',nav_rights:'आपके अधिकार',
+    disguise:'छुपाएं',quick_exit:'त्वरित बाहर',
+    hero_eyebrow:'गुमनाम · बहुभाषी · कोई डेटा नहीं · कर्नाटक',
+    hero_t1:'आप अकेली नहीं हैं',hero_t2:'हम साथ हैं',
+    hero_sub:'SafeVoice कर्नाटक की हर महिला को — उसकी भाषा में — AI कानूनी मार्गदर्शन, हेल्पलाइन और समर्थन देता है।',
+    hero_btn1:'💬 SafeVoice से बात करें',hero_btn2:'📞 आपातकालीन हेल्पलाइन',
+    scroll:'स्क्रॉल',stat1:'भारत में परिचित द्वारा हिंसा',stat2:'विवाहित महिलाओं की सुरक्षा',stat3:'कोई डेटा संग्रह नहीं',stat4:'भाषाएं तुरंत उपलब्ध',
+    feat_tag:'असली सुरक्षा',
+    feat1_title:'AI कानूनी मार्गदर्शन',feat1_desc:'अपनी स्थिति बताएं। SafeVoice भावनात्मक समर्थन और कानूनी मार्गदर्शन देती है।',
+    feat2_title:'सहयोगी मोड',feat2_desc:'किसी मित्र की मदद करें।',
+    feat3_title:'छद्म मोड',feat3_desc:'ऐप कैलकुलेटर की तरह खुलता है। 111 टाइप करें SafeVoice में जाएं।',
+    feat4_title:'साक्ष्य तिजोरी',feat4_desc:'फोटो, ऑडियो, नोट। AI विश्लेषण के लिए चैट से जोड़ें।',
+    feat5_title:'सुरक्षित निकास',feat5_desc:'चरण-दर-चरण निकास योजना।',
+    feat6_title:'SOS अलर्ट',feat6_desc:'एक टैप में तेज अलार्म और सभी नंबर।',
+    feat7_title:'त्वरित बाहर',feat7_desc:'एक क्लिक में Google पर जाएं।',
+    feat8_title:'अधिकार जानें',feat8_desc:'हर कानून की पूरी जानकारी।',
+    chat_desc:'अपनी भाषा चुनें और स्थिति बताएं।',
+    privacy_desc:'आपके संदेश AI को जाते हैं — कभी संग्रहीत नहीं।',
+    hl_tag:'24/7 उपलब्ध',hl_title:'आपातकालीन',hl_title2:'हेल्पलाइन',
+    hl1_name:'राष्ट्रीय महिला हेल्पलाइन',hl1_desc:'24/7 सहायता।',
+    hl2_name:'वनिता सहायवाणी',hl2_desc:'कर्नाटक राज्य महिला हेल्पलाइन।',
+    hl3_name:'पुलिस आपातकाल',hl3_desc:'तत्काल खतरा। FIR दर्ज करें।',
+    hl4_name:'वन स्टॉप सेंटर',hl4_desc:'चिकित्सा, पुलिस, कानूनी सहायता एक छत के नीचे।',
+    hl5_name:'चाइल्डलाइन',hl5_desc:'बाल दुर्व्यवहार। मुफ्त 24/7।',
+    hl6_name:'iCall मानसिक स्वास्थ्य',hl6_desc:'मुफ्त परामर्श।',
+    call:'कॉल करें',add_trusted:'विश्वसनीय संपर्क जोड़ें',
+    laws_tag:'अधिकार जानें',laws_title:'वे कानून जो',laws_title2:'आपकी रक्षा करते हैं',
+    law1_name:'क्रूरता से सुरक्षा',law1_desc:'IPC 498A — 3 साल जेल।',
+    law1_t1:'शारीरिक दुर्व्यवहार',law1_t2:'मानसिक क्रूरता',law1_t3:'दहेज उत्पीड़न',
+    law2_name:'घरेलू हिंसा अधिनियम 2005',law2_desc:'24 घंटे में संरक्षण आदेश।',
+    law3_name:'POCSO 2012',law3_desc:'बच्चों की सुरक्षा।',
+    law4_name:'महिला पर हमला',law4_desc:'1-5 साल।',
+    law5_name:'स्त्रीधन वसूली',law5_desc:'स्त्रीधन रोकना अपराध।',
+    law6_name:'आपातकालीन DV अधिकार',law6_desc:'24 घंटे में आदेश।',
     ask_btn:'💬 SafeVoice से पूछें →',
     footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
-    ally_title:'दूसरों का समर्थन', ally_sub:'सुरक्षित रूप से किसी का समर्थन · निजी सत्र',
-    vault_title:'साक्ष्य तिजोरी', add_note:'नोट जोड़ें', add_photo:'फोटो जोड़ें', take_photo:'फोटो लें', record_audio:'ऑडियो रिकॉर्ड', save_note:'नोट सहेजें', capture:'📸 कैप्चर करें',
-    vault_empty:'कोई प्रविष्टि नहीं।\nआपका साक्ष्य यहाँ दिखेगा।',
-    exit_title:'सुरक्षित निकास योजना', exit_sub:'निजी · व्यक्तिगत · चरण-दर-चरण',
-    get_location:'मेरा स्थान पाएं', police:'पुलिस स्टेशन', shelter:'आश्रय', hospital:'अस्पताल', legal_aid:'मुफ्त कानूनी सहायता', osc:'वन स्टॉप सेंटर',
-    welcome_msg:'नमस्ते। यह एक सुरक्षित, पूरी तरह निजी जगह है। मैं आपके कानूनी अधिकारों और विकल्पों को समझने में आपकी मदद करने के लिए यहाँ हूँ।',
-    ally_welcome:'आप यहाँ हैं, यह बहुत अच्छा है। किसी की देखभाल करना साहस दिखाता है।\n\nपहला सवाल — उस व्यक्ति से आपका क्या रिश्ता है?',
-    exit_welcome:'आप बहादुर हैं। मैं आपकी सुरक्षित निकास की योजना बनाने में मदद करने के लिए यहाँ हूँ।\n\nपहले अपनी स्थिति बताएं:',
+    ally_title:'दूसरों का समर्थन',ally_sub:'सुरक्षित समर्थन · निजी सत्र',
+    vault_title:'साक्ष्य तिजोरी',
+    exit_title:'सुरक्षित निकास',exit_sub:'निजी · व्यक्तिगत · चरण-दर-चरण',
+    welcome_msg:'नमस्ते। यह पूरी तरह सुरक्षित और निजी जगह है। आप अकेली नहीं हैं। 💜 कृपया बताएं क्या हो रहा है — अपने शब्दों में, जितना सहज लगे।',
+    ally_welcome:'आप यहाँ हैं, यह बहुत अच्छा है। किसी की देखभाल करना साहस की बात है।\n\nबताएं:\n• उस व्यक्ति से आपका क्या रिश्ता है?\n• उन्हें किस तरह का दुर्व्यवहार हो रहा है?\n• क्या उन्हें पता है कि आप मदद माँग रहे हैं?',
+    exit_welcome:'आप बहुत बहादुर हैं। मैं आपकी सुरक्षित निकासी की योजना बनाने में मदद करूँगी।\n\nपहले अपनी स्थिति बताएं:',
     exit_c1:'मैं अभी भी अपने दुर्व्यवहारकर्ता के साथ रह रही हूँ',
-    exit_c2:'मैं निकल गई हूँ लेकिन अभी सुरक्षित नहीं हूँ',
-    exit_c3:'मैं जल्द ही जाने की योजना बना रही हूँ',
+    exit_c2:'मैं निकल गई हूँ पर सुरक्षित नहीं हूँ',
+    exit_c3:'जल्द जाने की योजना बना रही हूँ',
     exit_c4:'किसी और के लिए मदद चाहिए',
   },
-  te: {
-    nav_home:'హోమ్', nav_features:'ఫీచర్లు', nav_help:'సహాయం పొందండి', nav_helplines:'హెల్ప్‌లైన్లు', nav_rights:'మీ హక్కులు',
-    disguise:'దాచు', quick_exit:'వేగంగా నిష్క్రమించు',
+  te:{
+    nav_home:'హోమ్',nav_features:'ఫీచర్లు',nav_help:'సహాయం',nav_helplines:'హెల్ప్‌లైన్లు',nav_rights:'మీ హక్కులు',
+    disguise:'దాచు',quick_exit:'వేగంగా నిష్క్రమించు',
     hero_eyebrow:'అనామకంగా · బహుభాషా · డేటా నిల్వ లేదు · కర్ణాటక',
-    hero_t1:'మీరు ఒంటరిగా లేరు', hero_t2:'ఒంటరిగా',
-    hero_sub:'SafeVoice కర్ణాటకలోని ప్రతి మహిళకు — ఆమె భాషలో — AI-ఆధారిత చట్టపరమైన మార్గదర్శనం, అత్యవసర హెల్ప్‌లైన్లు మరియు మద్దతు అందిస్తుంది.',
-    hero_btn1:'💬 SafeVoice తో మాట్లాడండి', hero_btn2:'📞 అత్యవసర హెల్ప్‌లైన్లు',
-    scroll:'స్క్రోల్',
-    stat1:'భారతదేశంలో పరిచయస్తులచే హింస', stat2:'వివాహిత మహిళలను రక్షించే కీలక చట్టం', stat3:'డేటా నిల్వ లేదు', stat4:'భాషలు వెంటనే మద్దతు',
-    feat_tag:'నిజమైన భద్రత కోసం',
-    feat1_title:'AI చట్టపరమైన మార్గదర్శనం', feat1_desc:'మీ పరిస్థితిని సరళమైన మాటల్లో వివరించండి.',
-    feat2_title:'మిత్ర మోడ్', feat2_desc:'స్నేహితులకు మద్దతు ఇవ్వాలా? మార్గదర్శనం పొందండి.',
-    feat3_title:'మారువేషం మోడ్', feat3_desc:'ఒక ట్యాప్‌తో కాల్కులేటర్ అవుతుంది. 111 టైప్ చేయండి.',
-    feat4_title:'సాక్ష్యాల వాల్ట్', feat4_desc:'ఫోటోలు, ఆడియో సురక్షితంగా నిల్వ చేయండి.',
-    feat5_title:'సురక్షిత నిష్క్రమణ ప్రణాళిక', feat5_desc:'సమీప పోలీస్ స్టేషన్, ఆసుపత్రి, ఆశ్రయం కనుగొంటుంది.',
-    feat6_title:'SOS అత్యవసర హెచ్చరిక', feat6_desc:'ఒక ట్యాప్‌తో అన్ని అత్యవసర నంబర్లు.',
-    feat7_title:'వేగంగా నిష్క్రమించు', feat7_desc:'ఒక క్లిక్‌తో Google కి రీడైరెక్ట్.',
-    feat8_title:'మీ హక్కులు తెలుసుకోండి', feat8_desc:'ప్రతి చట్టం యొక్క సరళ సారాంశం.',
-    chat_desc:'మీ భాష ఎంచుకోండి మరియు మీ పరిస్థితి వివరించండి.',
-    privacy_title:'🔒 పూర్తిగా ప్రైవేట్.', privacy_desc:'మీ సందేశాలు AI కి వెళ్తాయి — ఎప్పుడూ నిల్వ చేయబడవు.',
-    hl_tag:'24/7 అందుబాటులో', hl_title:'అత్యవసర', hl_title2:'హెల్ప్‌లైన్లు',
-    hl1_name:'జాతీయ మహిళా హెల్ప్‌లైన్', hl1_desc:'24/7 మహిళలకు మద్దతు.',
-    hl2_name:'వనిత సహాయవాణి', hl2_desc:'కర్ణాటక రాష్ట్ర మహిళా హెల్ప్‌లైన్.',
-    hl3_name:'పోలీస్ అత్యవసర', hl3_desc:'తక్షణ ప్రమాదం. FIR నమోదు చేయండి.',
-    hl4_name:'వన్ స్టాప్ సెంటర్', hl4_desc:'వైద్య, పోలీస్, చట్టపరమైన సహాయం ఒక చోట.',
-    hl5_name:'చైల్డ్‌లైన్ (POCSO)', hl5_desc:'శిశు దుర్వినియోగం అత్యవసరం. ఉచితం, 24/7.',
-    hl6_name:'iCall మానసిక ఆరోగ్యం', hl6_desc:'గాయానికి ఉచిత కౌన్సెలింగ్.',
-    call:'కాల్ చేయండి',
-    laws_tag:'మీ హక్కులు తెలుసుకోండి', laws_title:'మిమ్మల్ని', laws_title2:'రక్షించే చట్టాలు',
-    law1_name:'భర్త లేదా బంధువుల క్రూరత్వం నుండి రక్షణ', law1_desc:'IPC 498A - జామీను లేని నేరం. 3 సంవత్సరాల జైలు.',
-    law1_t1:'శారీరక దుర్వినియోగం', law1_t2:'మానసిక క్రూరత్వం', law1_t3:'వరకట్న వేధింపు',
-    law2_name:'గృహ హింస నిరోధక చట్టం 2005', law2_desc:'రక్షణ ఆదేశాలు, నివాస ఆదేశాలు, ఆర్థిక సహాయం. 24 గంటల్లో అత్యవసర ఆదేశాలు.',
-    law3_name:'శిశువుల లైంగిక నేరాల నిరోధక చట్టం 2012', law3_desc:'18 సంవత్సరాల కంటే తక్కువ వయస్సు పిల్లలను రక్షిస్తుంది.',
-    law4_name:'మహిళపై దాడి', law4_desc:'1-5 సంవత్సరాలు. వేధింపు కూడా ఇందులో ఉంది.',
-    law5_name:'స్త్రీధనం వసూలు', law5_desc:'మహిళ స్త్రీధనం (నగలు, బహుమతులు) నిలిపివేయడం నేరం.',
-    law6_name:'గృహ హింస చట్టం కింద అత్యవసర హక్కులు', law6_desc:'24 గంటల్లో రక్షణ ఆదేశం. ఇంట్లో ఉండే హక్కు.',
+    hero_t1:'మీరు ఒంటరిగా లేరు',hero_t2:'మేము మీతో ఉన్నాము',
+    hero_sub:'SafeVoice కర్ణాటకలోని ప్రతి మహిళకు — ఆమె భాషలో — AI చట్టపరమైన మార్గదర్శనం మరియు మద్దతు అందిస్తుంది.',
+    hero_btn1:'💬 SafeVoice తో మాట్లాడండి',hero_btn2:'📞 అత్యవసర హెల్ప్‌లైన్లు',
+    scroll:'స్క్రోల్',stat1:'భారతదేశంలో పరిచయస్తులచే హింస',stat2:'వివాహిత మహిళల రక్షణ చట్టం',stat3:'డేటా నిల్వ లేదు',stat4:'భాషలు అందుబాటులో',
+    feat_tag:'నిజమైన భద్రత',
+    feat1_title:'AI చట్టపరమైన మార్గదర్శనం',feat1_desc:'మీ పరిస్థితి చెప్పండి. SafeVoice మానసిక మద్దతు మరియు చట్టపరమైన మార్గదర్శనం ఇస్తుంది.',
+    feat2_title:'మిత్ర మోడ్',feat2_desc:'స్నేహితుడికి మద్దతు ఇవ్వండి.',
+    feat3_title:'మారువేషం మోడ్',feat3_desc:'యాప్ కాల్కులేటర్‌గా తెరుచుకుంటుంది. 111 టైప్ చేయండి.',
+    feat4_title:'సాక్ష్యాల వాల్ట్',feat4_desc:'ఫోటోలు, ఆడియో, నోట్స్. AI విశ్లేషణకు చాట్‌కు జోడించండి.',
+    feat5_title:'సురక్షిత నిష్క్రమణ',feat5_desc:'దశల వారీ నిష్క్రమణ ప్రణాళిక.',
+    feat6_title:'SOS అత్యవసర హెచ్చరిక',feat6_desc:'ఒక ట్యాప్‌తో బిగ్గరగా అలారం మరియు అన్ని నంబర్లు.',
+    feat7_title:'వేగంగా నిష్క్రమించు',feat7_desc:'ఒక క్లిక్‌తో Google కి.',
+    feat8_title:'హక్కులు తెలుసుకోండి',feat8_desc:'ప్రతి చట్టం పూర్తి వివరాలు.',
+    chat_desc:'మీ భాష ఎంచుకోండి మరియు పరిస్థితి వివరించండి.',
+    privacy_desc:'మీ సందేశాలు AI కి వెళ్తాయి — ఎప్పుడూ నిల్వ చేయబడవు.',
+    hl_tag:'24/7 అందుబాటులో',hl_title:'అత్యవసర',hl_title2:'హెల్ప్‌లైన్లు',
+    hl1_name:'జాతీయ మహిళా హెల్ప్‌లైన్',hl1_desc:'24/7 మహిళలకు మద్దతు.',
+    hl2_name:'వనిత సహాయవాణి',hl2_desc:'కర్ణాటక రాష్ట్ర మహిళా హెల్ప్‌లైన్.',
+    hl3_name:'పోలీస్ అత్యవసర',hl3_desc:'తక్షణ ప్రమాదం. FIR నమోదు.',
+    hl4_name:'వన్ స్టాప్ సెంటర్',hl4_desc:'వైద్య, పోలీస్, చట్టపరమైన సహాయం.',
+    hl5_name:'చైల్డ్‌లైన్',hl5_desc:'శిశు దుర్వినియోగం. ఉచితం 24/7.',
+    hl6_name:'iCall మానసిక ఆరోగ్యం',hl6_desc:'ఉచిత కౌన్సెలింగ్.',
+    call:'కాల్ చేయండి',add_trusted:'విశ్వసనీయ సంప్రదింపు జోడించండి',
+    laws_tag:'మీ హక్కులు',laws_title:'మిమ్మల్ని',laws_title2:'రక్షించే చట్టాలు',
+    law1_name:'భర్త క్రూరత్వం నుండి రక్షణ',law1_desc:'IPC 498A — 3 సంవత్సరాల జైలు.',
+    law1_t1:'శారీరక దుర్వినియోగం',law1_t2:'మానసిక క్రూరత్వం',law1_t3:'వరకట్న వేధింపు',
+    law2_name:'గృహ హింస నిరోధక చట్టం 2005',law2_desc:'24 గంటల్లో రక్షణ ఆదేశాలు.',
+    law3_name:'POCSO 2012',law3_desc:'శిశువుల రక్షణ.',
+    law4_name:'మహిళపై దాడి',law4_desc:'1-5 సంవత్సరాలు.',
+    law5_name:'స్త్రీధనం వసూలు',law5_desc:'స్త్రీధనం నిలిపివేయడం నేరం.',
+    law6_name:'అత్యవసర DV హక్కులు',law6_desc:'24 గంటల్లో రక్షణ ఆదేశం.',
     ask_btn:'💬 SafeVoice ని అడగండి →',
     footer_note:'Team Nova — PES University CSE (AIML). Hackfinity 2025.',
-    ally_title:'ఇతరులకు మద్దతు', ally_sub:'సురక్షితంగా మద్దతు · ప్రైవేట్ సెషన్',
-    vault_title:'సాక్ష్యాల వాల్ట్', add_note:'నోట్ జోడించు', add_photo:'ఫోటో జోడించు', take_photo:'ఫోటో తీయండి', record_audio:'ఆడియో రికార్డ్', save_note:'నోట్ సేవ్ చేయి', capture:'📸 క్యాప్చర్',
-    vault_empty:'ఎంట్రీలు లేవు.\nమీ సాక్ష్యాలు ఇక్కడ కనిపిస్తాయి.',
-    exit_title:'సురక్షిత నిష్క్రమణ ప్రణాళిక', exit_sub:'ప్రైవేట్ · వ్యక్తిగతీకరించిన · దశల వారీగా',
-    get_location:'నా స్థానం పొందండి', police:'పోలీస్ స్టేషన్', shelter:'ఆశ్రయం', hospital:'ఆసుపత్రి', legal_aid:'ఉచిత చట్టపరమైన సహాయం', osc:'వన్ స్టాప్ సెంటర్',
-    welcome_msg:'నమస్కారం. ఇది సురక్షితమైన, పూర్తిగా ప్రైవేట్ స్థలం. మీ చట్టపరమైన హక్కులు మరియు ఎంపికలను అర్థం చేసుకోవడంలో సహాయం చేయడానికి నేను ఇక్కడ ఉన్నాను.',
-    ally_welcome:'మీరు ఇక్కడ ఉన్నందుకు సంతోషం. ఎవరిపై శ్రద్ధ వహించడం ధైర్యం చూపిస్తుంది.\n\nమొదటి ప్రశ్న — ఆ వ్యక్తితో మీ అనుబంధం ఏమిటి?',
-    exit_welcome:'మీరు ధైర్యంగా ఉన్నారు. మీ నిష్క్రమణను సురక్షితంగా ప్లాన్ చేయడానికి నేను సహాయం చేస్తాను.\n\nమీ పరిస్థితి చెప్పండి:',
-    exit_c1:'నేను ఇంకా నా హింసకు గురిచేస్తున్న వ్యక్తితో నివసిస్తున్నాను',
-    exit_c2:'నేను వెళ్లిపోయాను కానీ ఇంకా సురక్షితంగా లేను',
-    exit_c3:'నేను త్వరలో వెళ్ళాలని ప్లాన్ చేస్తున్నాను',
+    ally_title:'ఇతరులకు మద్దతు',ally_sub:'సురక్షిత మద్దతు · ప్రైవేట్ సెషన్',
+    vault_title:'సాక్ష్యాల వాల్ట్',
+    exit_title:'సురక్షిత నిష్క్రమణ',exit_sub:'ప్రైవేట్ · వ్యక్తిగతీకరించిన · దశల వారీగా',
+    welcome_msg:'నమస్కారం. ఇది సంపూర్ణంగా సురక్షితమైన మరియు ప్రైవేట్ స్థలం. మీరు ఒంటరిగా లేరు. 💜 ఏం జరుగుతుందో చెప్పండి — మీ మాటల్లో, మీకు సౌకర్యంగా అనిపించినంతగా.',
+    ally_welcome:'మీరు ఇక్కడ ఉన్నందుకు చాలా సంతోషం. ఎవరికోసమైనా శ్రద్ధ చూపించడం ధైర్యం.\n\nనాకు చెప్పండి:\n• ఆ వ్యక్తితో మీ అనుబంధం ఏమిటి?\n• వారికి ఎలాంటి హింస జరుగుతోంది?\n• మీరు సహాయం కోరుతున్నారని వారికి తెలుసా?',
+    exit_welcome:'మీరు చాలా ధైర్యంగా ఉన్నారు. మీ సురక్షిత నిష్క్రమణను ప్లాన్ చేయడంలో నేను సహాయం చేస్తాను.\n\nమీ ప్రస్తుత పరిస్థితి చెప్పండి:',
+    exit_c1:'నేను ఇంకా నా హింసకు గురిచేసే వ్యక్తితో నివసిస్తున్నాను',
+    exit_c2:'వెళ్లిపోయాను కానీ ఇంకా సురక్షితంగా లేను',
+    exit_c3:'త్వరలో వెళ్ళాలని ప్లాన్ చేస్తున్నాను',
     exit_c4:'మరొకరికి సహాయం కావాలి',
   }
 };
@@ -849,205 +846,151 @@ const TRANSLATIONS = {
 // ══════════════════════════════════════════
 // GLOBAL STATE
 // ══════════════════════════════════════════
-let globalLang = 'en';
-let chatLang = 'en';
-let allyLang = 'en';
-let exitLang = 'en';
-let userLat = null, userLng = null;
-let chatHistory = [];
-let allyHistory = [];
-let exitHistory = [];
-let sosActive = false;
-let sosAudio = null;
-let cameraStream = null;
+let globalLang='en', chatLang='en', allyLang='en', exitLang='en';
+let userLat=null, userLng=null;
+let chatHistory=[], allyHistory=[], exitHistory=[];
+let sosActive=false, sosAudioCtx=null;
+let cameraStreamObj=null;
+let mediaRec=null, audioChunks=[], recActive=false;
+let vaultData=[];
+let attachedToChat=[];
 
-const API_BASE = window.location.origin;
-const GEMINI_API_KEY = 'AIzaSyAzj3saWTcpE-UYPlDMS0u297lJTWXqT-8';
+const GEMINI_KEY='AIzaSyAzj3saWTcpE-UYPlDMS0u297lJTWXqT-8';
+
+// Load vault from storage
+try{ vaultData=JSON.parse(localStorage.getItem('sv_vault')||'[]'); }catch(e){ vaultData=[]; }
+
+// Load trusted contact
+let trustedContact=null;
+try{ trustedContact=JSON.parse(localStorage.getItem('sv_trusted')||'null'); }catch(e){}
 
 // ══════════════════════════════════════════
-// I18N - APPLY TRANSLATIONS TO WHOLE PAGE
+// TRANSLATIONS APPLY
 // ══════════════════════════════════════════
-function applyTranslations(lang) {
-  const T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (T[key] !== undefined) {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = T[key];
-      } else {
-        el.innerHTML = T[key];
-      }
+function applyTranslations(lang){
+  const T=TRANSLATIONS[lang]||TRANSLATIONS['en'];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key=el.getAttribute('data-i18n');
+    if(T[key]!==undefined){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA') el.placeholder=T[key];
+      else el.textContent=T[key];
     }
   });
-  // Update chat placeholder
-  const chatIn = document.getElementById('chatIn');
-  if (chatIn) {
-    const ph = {en:'Type your message here...',kn:'ನಿಮ್ಮ ಸಂದೇಶ ಟೈಪ್ ಮಾಡಿ...',hi:'यहाँ अपना संदेश लिखें...',te:'మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి...'};
-    chatIn.placeholder = ph[lang] || ph['en'];
-  }
-  // Update welcome message
-  const wm = document.getElementById('welcomeMsg');
-  if (wm) wm.textContent = T['welcome_msg'] || TRANSLATIONS['en']['welcome_msg'];
-  // Update page title lang attribute
-  document.documentElement.lang = lang;
+  // Hero title fix — set individually to avoid extra content
+  const t1=document.querySelector('.hero-title .t1');
+  const t2=document.querySelector('.hero-title .t2');
+  if(t1) t1.textContent=T['hero_t1']||'You Are Not';
+  if(t2) t2.textContent=T['hero_t2']||'Alone';
+  // Feature title with em tag preserved
+  const ftEl=document.querySelector('.section-title[data-i18n="feat_title_html"]');
+  if(ftEl) ftEl.innerHTML='Every feature built for <em>real safety</em>';
+  // Chat placeholder
+  const ph={en:'Tell me what happened...',kn:'ಏನು ಆಯಿತು ಹೇಳಿ...',hi:'क्या हुआ बताएं...',te:'ఏం జరిగిందో చెప్పండి...'};
+  const ci=document.getElementById('chatIn');
+  if(ci) ci.placeholder=ph[lang]||ph['en'];
+  // Welcome msg
+  const wm=document.getElementById('welcomeMsg');
+  if(wm) wm.textContent=T['welcome_msg']||TRANSLATIONS['en']['welcome_msg'];
+  document.documentElement.lang=lang;
 }
 
-function setGlobalLang(lang, btn) {
-  globalLang = lang;
-  chatLang = lang;
-  // Update hero buttons
-  document.querySelectorAll('.lang-hero-btn').forEach(b => b.classList.remove('on'));
+function setGlobalLang(lang,btn){
+  globalLang=lang; chatLang=lang;
+  document.querySelectorAll('.lang-hero-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  // Sync chat lang buttons
-  document.querySelectorAll('#langRow .lang-btn').forEach(b => b.classList.remove('on'));
-  const langMap = {en:'English',kn:'ಕನ್ನಡ',hi:'हिंदी',te:'తెలుగు'};
-  document.querySelectorAll('#langRow .lang-btn').forEach(b => {
-    if (b.textContent.trim() === langMap[lang]) b.classList.add('on');
-  });
-  // Apply all translations
-  applyTranslations(lang);
-  renderChips();
-  showToast('🌐 Language: ' + btn.textContent.trim());
-}
-
-function setChatLang(lang, btn) {
-  chatLang = lang;
-  globalLang = lang;
-  document.querySelectorAll('#langRow .lang-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  // Sync hero buttons
-  document.querySelectorAll('.lang-hero-btn').forEach(b => b.classList.remove('on'));
-  const heroLabels = {en:'🇬🇧 English',kn:'🇮🇳 ಕನ್ನಡ',hi:'🇮🇳 हिंदी',te:'🇮🇳 తెలుగు'};
-  document.querySelectorAll('.lang-hero-btn').forEach(b => {
-    if (b.textContent.trim() === heroLabels[lang]) b.classList.add('on');
+  document.querySelectorAll('#langRow .lang-btn').forEach(b=>{
+    b.classList.remove('on');
+    if(b.textContent.trim()==={en:'English',kn:'ಕನ್ನಡ',hi:'हिंदी',te:'తెలుగు'}[lang]) b.classList.add('on');
   });
   applyTranslations(lang);
   renderChips();
-  showToast('🌐 Language: ' + btn.textContent.trim());
+  showToast('🌐 '+btn.textContent.trim());
 }
 
-function setAllyLang(lang, btn) {
-  allyLang = lang;
-  btn.parentElement.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('on'));
+function setChatLang(lang,btn){
+  chatLang=lang; globalLang=lang;
+  document.querySelectorAll('#langRow .lang-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  // Update placeholder
-  const ph = {en:"Describe your friend's situation...",kn:'ನಿಮ್ಮ ಸ್ನೇಹಿತರ ಸ್ಥಿತಿ ವಿವರಿಸಿ...',hi:'अपने मित्र की स्थिति बताएं...',te:'మీ స్నేహితుని పరిస్థితి వివరించండి...'};
-  document.getElementById('allyChatIn').placeholder = ph[lang] || ph['en'];
+  document.querySelectorAll('.lang-hero-btn').forEach(b=>{
+    b.classList.remove('on');
+    if(b.textContent.includes({en:'English',kn:'ಕನ್ನಡ',hi:'हिंदी',te:'తెలుగు'}[lang])) b.classList.add('on');
+  });
+  applyTranslations(lang);
+  renderChips();
+  showToast('🌐 '+btn.textContent.trim());
 }
 
-function setExitLang(lang, btn) {
-  exitLang = lang;
-  btn.parentElement.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('on'));
+function setAllyLang(lang,btn){
+  allyLang=lang;
+  btn.parentElement.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
-  // Rebuild exit choices
-  const chat = document.getElementById('exitChat');
-  chat.innerHTML = '';
-  exitHistory = [];
-  const T = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  _addExitBubble(T['exit_welcome'], 'bot', true);
+}
+
+function setExitLang(lang,btn){
+  exitLang=lang;
+  btn.parentElement.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('exitChat').innerHTML='';
+  exitHistory=[];
+  const T=TRANSLATIONS[lang]||TRANSLATIONS['en'];
+  _addExitBubble(T['exit_welcome'],'bot',true);
 }
 
 // ══════════════════════════════════════════
 // CURSOR
 // ══════════════════════════════════════════
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 (function animRing(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
 function addHover(sel){document.querySelectorAll(sel).forEach(el=>{el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='58px';ring.style.height='58px';});el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='38px';ring.style.height='38px';});});}
-addHover('a,button,.feat,.hl-card,.law-card,.qchip,.lang-btn,.hl-call-btn,.lang-hero-btn');
+addHover('a,button,.feat,.hl-card,.law-card,.qchip,.lang-btn,.lang-hero-btn');
 
 // ══════════════════════════════════════════
 // CANVAS PARTICLES
 // ══════════════════════════════════════════
-const cv = document.getElementById('bg-canvas');
-const ctx2 = cv.getContext('2d');
+const cv=document.getElementById('bg-canvas');
+const ctx2=cv.getContext('2d');
 let W,H,pts=[];
 function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
-resize(); window.addEventListener('resize',resize);
+resize();window.addEventListener('resize',resize);
 const cols=['#c084fc','#e879f9','#7c3aed','#9b59f5','#a78bfa'];
 for(let i=0;i<150;i++) pts.push({x:Math.random()*1200,y:Math.random()*800,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.3,a:Math.random()*.45+.08,c:cols[Math.floor(Math.random()*cols.length)]});
 (function draw(){
   ctx2.clearRect(0,0,W,H);
-  for(let i=0;i<pts.length;i++){
-    let p=pts[i];p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
-    ctx2.beginPath();ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);ctx2.fillStyle=p.c;ctx2.globalAlpha=p.a;ctx2.fill();
-    for(let j=i+1;j<pts.length;j++){let q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx2.globalAlpha=.07*(1-d/90);ctx2.beginPath();ctx2.moveTo(p.x,p.y);ctx2.lineTo(q.x,q.y);ctx2.strokeStyle='#7c3aed';ctx2.lineWidth=.5;ctx2.stroke();}}
-  }
+  for(let i=0;i<pts.length;i++){let p=pts[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx2.beginPath();ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);ctx2.fillStyle=p.c;ctx2.globalAlpha=p.a;ctx2.fill();for(let j=i+1;j<pts.length;j++){let q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx2.globalAlpha=.07*(1-d/90);ctx2.beginPath();ctx2.moveTo(p.x,p.y);ctx2.lineTo(q.x,q.y);ctx2.strokeStyle='#7c3aed';ctx2.lineWidth=.5;ctx2.stroke();}}}
   ctx2.globalAlpha=1;requestAnimationFrame(draw);
 })();
 
 // ══════════════════════════════════════════
 // SCROLL REVEAL
 // ══════════════════════════════════════════
-const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 
 // ══════════════════════════════════════════
 // NAVIGATION
 // ══════════════════════════════════════════
-function navTo(id){
-  const el=document.getElementById(id);
-  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-}
+function navTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
 function quickExit(){window.location.replace('https://www.google.com');}
 
 // ══════════════════════════════════════════
 // TOAST
 // ══════════════════════════════════════════
-function showToast(msg,duration=3000){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),duration);
-}
+function showToast(msg,d=3000){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d);}
 
 // ══════════════════════════════════════════
-// SOS SYSTEM
-// ══════════════════════════════════════════
-function triggerSOS() {
-  sosActive = true;
-  document.getElementById('sosOverlay').classList.add('show');
-  document.getElementById('sosBtn').classList.add('alarm-active');
-  // Play alarm sound using AudioContext
-  try {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    function beep(freq, start, duration) {
-      const oscillator = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      oscillator.type = 'square';
-      oscillator.frequency.value = freq;
-      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime + start);
-      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + start + duration);
-      oscillator.start(audioCtx.currentTime + start);
-      oscillator.stop(audioCtx.currentTime + start + duration);
-    }
-    for (let i = 0; i < 10; i++) {
-      beep(880, i * 0.5, 0.3);
-      beep(660, i * 0.5 + 0.25, 0.25);
-    }
-    sosAudio = audioCtx;
-  } catch(e) { console.log('Audio not available'); }
-  // Update sub text in current language
-  const msgs = {en:'Call emergency services immediately', kn:'ತಕ್ಷಣ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಕರೆ ಮಾಡಿ', hi:'तुरंत आपातकालीन सेवाओं को कॉल करें', te:'వెంటనే అత్యవసర సేవలను కాల్ చేయండి'};
-  document.getElementById('sosSub').textContent = msgs[globalLang] || msgs['en'];
-}
-
-function stopSOS() {
-  sosActive = false;
-  document.getElementById('sosOverlay').classList.remove('show');
-  document.getElementById('sosBtn').classList.remove('alarm-active');
-  if (sosAudio) { try { sosAudio.close(); } catch(e){} sosAudio = null; }
-}
-
-// ══════════════════════════════════════════
-// DISGUISE CALCULATOR (111 = return home)
+// DISGUISE CALCULATOR — ENTRY POINT
 // ══════════════════════════════════════════
 let cVal='0',cPrev='',cOp=null,cNew=false;
-function showDisguise(){document.getElementById('disguise').classList.add('show');}
+
+function showDisguise(){
+  document.getElementById('disguise').classList.add('show');
+  cVal='0';cPrev='';cOp=null;cNew=false;
+  document.getElementById('cMain').textContent='0';
+  document.getElementById('cPrev').textContent='';
+}
 function hideDisguise(){document.getElementById('disguise').classList.remove('show');}
 
 function ck(v){
@@ -1067,84 +1010,310 @@ function ck(v){
     if(cNew){cVal='0.';cNew=false;}
     else if(!cVal.includes('.'))cVal+='.';
   }
-  else {
+  else{
     if(cVal==='0'||cNew){cVal=v;cNew=false;}
     else if(cVal.length<12)cVal+=v;
-    // Check secret code 111
+    // Secret code 111 → enter app
     if(cVal==='111'){
-      setTimeout(()=>{hideDisguise();cVal='0';disp.textContent='0';},100);
+      setTimeout(()=>{hideDisguise();cVal='0';disp.textContent='0';},150);
       return;
     }
   }
   disp.textContent=cVal.length>10?parseFloat(cVal).toExponential(3):cVal;
 }
 
+// ══ Show disguise on first load ══
+window.addEventListener('load',()=>{
+  showDisguise();
+  applyTranslations('en');
+  renderChips();
+  renderTrustedContact();
+});
+
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){hideDisguise();stopSOS();}});
 
 // ══════════════════════════════════════════
-// GEMINI API CALL
+// SOS — LOUD ALARM
 // ══════════════════════════════════════════
-async function callGemini(messages, systemPrompt) {
-  const gemMsgs = messages.map(m=>({
-    role: m.role==='assistant'?'model':'user',
-    parts:[{text:m.content}]
-  }));
-  const r = await fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+GEMINI_API_KEY,
-    {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        system_instruction:{parts:[{text:systemPrompt}]},
-        contents:gemMsgs
-      })
+function triggerSOS(){
+  sosActive=true;
+  document.getElementById('sosOverlay').classList.add('show');
+  document.getElementById('sosBtn').classList.add('alarm-active');
+  _playLoudAlarm();
+  // Update sub text
+  const msgs={en:'CALL EMERGENCY NOW — You are not alone!',kn:'ತಕ್ಷಣ ತುರ್ತು ಸೇವೆಗಳಿಗೆ ಕರೆ ಮಾಡಿ!',hi:'अभी आपातकालीन सेवाओं को कॉल करें!',te:'వెంటనే అత్యవసర సేవలను కాల్ చేయండి!'};
+  document.getElementById('sosSub').textContent=msgs[globalLang]||msgs['en'];
+  // Show trusted contact in SOS if set
+  _updateSOSTrusted();
+}
+
+function _playLoudAlarm(){
+  try{
+    if(sosAudioCtx){ try{sosAudioCtx.close();}catch(e){} }
+    sosAudioCtx=new(window.AudioContext||window.webkitAudioContext)();
+    const masterGain=sosAudioCtx.createGain();
+    masterGain.gain.value=1.5; // Loud
+    masterGain.connect(sosAudioCtx.destination);
+
+    function playBeep(freq,startT,dur,type='square'){
+      const osc=sosAudioCtx.createOscillator();
+      const g=sosAudioCtx.createGain();
+      osc.connect(g);g.connect(masterGain);
+      osc.type=type;osc.frequency.value=freq;
+      g.gain.setValueAtTime(0,sosAudioCtx.currentTime+startT);
+      g.gain.linearRampToValueAtTime(0.8,sosAudioCtx.currentTime+startT+0.02);
+      g.gain.setValueAtTime(0.8,sosAudioCtx.currentTime+startT+dur-0.05);
+      g.gain.linearRampToValueAtTime(0,sosAudioCtx.currentTime+startT+dur);
+      osc.start(sosAudioCtx.currentTime+startT);
+      osc.stop(sosAudioCtx.currentTime+startT+dur);
     }
+    // Emergency siren pattern — loud, alternating high/low tones
+    for(let i=0;i<20;i++){
+      playBeep(1100,i*0.4,0.2,'square');
+      playBeep(880,i*0.4+0.2,0.2,'sawtooth');
+    }
+    // Repeat after 8s if still active
+    if(sosActive){
+      setTimeout(()=>{ if(sosActive) _playLoudAlarm(); },8100);
+    }
+  }catch(e){console.log('Audio unavailable');}
+}
+
+function stopSOS(){
+  sosActive=false;
+  document.getElementById('sosOverlay').classList.remove('show');
+  document.getElementById('sosBtn').classList.remove('alarm-active');
+  if(sosAudioCtx){try{sosAudioCtx.close();}catch(e){} sosAudioCtx=null;}
+}
+
+function _updateSOSTrusted(){
+  const numDiv=document.getElementById('sosNumbers');
+  // Remove old trusted btn if any
+  const old=numDiv.querySelector('.sos-trusted');
+  if(old) old.remove();
+  if(trustedContact&&trustedContact.phone){
+    const a=document.createElement('a');
+    a.href='tel:'+trustedContact.phone;
+    a.className='sos-call-btn sos-trusted';
+    a.innerHTML=`👤 ${trustedContact.phone}<br><small>${trustedContact.name||'Trusted'}</small>`;
+    numDiv.appendChild(a);
+  }
+}
+
+// ══════════════════════════════════════════
+// TRUSTED CONTACT
+// ══════════════════════════════════════════
+function openTrustedContact(){
+  if(trustedContact){
+    document.getElementById('trustedName').value=trustedContact.name||'';
+    document.getElementById('trustedPhone').value=trustedContact.phone||'';
+    document.getElementById('trustedRelation').value=trustedContact.relation||'';
+  }
+  document.getElementById('trustedModal').classList.add('open');
+}
+function closeTrustedContact(){document.getElementById('trustedModal').classList.remove('open');}
+function saveTrustedContact(){
+  const name=document.getElementById('trustedName').value.trim();
+  const phone=document.getElementById('trustedPhone').value.trim();
+  const relation=document.getElementById('trustedRelation').value.trim();
+  if(!name||!phone){showToast('Please fill in name and phone number');return;}
+  trustedContact={name,phone,relation};
+  localStorage.setItem('sv_trusted',JSON.stringify(trustedContact));
+  closeTrustedContact();
+  renderTrustedContact();
+  showToast('✅ Trusted contact saved: '+name);
+  _updateSOSTrusted();
+}
+
+function renderTrustedContact(){
+  if(!trustedContact) return;
+  const grid=document.getElementById('helplinesGrid');
+  let existing=document.getElementById('trustedCard');
+  if(!existing){
+    existing=document.createElement('div');
+    existing.id='trustedCard';
+    existing.className='hl-card trusted';
+    grid.insertBefore(existing,grid.firstChild);
+  }
+  existing.innerHTML=`
+    <div class="hl-ico">💚</div>
+    <div class="hl-org">${trustedContact.name}</div>
+    <div class="hl-num" style="font-size:1.1rem">${trustedContact.phone}</div>
+    <div class="hl-desc">${trustedContact.relation||'Trusted Person'} — Your private emergency contact</div>
+    <span class="hl-tag">TRUSTED · PRIVATE</span>
+    <a href="tel:${trustedContact.phone}" class="hl-call-btn" style="background:linear-gradient(135deg,#059669,#0d9488)">📞 Call ${trustedContact.name}</a>
+    <button onclick="openTrustedContact()" style="width:100%;margin-top:0.4rem;background:transparent;border:1px solid rgba(74,222,128,0.3);color:var(--green);border-radius:100px;padding:0.35rem;cursor:pointer;font-size:0.72rem;font-family:inherit">✏️ Edit Contact</button>
+  `;
+}
+
+// ══════════════════════════════════════════
+// GEMINI API
+// ══════════════════════════════════════════
+async function callGemini(messages, systemPrompt, parts_override=null){
+  const gemMsgs=messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]}));
+  // If parts_override provided (for multipart with images), use for last message
+  if(parts_override&&gemMsgs.length>0){
+    gemMsgs[gemMsgs.length-1].parts=parts_override;
+  }
+  const r=await fetch(
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key='+GEMINI_KEY,
+    {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      system_instruction:{parts:[{text:systemPrompt}]},
+      contents:gemMsgs
+    })}
   );
   if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.error?.message||'API error');}
   const d=await r.json();
   return d.candidates[0].content.parts[0].text;
 }
 
-// System prompts per language
-const SYS_PROMPTS = {
-  en:`You are SafeVoice, a compassionate AI legal guidance assistant for women experiencing domestic abuse in Karnataka, India. ALWAYS respond ONLY in English. Cover: IPC 498A (cruelty, non-bailable, 3 yrs), PWDVA 2005 (Protection Orders in 24hrs), POCSO 2012, IPC 354, IPC 406. Helplines: 181, 1091 (Vanitha Sahayavani), 100, 7827170170, 1098. Warm, never victim-blame. Use **bold** for key info. Under 250 words.`,
-  kn:`ನೀವು SafeVoice — ಕರ್ನಾಟಕದ ಮಹಿಳೆಯರಿಗೆ ಕಾನೂನು ಸಹಾಯ ನೀಡುವ AI ಸಹಾಯಕ. ಎಲ್ಲಾ ಉತ್ತರಗಳನ್ನು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ನೀಡಿ. IPC 498A, PWDVA 2005, POCSO ಕಾನೂನುಗಳ ಬಗ್ಗೆ ಮಾಹಿತಿ ನೀಡಿ. ಸಹಾಯವಾಣಿ: 181, 1091, 100, 1098. ಪ್ರೀತಿಯಿಂದ ಮಾತನಾಡಿ. ಮುಖ್ಯ ಮಾಹಿತಿಗೆ **bold** ಬಳಸಿ. 250 ಪದಗಳ ಒಳಗೆ ಉತ್ತರಿಸಿ.`,
-  hi:`आप SafeVoice हैं — कर्नाटक में महिलाओं के लिए AI कानूनी सहायक। सभी जवाब केवल हिंदी में दें। IPC 498A, PWDVA 2005, POCSO के बारे में जानकारी दें। हेल्पलाइन: 181, 1091, 100, 1098। गर्मजोशी से बात करें। जरूरी जानकारी **bold** में लिखें। 250 शब्दों में जवाब दें।`,
-  te:`మీరు SafeVoice — కర్ణాటకలో మహిళలకు AI చట్టపరమైన సహాయకుడు. అన్ని సమాధానాలు తెలుగులో మాత్రమే ఇవ్వండి. IPC 498A, PWDVA 2005, POCSO గురించి తెలియజేయండి. హెల్ప్‌లైన్: 181, 1091, 100, 1098. ప్రేమగా మాట్లాడండి. ముఖ్యమైన సమాచారం **bold** లో రాయండి. 250 పదాలలో జవాబు ఇవ్వండి.`
+// ── System prompts ──
+const SYS_CHAT={
+  en:`You are SafeVoice, a compassionate AI assistant for women experiencing domestic abuse in Karnataka, India. ALWAYS respond ONLY in English.
+
+YOUR CONVERSATION APPROACH:
+1. FIRST — acknowledge her feelings with warmth and empathy. Never jump straight to laws.
+2. ASK follow-up questions to understand her situation better (what type of abuse, how long, who, any children involved, is she safe right now).
+3. Once you understand the situation, IDENTIFY THE SPECIFIC ABUSE TYPE and relevant laws:
+   - Physical violence → IPC 498A (cruelty, non-bailable, 3 years), PWDVA Protection Order (24 hours)
+   - Mental/emotional abuse → IPC 498A, PWDVA
+   - Financial control/streedhan withheld → IPC 406, PWDVA Monetary Relief
+   - Sexual abuse in marriage → IPC 376B (marital rape in some states), PWDVA
+   - Dowry demands → Dowry Prohibition Act, IPC 498A
+   - Child abuse → POCSO 2012 (7 years to life)
+   - Stalking → IPC 354D
+   - Assault on modesty → IPC 354 (1-5 years)
+4. GIVE CLEAR ACTION STEPS:
+   - Immediate safety: Leave if danger, call 100 or 1091
+   - Filing FIR: Go to police station, ask for women officer, FIR cannot be refused
+   - PWDVA complaint to Magistrate or Protection Officer
+   - Gather evidence: photos, medical reports, witnesses
+   - Legal aid: Free at district legal services authority
+   - Shelter: One Stop Centre 7827170170
+5. END with relevant helpline for the situation.
+
+If user attaches photos/notes as evidence, ANALYZE them and connect to legal framework.
+Be warm, never clinical. Use **bold** for key info. Under 300 words per response.`,
+
+  kn:`ನೀವು SafeVoice — ಕರ್ನಾಟಕದ ಮಹಿಳೆಯರಿಗೆ ಕಾನೂನು ಮತ್ತು ಭಾವನಾತ್ಮಕ ಬೆಂಬಲ ನೀಡುವ AI. ಎಲ್ಲಾ ಉತ್ತರಗಳನ್ನು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ನೀಡಿ.
+
+ನಿಮ್ಮ ವಿಧಾನ:
+1. ಮೊದಲು — ಪ್ರೀತಿ ಮತ್ತು ಗೌರವದಿಂದ ಅವಳ ಭಾವನೆಗಳನ್ನು ಗುರುತಿಸಿ. ತೀರ್ಪು ನೀಡಬೇಡಿ.
+2. ಹೆಚ್ಚಿನ ಪ್ರಶ್ನೆಗಳನ್ನು ಕೇಳಿ — ಯಾವ ರೀತಿ ಹಿಂಸೆ, ಎಷ್ಟು ದಿನದಿಂದ, ಮಕ್ಕಳಿದ್ದಾರೆಯೇ, ಈಗ ಸುರಕ್ಷಿತವಾಗಿದ್ದಾರೆಯೇ.
+3. ಸ್ಥಿತಿ ಅರ್ಥವಾದ ನಂತರ ಕಾನೂನು ವಿಶ್ಲೇಷಣೆ ನೀಡಿ: IPC 498A, PWDVA, POCSO, IPC 354, IPC 406.
+4. ಸ್ಪಷ್ಟ ಕ್ರಮಗಳು ಹೇಳಿ: FIR ದಾಖಲಿಸುವ ವಿಧಾನ, ರಕ್ಷಣಾ ಆದೇಶ, ಆಶ್ರಯ.
+5. ಸಂಬಂಧಿತ ಸಹಾಯವಾಣಿ ನೀಡಿ: 181, 1091, 100.
+
+**bold** ಬಳಸಿ. 300 ಪದಗಳ ಒಳಗೆ.`,
+
+  hi:`आप SafeVoice हैं — कर्नाटक में महिलाओं के लिए कानूनी और भावनात्मक सहायता देने वाली AI। केवल हिंदी में जवाब दें।
+
+आपका तरीका:
+1. पहले — प्यार और सम्मान के साथ उसकी भावनाओं को समझें। कभी दोष न दें।
+2. अधिक जानकारी के लिए प्रश्न पूछें — किस तरह का दुर्व्यवहार, कितने समय से, बच्चे हैं, अभी सुरक्षित हैं।
+3. स्थिति समझने के बाद कानूनी विश्लेषण दें: IPC 498A, PWDVA, POCSO, IPC 354, IPC 406.
+4. स्पष्ट कदम बताएं: FIR कैसे दर्ज करें, संरक्षण आदेश, आश्रय।
+5. संबंधित हेल्पलाइन: 181, 1091, 100.
+
+**bold** में जरूरी जानकारी। 300 शब्दों में।`,
+
+  te:`మీరు SafeVoice — కర్ణాటకలో మహిళలకు చట్టపరమైన మరియు మానసిక మద్దతు ఇచ్చే AI. తెలుగులో మాత్రమే జవాబు ఇవ్వండి.
+
+మీ విధానం:
+1. మొదట — ప్రేమతో మరియు గౌరవంతో ఆమె భావాలను గుర్తించండి. ఎప్పుడూ నిందించవద్దు.
+2. మరిన్ని ప్రశ్నలు అడగండి — ఎలాంటి హింస, ఎంత కాలం, పిల్లలు ఉన్నారా, ఇప్పుడు సురక్షితంగా ఉన్నారా.
+3. పరిస్థితి అర్థమైన తర్వాత చట్టపరమైన విశ్లేషణ ఇవ్వండి: IPC 498A, PWDVA, POCSO, IPC 354, IPC 406.
+4. స్పష్టమైన చర్యలు చెప్పండి: FIR నమోదు విధానం, రక్షణ ఆదేశం, ఆశ్రయం.
+5. సంబంధిత హెల్ప్‌లైన్: 181, 1091, 100.
+
+**bold** వాడండి. 300 పదాల లోపు.`
 };
 
-const ALLY_SYS = {
-  en:`You are SafeVoice Ally Mode. The user is supporting a friend/family member experiencing domestic abuse in India, NOT the victim themselves. Help them: how to approach safely, legal options (IPC 498A, PWDVA, POCSO), how to connect their friend to help. Karnataka helplines: 181, 1091, 100. Warm, practical. **Bold** key actions. RESPOND ONLY IN ENGLISH. Under 200 words.`,
-  kn:`ನೀವು SafeVoice Ally Mode. ಬಳಕೆದಾರರು ಸ್ನೇಹಿತರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತಿದ್ದಾರೆ. ಸ್ನೇಹಿತರಿಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬೇಕು ಎಂದು ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ. ಸಹಾಯವಾಣಿ: 181, 1091, 100. **Bold** ಬಳಸಿ. 200 ಪದಗಳ ಒಳಗೆ.`,
-  hi:`आप SafeVoice Ally Mode हैं। उपयोगकर्ता किसी मित्र का समर्थन कर रहे हैं। केवल हिंदी में जवाब दें। दोस्त की कैसे मदद करें, IPC 498A, PWDVA, हेल्पलाइन: 181, 1091, 100। **Bold** में मुख्य कदम। 200 शब्दों में।`,
-  te:`మీరు SafeVoice Ally Mode. వినియోగదారు స్నేహితుడికి మద్దతు ఇస్తున్నారు. తెలుగులో మాత్రమే జవాబు ఇవ్వండి. స్నేహితుడికి ఎలా సహాయం చేయాలో చెప్పండి. హెల్ప్‌లైన్: 181, 1091, 100. **Bold** వాడండి. 200 పదాల లోపు.`
+const SYS_ALLY={
+  en:`You are SafeVoice Ally Mode. The user is supporting a FRIEND/FAMILY MEMBER experiencing domestic abuse — NOT the victim themselves. RESPOND ONLY IN ENGLISH.
+
+YOUR APPROACH:
+1. Acknowledge their concern and courage for reaching out.
+2. Ask specific questions to understand the victim's situation:
+   - Type and severity of abuse
+   - Whether the victim wants help or is in denial
+   - Whether children are involved
+   - The abuser's access and control level
+3. Give PRACTICAL GUIDANCE tailored to their relationship:
+   - How to approach the conversation safely
+   - What NOT to say (don't pressure, don't ultimatums)
+   - How to connect the victim to help without endangering them
+4. Explain the LEGAL OPTIONS the victim has (IPC 498A, PWDVA, POCSO).
+5. Safety planning for the ally too — some abusers become dangerous to people helping.
+
+Helplines to share: 181, 1091, 100, 1098. Warm, practical. **Bold** key actions. Under 250 words.`,
+  kn:`ನೀವು SafeVoice Ally Mode. ಬಳಕೆದಾರರು ತಮ್ಮ ಸ್ನೇಹಿತ/ಕುಟುಂಬದ ಸದಸ್ಯರಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತಿದ್ದಾರೆ. ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಉತ್ತರಿಸಿ.
+ವಿಧಾನ: 1) ಅವರ ಕಾಳಜಿ ಗುರುತಿಸಿ. 2) ಸಂತ್ರಸ್ತರ ಸ್ಥಿತಿ ಅರ್ಥ ಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಶ್ನೆಗಳು ಕೇಳಿ. 3) ಸ್ನೇಹಿತರಿಗೆ ಸಂಪರ್ಕಿಸಲು ಸುರಕ್ಷಿತ ಮಾರ್ಗ ತಿಳಿಸಿ. 4) ಕಾನೂನು ಆಯ್ಕೆಗಳು: IPC 498A, PWDVA. 5) ಸಹಾಯವಾಣಿ: 181, 1091. **bold** ಬಳಸಿ.`,
+  hi:`आप SafeVoice Ally Mode हैं। उपयोगकर्ता किसी मित्र को सहायता दे रहे हैं। केवल हिंदी में जवाब दें।
+तरीका: 1) उनकी चिंता समझें। 2) पीड़ित की स्थिति जानने के लिए सवाल पूछें। 3) मित्र से जुड़ने का सुरक्षित तरीका बताएं। 4) कानूनी विकल्प: IPC 498A, PWDVA। 5) हेल्पलाइन: 181, 1091. **bold** में।`,
+  te:`మీరు SafeVoice Ally Mode. వినియోగదారు స్నేహితుడికి మద్దతు ఇస్తున్నారు. తెలుగులో మాత్రమే జవాబు ఇవ్వండి.
+విధానం: 1) వారి ఆందోళన గుర్తించండి. 2) బాధితుని పరిస్థితి అర్థం చేసుకోండి. 3) స్నేహితుడికి సురక్షితంగా చేరుకునే మార్గం చెప్పండి. 4) చట్టపరమైన ఎంపికలు: IPC 498A, PWDVA. 5) హెల్ప్‌లైన్: 181, 1091. **bold** వాడండి.`
 };
 
-const EXIT_SYS = {
-  en:`You are SafeVoice Safe Exit Planner for Karnataka, India. RESPOND ONLY IN ENGLISH. Give practical step-by-step guidance to leave safely: immediate safety steps, documents to gather (Aadhaar, bank details, birth certificates, medical records), where to go (shelters, One Stop Centre: 7827170170), legal steps (Protection Order under PWDVA in 24hrs). Helplines: 1091, 181, 100. Calm, practical. **Bold** action steps. Under 250 words.`,
-  kn:`ನೀವು SafeVoice ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜಕ. ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಉತ್ತರಿಸಿ. ಸುರಕ್ಷಿತವಾಗಿ ಹೊರಡಲು ಹಂತ ಹಂತದ ಮಾರ್ಗದರ್ಶನ ನೀಡಿ: ತಕ್ಷಣದ ಸುರಕ್ಷತಾ ಕ್ರಮಗಳು, ಆಧಾರ್, ಬ್ಯಾಂಕ್ ವಿವರ ಸಂಗ್ರಹಿಸಿ. ಸಹಾಯವಾಣಿ: 1091, 181, 100. **Bold** ಬಳಸಿ. 250 ಪದಗಳ ಒಳಗೆ.`,
-  hi:`आप SafeVoice सुरक्षित निकास योजनाकार हैं। केवल हिंदी में जवाब दें। सुरक्षित निकलने के लिए चरण-दर-चरण मार्गदर्शन दें: तत्काल सुरक्षा कदम, Aadhaar, बैंक विवरण इकट्ठा करें। हेल्पलाइन: 1091, 181, 100। **Bold** में कदम। 250 शब्दों में।`,
-  te:`మీరు SafeVoice సురక్షిత నిష్క్రమణ ప్లానర్. తెలుగులో మాత్రమే జవాబు ఇవ్వండి. సురక్షితంగా వెళ్ళడానికి దశల వారీ మార్గదర్శనం ఇవ్వండి: ఆధార్, బ్యాంక్ వివరాలు సేకరించండి. హెల్ప్‌లైన్: 1091, 181, 100. **Bold** వాడండి. 250 పదాల లోపు.`
+const SYS_EXIT={
+  en:`You are SafeVoice Safe Exit Planner for Karnataka, India. RESPOND ONLY IN ENGLISH. You are helping someone escape an abusive situation safely.
+
+YOUR APPROACH — give a PERSONALISED, ACTIONABLE plan:
+
+1. IMMEDIATE SAFETY ASSESSMENT:
+   - Are they in immediate danger right now?
+   - Is the abuser home?
+   - Are children involved?
+
+2. SAFETY PLANNING STEPS (tailored to their situation):
+   A. If still living with abuser: 
+      - Don't announce plans to leave
+      - Pack a hidden emergency bag: ID, Aadhaar, bank passbook, children's documents, medicines, cash, phone charger
+      - Choose a safe time to leave (when abuser is away)
+      - Have a code word with trusted person
+   B. If recently left:
+      - Don't return alone
+      - Change phone settings (location off)
+      - Inform trusted family/friends
+   
+3. WHERE TO GO:
+   - One Stop Centre: 7827170170 (free shelter, medical, legal)
+   - Vanitha Sahayavani: 1091 (shelter referral)
+   - Police: 100 (FIR + Magistrate order for residence)
+   - Mahila Courts / Family Courts
+   
+4. LEGAL PROTECTION (get these FIRST if possible):
+   - Protection Order under PWDVA — Magistrate can issue in 24 hours
+   - FIR under IPC 498A — makes abuser's arrest possible
+   - Residence Order — gives right to stay in shared home
+
+5. DOCUMENTS to gather before leaving (if safe to do so).
+
+Be specific, calm, practical. **Bold** action steps. Under 300 words.`,
+  kn:`ನೀವು SafeVoice ಸುರಕ್ಷಿತ ನಿರ್ಗಮನ ಯೋಜಕ. ಕನ್ನಡದಲ್ಲಿ ಮಾತ್ರ ಉತ್ತರಿಸಿ.
+ವ್ಯಕ್ತಿಗತ, ಕ್ರಿಯಾಶೀಲ ನಿರ್ಗಮನ ಯೋಜನೆ ನೀಡಿ: 1) ತಕ್ಷಣ ಸುರಕ್ಷತೆ ಮೌಲ್ಯಮಾಪನ. 2) ತುರ್ತು ಚೀಲ — ಆಧಾರ್, ಬ್ಯಾಂಕ್ ಪಾಸ್‌ಬುಕ್, ಮಕ್ಕಳ ದಾಖಲೆ, ಹಣ. 3) ಹೋಗಲು ಸ್ಥಳ: One Stop Centre 7827170170, Vanitha Sahayavani 1091. 4) PWDVA ರಕ್ಷಣಾ ಆದೇಶ 24 ಗಂಟೆಯಲ್ಲಿ. 5) IPC 498A FIR. **bold** ಬಳಸಿ.`,
+  hi:`आप SafeVoice सुरक्षित निकास योजनाकार हैं। केवल हिंदी में जवाब दें।
+व्यक्तिगत, व्यावहारिक निकास योजना दें: 1) तत्काल सुरक्षा। 2) आपातकालीन बैग: Aadhaar, बैंक पासबुक, बच्चों के दस्तावेज, दवाइयाँ। 3) जाने की जगह: One Stop Centre 7827170170, 1091। 4) PWDVA संरक्षण आदेश 24 घंटे में। 5) IPC 498A FIR। **bold** में।`,
+  te:`మీరు SafeVoice సురక్షిత నిష్క్రమణ ప్లానర్. తెలుగులో మాత్రమే జవాబు ఇవ్వండి.
+వ్యక్తిగత, ఆచరణాత్మక నిష్క్రమణ ప్రణాళిక ఇవ్వండి: 1) తక్షణ భద్రత. 2) అత్యవసర బ్యాగ్: ఆధార్, బ్యాంక్ పాస్‌బుక్, పిల్లల పత్రాలు, నగదు. 3) వెళ్ళే చోటు: One Stop Centre 7827170170, 1091. 4) PWDVA రక్షణ ఆదేశం 24 గంటల్లో. 5) IPC 498A FIR. **bold** వాడండి.`
 };
 
 // ══════════════════════════════════════════
-// CHAT
+// MAIN CHAT
 // ══════════════════════════════════════════
-const QP = {
-  en:['What is IPC 498A?','My husband is abusive','How do I file an FIR?','I need shelter','What is PWDVA?'],
-  kn:['IPC 498A ಎಂದರೇನು?','ನನ್ನ ಪತಿ ಹಿಂಸೆ ನೀಡುತ್ತಾರೆ','ದೂರು ಹೇಗೆ ದಾಖಲಿಸಬೇಕು?','ಆಶ್ರಯ ಬೇಕು','PWDVA ಏನು?'],
-  hi:['IPC 498A क्या है?','मेरे पति मुझे मारते हैं','FIR कैसे दर्ज करें?','मुझे आश्रय चाहिए','PWDVA क्या है?'],
-  te:['IPC 498A అంటే ఏమిటి?','నా భర్త హింస చేస్తున్నారు','ఫిర్యాదు ఎలా నమోదు చేయాలి?','ఆశ్రయం కావాలి','PWDVA అంటే ఏమిటి?']
+const QP={
+  en:['My husband hurts me','What is IPC 498A?','How do I file an FIR?','I need shelter now','He threatens me daily'],
+  kn:['ನನ್ನ ಪತಿ ನನಗೆ ಹೊಡೆಯುತ್ತಾರೆ','IPC 498A ಏನು?','ದೂರು ಹೇಗೆ ದಾಖಲಿಸಬೇಕು?','ನನಗೆ ಆಶ್ರಯ ಬೇಕು','ಅವರು ನನ್ನನ್ನು ಬೆದರಿಸುತ್ತಾರೆ'],
+  hi:['मेरे पति मुझे मारते हैं','IPC 498A क्या है?','FIR कैसे दर्ज करें?','मुझे अभी आश्रय चाहिए','वो रोज धमकाते हैं'],
+  te:['నా భర్త నన్ను కొడతారు','IPC 498A అంటే ఏమిటి?','FIR ఎలా నమోదు చేయాలి?','నాకు ఇప్పుడు ఆశ్రయం కావాలి','అతను రోజూ బెదిరిస్తున్నాడు']
 };
 
 function renderChips(){
   const c=document.getElementById('quickChips');
-  const lang=chatLang;
-  c.innerHTML=(QP[lang]||QP['en']).map(t=>`<span class="qchip" onclick="useChip('${t.replace(/'/g,"\\'")}')"> ${t}</span>`).join('');
+  c.innerHTML=(QP[chatLang]||QP['en']).map(t=>`<span class="qchip" onclick="useChip('${t.replace(/'/g,"\\'")}')">${t}</span>`).join('');
   addHover('.qchip');
 }
 function useChip(t){document.getElementById('chatIn').value=t;sendMsg();}
-renderChips();
 
 function addMsg(text,role){
   const wrap=document.getElementById('chatMsgs');
@@ -1154,59 +1323,252 @@ function addMsg(text,role){
   const bub=document.createElement('div');bub.className='bubble';
   bub.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
   right.appendChild(bub);div.appendChild(ico);div.appendChild(right);
-  wrap.appendChild(div);wrap.scrollTop=wrap.scrollHeight;
+  wrap.appendChild(div);wrap.scrollTop=99999;
 }
-function showTyping(){
-  const wrap=document.getElementById('chatMsgs');
-  const d=document.createElement('div');d.className='msg bot';d.id='typing';
+function showTyping(container='chatMsgs'){
+  const wrap=document.getElementById(container);
+  const d=document.createElement('div');d.className='msg bot';d.id='typing_'+container;
   d.innerHTML='<div class="msg-ico">🛡️</div><div><div class="bubble"><div class="typing-wrap"><span></span><span></span><span></span></div></div></div>';
-  wrap.appendChild(d);wrap.scrollTop=wrap.scrollHeight;
+  wrap.appendChild(d);wrap.scrollTop=99999;
 }
-function hideTyping(){const t=document.getElementById('typing');if(t)t.remove();}
+function hideTyping(container='chatMsgs'){const t=document.getElementById('typing_'+container);if(t)t.remove();}
 
 async function sendMsg(){
   const inp=document.getElementById('chatIn');
   const txt=inp.value.trim();if(!txt)return;
   inp.value='';
-  addMsg(txt,'user');
-  chatHistory.push({role:'user',content:txt});
+
+  // Build user message, including attached docs
+  let displayText=txt;
+  let apiContent=txt;
+  let parts_override=null;
+
+  if(attachedToChat.length>0){
+    // Build multipart message with text + evidence
+    const parts=[{text:txt+'\n\n[Evidence attached for analysis:]'}];
+    attachedToChat.forEach(item=>{
+      if(item.type==='note'){
+        parts.push({text:'NOTE EVIDENCE: '+item.content});
+      } else if(item.type==='photo'){
+        // Extract base64
+        const base64=item.content.split(',')[1];
+        const mime=item.content.split(';')[0].split(':')[1]||'image/jpeg';
+        parts.push({inline_data:{mime_type:mime,data:base64}});
+      } else if(item.type==='audio'){
+        parts.push({text:'AUDIO EVIDENCE: [Audio recording from '+item.date+']'});
+      }
+    });
+    parts_override=parts;
+    displayText=txt+' 📎 ['+attachedToChat.length+' evidence item(s) attached]';
+    // Clear attached after sending
+    attachedToChat=[];
+    renderAttachedDocs();
+  }
+
+  addMsg(displayText,'user');
+  chatHistory.push({role:'user',content:apiContent});
   showTyping();
+
   try{
-    const reply=await callGemini(chatHistory.slice(-10),SYS_PROMPTS[chatLang]||SYS_PROMPTS['en']);
+    const sys=SYS_CHAT[chatLang]||SYS_CHAT['en'];
+    let msgs=[...chatHistory.slice(-10)];
+    const reply=await callGemini(msgs,sys,parts_override);
     hideTyping();
     addMsg(reply,'bot');
     chatHistory.push({role:'assistant',content:reply});
   }catch(e){
     hideTyping();
-    const T=TRANSLATIONS[chatLang]||TRANSLATIONS['en'];
-    addMsg('📞 '+( chatLang==='kn'?'ಸಹಾಯಕ್ಕಾಗಿ ಕರೆ ಮಾಡಿ': chatLang==='hi'?'सहायता के लिए कॉल करें': chatLang==='te'?'సహాయం కోసం కాల్ చేయండి':'Call for help')+': 181 · 1091 · 100','bot');
+    const hl={en:'📞 Call now: **181** · **1091** · **100**',kn:'📞 ಕರೆ ಮಾಡಿ: **181** · **1091** · **100**',hi:'📞 कॉल करें: **181** · **1091** · **100**',te:'📞 కాల్ చేయండి: **181** · **1091** · **100**'};
+    addMsg(hl[chatLang]||hl['en'],'bot');
   }
 }
 
-function askAboutLaw(lawQuery){
+function askAboutLaw(query){
   navTo('chatbot');
-  setTimeout(()=>{document.getElementById('chatIn').value='Tell me about '+lawQuery;sendMsg();},600);
+  setTimeout(()=>{document.getElementById('chatIn').value='Tell me about '+query;sendMsg();},600);
 }
 
 // ══════════════════════════════════════════
 // VOICE INPUT
 // ══════════════════════════════════════════
-let recog=null;
+let recogObj=null;
 function toggleVoice(){
   const btn=document.getElementById('voiceBtn');
-  if(recog){recog.stop();recog=null;btn.classList.remove('recording');btn.textContent='🎤';return;}
-  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){showToast('⚠️ Voice works in Chrome.');return;}
+  if(recogObj){recogObj.stop();recogObj=null;btn.classList.remove('recording');btn.textContent='🎤';return;}
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){showToast('⚠️ Voice works in Chrome');return;}
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  recog=new SR();
-  recog.lang={en:'en-IN',kn:'kn-IN',hi:'hi-IN',te:'te-IN'}[chatLang]||'en-IN';
-  recog.onstart=()=>{btn.classList.add('recording');btn.textContent='🔴';showToast('🎤 Listening...');};
-  recog.onresult=e=>{
-    document.getElementById('chatIn').value=e.results[0][0].transcript;
-    recog=null;btn.classList.remove('recording');btn.textContent='🎤';sendMsg();
+  recogObj=new SR();
+  recogObj.lang={en:'en-IN',kn:'kn-IN',hi:'hi-IN',te:'te-IN'}[chatLang]||'en-IN';
+  recogObj.onstart=()=>{btn.classList.add('recording');btn.textContent='🔴';showToast('🎤 Listening...');};
+  recogObj.onresult=e=>{document.getElementById('chatIn').value=e.results[0][0].transcript;recogObj=null;btn.classList.remove('recording');btn.textContent='🎤';sendMsg();};
+  recogObj.onerror=()=>{recogObj=null;btn.classList.remove('recording');btn.textContent='🎤';showToast('Voice error');};
+  recogObj.onend=()=>{if(recogObj){recogObj=null;btn.classList.remove('recording');btn.textContent='🎤';}};
+  recogObj.start();
+}
+
+// ══════════════════════════════════════════
+// EVIDENCE VAULT
+// ══════════════════════════════════════════
+function openEvidenceVault(){document.getElementById('vaultModal').classList.add('open');renderVault();}
+function closeVault(){document.getElementById('vaultModal').classList.remove('open');vaultStopCamera();}
+
+function vaultToggleNote(){const n=document.getElementById('noteInputArea');n.style.display=n.style.display==='none'?'block':'none';}
+function vaultPickPhoto(){document.getElementById('photoInput').click();}
+
+function vaultSaveNote(){
+  const text=document.getElementById('noteText').value.trim();
+  if(!text){showToast('Please write something first');return;}
+  vaultData.push({type:'note',content:text,date:new Date().toLocaleString('en-IN'),id:Date.now()});
+  _saveVault();
+  document.getElementById('noteText').value='';
+  document.getElementById('noteInputArea').style.display='none';
+  renderVault();showToast('📝 Note saved securely');
+}
+
+function vaultSavePhoto(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    vaultData.push({type:'photo',content:ev.target.result,name:file.name,date:new Date().toLocaleString('en-IN'),id:Date.now()});
+    _saveVault();renderVault();showToast('📷 Photo saved securely');
   };
-  recog.onerror=()=>{recog=null;btn.classList.remove('recording');btn.textContent='🎤';showToast('Voice error');};
-  recog.onend=()=>{if(recog){recog=null;btn.classList.remove('recording');btn.textContent='🎤';}};
-  recog.start();
+  r.readAsDataURL(file);e.target.value='';
+}
+
+async function vaultOpenCamera(){
+  const cameraArea=document.getElementById('cameraArea');
+  const video=document.getElementById('cameraStream');
+  try{
+    cameraStreamObj=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
+    video.srcObject=cameraStreamObj;
+    cameraArea.style.display='block';
+    showToast('📸 Camera ready');
+  }catch(err){showToast('⚠️ Camera access denied');}
+}
+
+function vaultCapturePhoto(){
+  const video=document.getElementById('cameraStream');
+  const canvas=document.getElementById('cameraCanvas');
+  canvas.width=video.videoWidth||640;canvas.height=video.videoHeight||480;
+  canvas.getContext('2d').drawImage(video,0,0);
+  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
+  vaultData.push({type:'photo',content:dataUrl,name:'capture-'+Date.now()+'.jpg',date:new Date().toLocaleString('en-IN'),id:Date.now()});
+  _saveVault();vaultStopCamera();renderVault();showToast('📸 Photo captured!');
+}
+
+function vaultStopCamera(){
+  if(cameraStreamObj){cameraStreamObj.getTracks().forEach(t=>t.stop());cameraStreamObj=null;}
+  const v=document.getElementById('cameraStream');if(v)v.srcObject=null;
+  const a=document.getElementById('cameraArea');if(a)a.style.display='none';
+}
+
+async function vaultToggleAudio(){
+  const lbl=document.getElementById('audioLabel');
+  if(recActive){mediaRec.stop();recActive=false;lbl.textContent='Record Audio';showToast('Recording stopped...');return;}
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    audioChunks=[];
+    mediaRec=new MediaRecorder(stream);
+    mediaRec.ondataavailable=ev=>audioChunks.push(ev.data);
+    mediaRec.onstop=()=>{
+      const blob=new Blob(audioChunks,{type:'audio/webm'});
+      const rd=new FileReader();
+      rd.onload=ev2=>{
+        vaultData.push({type:'audio',content:ev2.target.result,date:new Date().toLocaleString('en-IN'),id:Date.now()});
+        _saveVault();renderVault();showToast('🎙️ Audio saved securely');
+        stream.getTracks().forEach(t=>t.stop());
+      };
+      rd.readAsDataURL(blob);
+    };
+    mediaRec.start();recActive=true;lbl.textContent='Stop 🔴';
+    showToast('🎙️ Recording... tap Stop to save');
+  }catch(err){showToast('⚠️ Microphone access denied');}
+}
+
+function vaultDelete(id){
+  if(!confirm('Delete this entry?'))return;
+  vaultData=vaultData.filter(e=>e.id!==id);
+  _saveVault();renderVault();showToast('Entry deleted');
+}
+
+function _saveVault(){
+  try{localStorage.setItem('sv_vault',JSON.stringify(vaultData));}catch(e){}
+}
+
+function renderVault(){
+  const list=document.getElementById('vaultEntries');
+  const empty=document.getElementById('vaultEmpty');
+  if(!vaultData.length){list.innerHTML='';empty.style.display='block';return;}
+  empty.style.display='none';
+  list.innerHTML=vaultData.map(e=>{
+    const del=`<button class="vault-delete" onclick="vaultDelete(${e.id})">🗑</button>`;
+    if(e.type==='note')return`<div class="vault-entry"><div class="vault-entry-header"><span>📝 ${e.date}</span><div class="actions">${del}</div></div><div>${e.content.replace(/\n/g,'<br>')}</div></div>`;
+    if(e.type==='photo')return`<div class="vault-entry"><div class="vault-entry-header"><span>📷 ${e.name||'Photo'} · ${e.date}</span><div class="actions">${del}</div></div><img src="${e.content}" style="max-width:100%;border-radius:8px;margin-top:0.4rem;cursor:pointer" onclick="window.open('${e.content}')"></div>`;
+    if(e.type==='audio')return`<div class="vault-entry"><div class="vault-entry-header"><span>🎙️ Audio · ${e.date}</span><div class="actions">${del}</div></div><audio controls src="${e.content}" style="width:100%;margin-top:0.3rem"></audio></div>`;
+    return'';
+  }).join('');
+}
+
+// ══════════════════════════════════════════
+// VAULT SELECTOR (attach to chat)
+// ══════════════════════════════════════════
+function openVaultSelector(){
+  if(!vaultData.length){showToast('No evidence in vault yet. Add some first!');return;}
+  document.getElementById('vaultSelectorModal').classList.add('open');
+  const list=document.getElementById('vaultSelectorList');
+  list.innerHTML=vaultData.map(e=>{
+    const alreadyAttached=attachedToChat.find(a=>a.id===e.id);
+    let preview='';
+    if(e.type==='note') preview=`<div style="font-size:0.75rem;color:var(--white-dim);margin-top:0.3rem">${e.content.substring(0,60)}${e.content.length>60?'...':''}</div>`;
+    else if(e.type==='photo') preview=`<img src="${e.content}" style="height:40px;border-radius:4px;margin-top:0.3rem">`;
+    else if(e.type==='audio') preview=`<div style="font-size:0.75rem;color:var(--white-dim);margin-top:0.3rem">🔊 Audio recording</div>`;
+    const icon=e.type==='note'?'📝':e.type==='photo'?'📷':'🎙️';
+    return`<div class="vault-entry" style="cursor:pointer" onclick="toggleVaultSelect(${e.id},this)">
+      <div style="display:flex;align-items:center;gap:0.6rem">
+        <input type="checkbox" class="vault-select-cb" id="vsel_${e.id}" ${alreadyAttached?'checked':''} onclick="event.stopPropagation();toggleVaultSelect(${e.id},this.closest('.vault-entry'))">
+        <div>
+          <div style="font-size:0.8rem;font-weight:600">${icon} ${e.type.charAt(0).toUpperCase()+e.type.slice(1)} · ${e.date}</div>
+          ${preview}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleVaultSelect(id,el){
+  const cb=document.getElementById('vsel_'+id);
+  if(cb) cb.checked=!cb.checked;
+}
+
+function confirmVaultAttach(){
+  const selected=vaultData.filter(e=>{
+    const cb=document.getElementById('vsel_'+e.id);
+    return cb&&cb.checked;
+  });
+  if(!selected.length){showToast('Select at least one item');return;}
+  attachedToChat=selected;
+  renderAttachedDocs();
+  closeVaultSelector();
+  showToast(`📎 ${selected.length} item(s) attached to chat`);
+}
+
+function closeVaultSelector(){document.getElementById('vaultSelectorModal').classList.remove('open');}
+
+function renderAttachedDocs(){
+  const bar=document.getElementById('chatAttachedBar');
+  const sideBar=document.getElementById('attachedDocs');
+  if(!attachedToChat.length){bar.innerHTML='';sideBar.innerHTML='';return;}
+  const html=attachedToChat.map(e=>{
+    const icon=e.type==='note'?'📝':e.type==='photo'?'📷':'🎙️';
+    return`<span class="attached-badge">${icon} ${e.type} <span class="rm" onclick="removeAttached(${e.id})">✕</span></span>`;
+  }).join('');
+  bar.innerHTML=html;
+  sideBar.innerHTML=html;
+}
+
+function removeAttached(id){
+  attachedToChat=attachedToChat.filter(e=>e.id!==id);
+  renderAttachedDocs();
 }
 
 // ══════════════════════════════════════════
@@ -1215,8 +1577,6 @@ function toggleVoice(){
 function openAllyMode(){
   document.getElementById('allyModal').classList.add('open');
   if(allyHistory.length===0){
-    allyHistory=[];
-    document.getElementById('allyChat').innerHTML='';
     const T=TRANSLATIONS[allyLang]||TRANSLATIONS['en'];
     _addAllyBubble(T['ally_welcome'],'bot');
   }
@@ -1236,18 +1596,14 @@ async function sendAllyMsg(){
   const msg=input.value.trim();if(!msg)return;
   _addAllyBubble(msg,'user');input.value='';
   allyHistory.push({role:'user',content:msg});
-  const load=document.createElement('div');load.className='ally-bubble-bot';load.style.color='var(--purple-light)';load.textContent='...';
+  const load=document.createElement('div');
+  load.className='ally-bubble-bot';load.style.color='var(--purple-light)';load.textContent='...';
   document.getElementById('allyChat').appendChild(load);
   try{
-    const msgs=allyHistory.slice(-8);
-    const reply=await callGemini(msgs,ALLY_SYS[allyLang]||ALLY_SYS['en']);
-    load.remove();
-    _addAllyBubble(reply,'bot');
+    const reply=await callGemini(allyHistory.slice(-10),SYS_ALLY[allyLang]||SYS_ALLY['en']);
+    load.remove();_addAllyBubble(reply,'bot');
     allyHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    load.remove();
-    _addAllyBubble('📞 181 · 1091 · 100','bot');
-  }
+  }catch(e){load.remove();_addAllyBubble('📞 181 · 1091 · 100','bot');}
 }
 
 // ══════════════════════════════════════════
@@ -1256,12 +1612,9 @@ async function sendAllyMsg(){
 function openSafeExit(){
   document.getElementById('exitModal').classList.add('open');
   if(exitHistory.length===0){
-    exitHistory=[];
-    document.getElementById('exitChat').innerHTML='';
     const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
     _addExitBubble(T['exit_welcome'],'bot',true);
   }
-  // Auto-get location
   getLocationAndSearch();
 }
 function closeExit(){document.getElementById('exitModal').classList.remove('open');}
@@ -1269,81 +1622,49 @@ function closeExit(){document.getElementById('exitModal').classList.remove('open
 function getLocationAndSearch(){
   const box=document.getElementById('locationBox');
   const txt=document.getElementById('locationText');
-  if(!navigator.geolocation){
-    box.className='location-box error';
-    txt.textContent='Location not available on this browser.';
-    return;
-  }
-  box.className='location-box';
-  txt.textContent='📍 Getting your location...';
+  if(!navigator.geolocation){box.className='location-box error';txt.textContent='Location not available.';return;}
+  box.className='location-box';txt.textContent='📍 Getting your location...';
   navigator.geolocation.getCurrentPosition(
     pos=>{
-      userLat=pos.coords.latitude;
-      userLng=pos.coords.longitude;
+      userLat=pos.coords.latitude;userLng=pos.coords.longitude;
       box.className='location-box found';
-      txt.textContent=`✅ Location found: ${userLat.toFixed(4)}, ${userLng.toFixed(4)}. Click a button below to find nearby help.`;
-      showToast('📍 Location acquired!');
+      txt.textContent=`✅ Location found: ${userLat.toFixed(4)}, ${userLng.toFixed(4)}. Click a button to find nearby help.`;
     },
     err=>{
       box.className='location-box error';
-      const msgs={1:'Location access denied. Please allow location for best results.',2:'Location unavailable. Using manual search.',3:'Location timeout. Using manual search.'};
-      txt.textContent='⚠️ '+(msgs[err.code]||'Location error. Using city-level search.');
-      // Still allow searches without precise location
-      userLat=12.9716;userLng=77.5946; // Default: Bangalore
-      txt.textContent+=' (Using Bangalore as default)';
+      userLat=12.9716;userLng=77.5946;
+      txt.textContent='⚠️ Location unavailable. Using Bangalore as default.';
     },
     {enableHighAccuracy:true,timeout:10000,maximumAge:60000}
   );
 }
 
 function searchNearby(query){
-  const lat=userLat||12.9716;
-  const lng=userLng||77.5946;
-  const mapsUrl=`https://www.google.com/maps/search/${encodeURIComponent(query)}/@${lat},${lng},14z`;
-  window.open(mapsUrl,'_blank');
-  showToast(`🗺️ Opening Google Maps for: ${query}`);
-  // Also add a message in chat
-  _addExitBubble(`🗺️ Opening Google Maps to find nearby "${query}" — please check the map that opened.`,'bot',false);
-  // AI response about this type of place
-  const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
-  const sysP=EXIT_SYS[exitLang]||EXIT_SYS['en'];
-  exitHistory.push({role:'user',content:`I searched for nearby ${query}. Give me specific advice on what to do when I reach a ${query} and what to say.`});
-  callGemini(exitHistory.slice(-6),sysP).then(r=>{
-    _addExitBubble(r,'bot',false);
-    exitHistory.push({role:'assistant',content:r});
-  }).catch(()=>{});
+  const lat=userLat||12.9716,lng=userLng||77.5946;
+  window.open(`https://www.google.com/maps/search/${encodeURIComponent(query)}/@${lat},${lng},14z`,'_blank');
+  showToast(`🗺️ Opening Maps: ${query}`);
+  exitHistory.push({role:'user',content:`I searched for nearby ${query}. What should I do when I reach a ${query}? What do I say and what help can I get?`});
+  _runExitAI();
 }
 
 function _addExitBubble(text,role,withChoices){
   const chat=document.getElementById('exitChat');
-  if(role==='bot'){
-    const div=document.createElement('div');
-    div.className='ally-bubble-bot';
-    div.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-    chat.appendChild(div);
-    if(withChoices){
-      const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
-      const choices=[T['exit_c1'],T['exit_c2'],T['exit_c3'],T['exit_c4']];
-      choices.forEach(c=>{
-        const btn=document.createElement('button');
-        btn.className='exit-choice-btn';
-        btn.textContent=c;
-        btn.onclick=()=>exitChoice(c);
-        chat.appendChild(btn);
-      });
-    }
-  } else {
-    const div=document.createElement('div');
-    div.className='ally-bubble-user';
-    div.textContent=text;
-    chat.appendChild(div);
+  const div=document.createElement('div');
+  div.className=role==='bot'?'ally-bubble-bot':'ally-bubble-user';
+  div.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  chat.appendChild(div);
+  if(withChoices){
+    const T=TRANSLATIONS[exitLang]||TRANSLATIONS['en'];
+    [T['exit_c1'],T['exit_c2'],T['exit_c3'],T['exit_c4']].forEach(c=>{
+      const btn=document.createElement('button');btn.className='exit-choice-btn';btn.textContent=c;
+      btn.onclick=()=>exitChoice(c);chat.appendChild(btn);
+    });
   }
   chat.scrollTop=99999;
 }
 
 function exitChoice(choice){
-  const chat=document.getElementById('exitChat');
-  chat.querySelectorAll('.exit-choice-btn').forEach(b=>b.remove());
+  document.getElementById('exitChat').querySelectorAll('.exit-choice-btn').forEach(b=>b.remove());
   _addExitBubble(choice,'user',false);
   exitHistory.push({role:'user',content:choice});
   _runExitAI();
@@ -1353,22 +1674,20 @@ async function _runExitAI(){
   const chat=document.getElementById('exitChat');
   const load=document.createElement('div');
   load.className='ally-bubble-bot';load.style.color='var(--purple-light)';
-  load.textContent='SafeVoice is building your plan...';
+  load.textContent='Building your plan...';
   chat.appendChild(load);chat.scrollTop=99999;
   try{
-    const sysP=EXIT_SYS[exitLang]||EXIT_SYS['en'];
-    // Include location in context if available
-    let msgs=[...exitHistory.slice(-8)];
+    const msgs=[...exitHistory.slice(-8)];
     if(userLat&&userLng){
-      msgs[msgs.length-1]={...msgs[msgs.length-1],content:msgs[msgs.length-1].content+` (User location: ${userLat.toFixed(4)}, ${userLng.toFixed(4)} - suggest they use the map buttons to find nearby help)`};
+      msgs[msgs.length-1]={...msgs[msgs.length-1],content:msgs[msgs.length-1].content+` (User location: ${userLat.toFixed(4)}, ${userLng.toFixed(4)} — suggest using the map buttons for nearby help)`};
     }
-    const reply=await callGemini(msgs,sysP);
+    const reply=await callGemini(msgs,SYS_EXIT[exitLang]||SYS_EXIT['en']);
     load.remove();
     _addExitBubble(reply,'bot',false);
     exitHistory.push({role:'assistant',content:reply});
   }catch(e){
     load.remove();
-    _addExitBubble('📞 Call now: **1091** · **7827170170** · **100**','bot',false);
+    _addExitBubble('📞 **1091** · **7827170170** · **100**','bot',false);
   }
 }
 
@@ -1381,150 +1700,220 @@ async function sendExitMsg(){
 }
 
 // ══════════════════════════════════════════
-// EVIDENCE VAULT
+// LAW DETAIL MODAL
 // ══════════════════════════════════════════
-let vaultData=JSON.parse(localStorage.getItem('sv_vault')||'[]');
-let mediaRec=null,audioChunks=[],recActive=false;
-
-function openEvidenceVault(){
-  document.getElementById('vaultModal').classList.add('open');
-  renderVault();
-}
-function closeVault(){
-  document.getElementById('vaultModal').classList.remove('open');
-  document.getElementById('noteInputArea').style.display='none';
-  vaultStopCamera();
-}
-
-function vaultToggleNote(){
-  const n=document.getElementById('noteInputArea');
-  n.style.display=n.style.display==='none'?'block':'none';
-}
-function vaultPickPhoto(){document.getElementById('photoInput').click();}
-
-function vaultSaveNote(){
-  const text=document.getElementById('noteText').value.trim();
-  if(!text){showToast('Please write something first');return;}
-  vaultData.push({type:'note',content:text,date:new Date().toLocaleString('en-IN')});
-  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
-  document.getElementById('noteText').value='';
-  document.getElementById('noteInputArea').style.display='none';
-  renderVault();showToast('📝 Note saved securely');
-}
-
-function vaultSavePhoto(e){
-  const file=e.target.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    vaultData.push({type:'photo',content:ev.target.result,name:file.name,date:new Date().toLocaleString('en-IN')});
-    localStorage.setItem('sv_vault',JSON.stringify(vaultData));
-    renderVault();showToast('📷 Photo saved securely');
-  };
-  r.readAsDataURL(file);e.target.value='';
-}
-
-// Live camera capture
-async function vaultOpenCamera(){
-  const cameraArea=document.getElementById('cameraArea');
-  const video=document.getElementById('cameraStream');
-  try{
-    cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
-    video.srcObject=cameraStream;
-    cameraArea.style.display='block';
-    showToast('📸 Camera ready — aim and capture');
-  }catch(err){
-    showToast('⚠️ Camera access denied or unavailable');
+const LAW_DETAILS={
+  '498a':{
+    ico:'⚖️',
+    title:'IPC Section 498A',
+    subtitle:'Protection from Cruelty by Husband or Relatives',
+    body:`
+      <p><strong>What this law says:</strong> IPC 498A criminalises <strong>any wilful conduct</strong> by the husband or his relatives that causes physical or mental cruelty to a married woman, or harassment for dowry.</p>
+      <div class="highlight">
+        <strong>Penalty:</strong> Imprisonment up to <strong>3 years</strong> + fine.<br>
+        <strong>Nature:</strong> Non-bailable, Cognizable (police can arrest without warrant)<br>
+        <strong>Who can file:</strong> The woman herself, her parents/relatives, or police suo-motu
+      </div>
+      <p><strong>What counts as cruelty under 498A:</strong></p>
+      <ul>
+        <li>Physical beating, kicking, burning, or any bodily harm</li>
+        <li>Emotional abuse, humiliation, isolation from family</li>
+        <li>Forcing her to leave the matrimonial home</li>
+        <li>Dowry demands — before or after marriage</li>
+        <li>Threat of divorce or second marriage as a weapon</li>
+        <li>Denying food, money, medical care</li>
+      </ul>
+      <div class="step-box">
+        <h4>🚶 How to File a Complaint</h4>
+        <ul>
+          <li><strong>Step 1:</strong> Go to the nearest police station with ID proof</li>
+          <li><strong>Step 2:</strong> Ask for a women police officer (your right)</li>
+          <li><strong>Step 3:</strong> Give your written statement — police CANNOT refuse to register FIR</li>
+          <li><strong>Step 4:</strong> Get a copy of the FIR (free)</li>
+          <li><strong>Step 5:</strong> Police will investigate and can arrest without bail</li>
+          <li>If police refuse FIR: directly approach Magistrate under CrPC 156(3)</li>
+        </ul>
+      </div>
+      <p><strong>Evidence that helps:</strong> Photos of injuries, medical reports, WhatsApp/call logs, witness statements, any written threats, bank records showing financial control.</p>
+      <p>📞 <strong>Free legal aid:</strong> Contact District Legal Services Authority (DLSA) — every district has one. Completely free for women.</p>
+    `
+  },
+  'pwdva':{
+    ico:'🏠',
+    title:'PWDVA 2005',
+    subtitle:'Protection of Women from Domestic Violence Act',
+    body:`
+      <p><strong>What this law does:</strong> This is a <strong>civil law</strong> that gives you immediate protection, the right to stay in your home, financial relief, and custody of children — without needing to prove a criminal offence.</p>
+      <div class="highlight">
+        <strong>Emergency orders can be issued within 24 HOURS</strong><br>
+        You do NOT need to leave your home to get protection under this law.<br>
+        Covers: Wife, live-in partners, daughters, sisters, mothers
+      </div>
+      <p><strong>Types of Orders you can get:</strong></p>
+      <ul>
+        <li><strong>Protection Order:</strong> Abuser cannot contact, approach, or communicate with you</li>
+        <li><strong>Residence Order:</strong> You have the RIGHT to stay in the shared home — abuser cannot throw you out</li>
+        <li><strong>Monetary Relief:</strong> Court can order monthly maintenance, compensation for losses</li>
+        <li><strong>Custody Order:</strong> Emergency custody of children</li>
+        <li><strong>Compensation Order:</strong> For physical/mental injury suffered</li>
+      </ul>
+      <div class="step-box">
+        <h4>🚶 How to Get Help Under PWDVA</h4>
+        <ul>
+          <li><strong>Step 1:</strong> Contact a Protection Officer (every district has one, free)</li>
+          <li><strong>Step 2:</strong> Or go directly to the Magistrate's court with a Domestic Incident Report (DIR)</li>
+          <li><strong>Step 3:</strong> Or contact a Registered Service Provider (NGO) — they assist for free</li>
+          <li><strong>Step 4:</strong> Magistrate can issue ex-parte order (without hearing abuser) in SAME DAY if urgent</li>
+        </ul>
+      </div>
+      <p>📞 <strong>One Stop Centre:</strong> 7827170170 — they have Protection Officers, legal aid, shelter, medical help all under one roof.</p>
+    `
+  },
+  'pocso':{
+    ico:'👶',
+    title:'POCSO 2012',
+    subtitle:'Protection of Children from Sexual Offences Act',
+    body:`
+      <p><strong>What this law does:</strong> POCSO protects ALL children under 18 years from sexual assault, sexual harassment, and pornography. It applies regardless of gender of the child or perpetrator.</p>
+      <div class="highlight">
+        <strong>Penalties:</strong> 7 years to LIFE imprisonment depending on the offence<br>
+        <strong>Presumption:</strong> Accused is PRESUMED GUILTY — burden of proof is on them<br>
+        <strong>Identity:</strong> Child's identity is completely protected by law — media cannot publish name/photo
+      </div>
+      <p><strong>Offences covered:</strong></p>
+      <ul>
+        <li>Penetrative sexual assault (minimum 10 years)</li>
+        <li>Aggravated penetrative sexual assault by family member/teacher/authority (minimum 20 years)</li>
+        <li>Sexual assault (minimum 3 years)</li>
+        <li>Sexual harassment (touching inappropriately, showing pornography, stalking)</li>
+        <li>Using child for pornographic purposes</li>
+      </ul>
+      <div class="step-box">
+        <h4>🚶 How to Report Under POCSO</h4>
+        <ul>
+          <li><strong>Step 1:</strong> Call <strong>Childline 1098</strong> (free, 24/7) — they guide you</li>
+          <li><strong>Step 2:</strong> File FIR at police station — mandatory to register, cannot be refused</li>
+          <li><strong>Step 3:</strong> Child's statement is recorded in a child-friendly manner (at home/safe space)</li>
+          <li><strong>Step 4:</strong> Free medical examination</li>
+          <li><strong>Step 5:</strong> Case goes to Special Court (fast-tracked)</li>
+        </ul>
+      </div>
+      <p><strong>Important:</strong> Even if the abuser is a family member — father, uncle, teacher — POCSO still fully applies. Failure to report known child abuse is also an offence.</p>
+    `
+  },
+  'ipc354':{
+    ico:'🚨',
+    title:'IPC Sections 354, 354A, 354B, 354C, 354D',
+    subtitle:'Laws Against Sexual Harassment, Stalking & Assault',
+    body:`
+      <p><strong>IPC 354 — Assault on Woman's Modesty:</strong> Assault or criminal force on a woman with intent to outrage her modesty. <strong>1–5 years imprisonment.</strong></p>
+      <p><strong>IPC 354A — Sexual Harassment:</strong> Unwelcome physical contact, demands for sexual favours, showing pornography, making sexual remarks. <strong>Up to 3 years</strong> for more severe forms.</p>
+      <p><strong>IPC 354B — Disrobing:</strong> Using criminal force or abetment to disrobe a woman. <strong>3–7 years.</strong></p>
+      <div class="highlight">
+        <strong>IPC 354C — Voyeurism:</strong> Watching or capturing images of a woman in private circumstances. <strong>1–7 years</strong> (higher on repeat). This includes phone recording without consent.
+      </div>
+      <p><strong>IPC 354D — Stalking:</strong> Following a woman repeatedly, monitoring email/messages/social media despite clear disinterest. <strong>3 years</strong> first offence, <strong>5 years</strong> on repeat.</p>
+      <div class="step-box">
+        <h4>🚶 Steps to Take</h4>
+        <ul>
+          <li><strong>Document:</strong> Screenshots of messages, note dates/times of incidents</li>
+          <li><strong>Witnesses:</strong> Ask any witnesses to be ready to give statement</li>
+          <li><strong>File FIR:</strong> At nearest police station — these are cognizable offences</li>
+          <li><strong>Workplace harassment:</strong> File complaint with Internal Complaints Committee under POSH Act</li>
+          <li><strong>Cybercrime:</strong> Report to cybercrime.gov.in if online harassment</li>
+        </ul>
+      </div>
+    `
+  },
+  'ipc406':{
+    ico:'💍',
+    title:'IPC Section 406',
+    subtitle:'Criminal Breach of Trust — Streedhan Recovery',
+    body:`
+      <p><strong>What is Streedhan?</strong> All property given to a woman <strong>before, during, or after marriage</strong> — jewellery, gifts from parents/relatives/husband, cash, property. It is her absolute property. Even the husband has NO right over it without her consent.</p>
+      <div class="highlight">
+        <strong>IPC 406 — Criminal Breach of Trust:</strong> Withholding, selling, or using a woman's Streedhan without her consent is a criminal offence.<br>
+        <strong>Penalty:</strong> Up to 3 years imprisonment + fine
+      </div>
+      <p><strong>What you can claim:</strong></p>
+      <ul>
+        <li>Gold jewellery given at time of marriage</li>
+        <li>Cash given as gifts</li>
+        <li>Property in her name</li>
+        <li>Gifts from her family</li>
+        <li>Bank accounts/FDs in her name</li>
+        <li>Items purchased with her own money</li>
+      </ul>
+      <div class="step-box">
+        <h4>🚶 Steps to Recover Streedhan</h4>
+        <ul>
+          <li><strong>Step 1:</strong> Make a written list of all Streedhan with estimated values</li>
+          <li><strong>Step 2:</strong> Send a legal notice to in-laws/husband demanding return (lawyer helps)</li>
+          <li><strong>Step 3:</strong> File complaint under IPC 406 at police station</li>
+          <li><strong>Step 4:</strong> File for return of Streedhan under PWDVA (Monetary Relief)</li>
+          <li><strong>Step 5:</strong> Civil suit for recovery if criminal complaint not enough</li>
+        </ul>
+      </div>
+      <p>📞 <strong>Free legal aid for Streedhan recovery:</strong> DLSA — District Legal Services Authority in every district.</p>
+    `
+  },
+  'dvact':{
+    ico:'🛡️',
+    title:'Domestic Violence Act — Emergency Rights',
+    subtitle:'Your Immediate Rights Under PWDVA 2005',
+    body:`
+      <p>Even if you haven't filed any complaint yet, you have <strong>immediate rights</strong> from the moment domestic violence occurs:</p>
+      <div class="highlight">
+        <strong>RIGHT TO RESIDENCE:</strong> You cannot be thrown out of the shared household — even if it is owned by your husband or in-laws. This is absolute.
+      </div>
+      <p><strong>24-Hour Emergency Protection:</strong></p>
+      <ul>
+        <li>Go to any Magistrate/court and apply for emergency Protection Order</li>
+        <li>Magistrate MUST hear your application on the same day</li>
+        <li>Ex-parte order (without the abuser present) can be issued immediately</li>
+        <li>Violation of Protection Order = arrest of abuser</li>
+      </ul>
+      <p><strong>Right to Maintenance:</strong> You can get interim maintenance ordered within days — for you and your children's food, shelter, medical needs.</p>
+      <p><strong>Right to Custody:</strong> Emergency custody of children can be ordered to prevent abuser from taking children.</p>
+      <div class="step-box">
+        <h4>🚶 Emergency Steps Right Now</h4>
+        <ul>
+          <li>If in immediate danger: <strong>Call 100</strong> (police must respond)</li>
+          <li>Go to <strong>One Stop Centre</strong> (7827170170) for shelter + immediate help</li>
+          <li>Call <strong>Vanitha Sahayavani 1091</strong> for Protection Officer contact</li>
+          <li>Go to Magistrate's court next working day for Protection Order</li>
+          <li>Take your ID, any evidence, children's documents with you</li>
+        </ul>
+      </div>
+      <p><strong>Free Legal Aid:</strong> Every woman has the right to free legal representation. Contact your <strong>District Legal Services Authority (DLSA)</strong> — they will assign you a free lawyer.</p>
+    `
   }
-}
+};
 
-function vaultCapturePhoto(){
-  const video=document.getElementById('cameraStream');
-  const canvas=document.getElementById('cameraCanvas');
-  canvas.width=video.videoWidth||640;
-  canvas.height=video.videoHeight||480;
-  canvas.getContext('2d').drawImage(video,0,0);
-  const dataUrl=canvas.toDataURL('image/jpeg',0.85);
-  vaultData.push({type:'photo',content:dataUrl,name:'camera-'+Date.now()+'.jpg',date:new Date().toLocaleString('en-IN')});
-  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
-  vaultStopCamera();
-  renderVault();showToast('📸 Photo captured and saved securely!');
+function openLawDetail(key){
+  const d=LAW_DETAILS[key];if(!d)return;
+  document.getElementById('lawDetailIco').textContent=d.ico;
+  document.getElementById('lawDetailTitle').textContent=d.title;
+  document.getElementById('lawDetailSubtitle').textContent=d.subtitle;
+  document.getElementById('lawDetailBody').innerHTML=d.body;
+  document.getElementById('lawDetailModal').classList.add('open');
 }
-
-function vaultStopCamera(){
-  if(cameraStream){
-    cameraStream.getTracks().forEach(t=>t.stop());
-    cameraStream=null;
-  }
-  const video=document.getElementById('cameraStream');
-  if(video) video.srcObject=null;
-  const cameraArea=document.getElementById('cameraArea');
-  if(cameraArea) cameraArea.style.display='none';
-}
-
-async function vaultToggleAudio(){
-  const lbl=document.getElementById('audioLabel');
-  if(recActive){
-    mediaRec.stop();recActive=false;
-    const T=TRANSLATIONS[globalLang]||TRANSLATIONS['en'];
-    lbl.textContent=T['record_audio']||'Record Audio';
-    showToast('Recording stopped — saving...');return;
-  }
-  try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    audioChunks=[];
-    mediaRec=new MediaRecorder(stream);
-    mediaRec.ondataavailable=ev=>audioChunks.push(ev.data);
-    mediaRec.onstop=()=>{
-      const blob=new Blob(audioChunks,{type:'audio/webm'});
-      const r=new FileReader();
-      r.onload=ev2=>{
-        vaultData.push({type:'audio',content:ev2.target.result,date:new Date().toLocaleString('en-IN')});
-        localStorage.setItem('sv_vault',JSON.stringify(vaultData));
-        renderVault();showToast('🎙️ Audio saved securely');
-        stream.getTracks().forEach(t=>t.stop());
-      };
-      r.readAsDataURL(blob);
-    };
-    mediaRec.start();recActive=true;lbl.textContent='Stop 🔴';
-    showToast('🎙️ Recording... tap Stop to save');
-  }catch(err){showToast('⚠️ Microphone access denied');}
-}
-
-function vaultDelete(i){
-  if(!confirm('Delete this entry?'))return;
-  vaultData.splice(i,1);
-  localStorage.setItem('sv_vault',JSON.stringify(vaultData));
-  renderVault();showToast('Entry deleted');
-}
-
-function renderVault(){
-  const list=document.getElementById('vaultEntries');
-  const empty=document.getElementById('vaultEmpty');
-  if(!vaultData.length){list.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  list.innerHTML=vaultData.map((e,i)=>{
-    const del=`<button class="vault-delete" onclick="vaultDelete(${i})">🗑</button>`;
-    if(e.type==='note')return`<div class="vault-entry"><div class="vault-entry-header"><span>📝 ${e.date}</span>${del}</div><div>${e.content.replace(/\n/g,'<br>')}</div></div>`;
-    if(e.type==='photo')return`<div class="vault-entry"><div class="vault-entry-header"><span>📷 ${e.name||'Photo'} · ${e.date}</span>${del}</div><img src="${e.content}" style="max-width:100%;border-radius:8px;margin-top:0.4rem;cursor:pointer" onclick="window.open('${e.content}')"></div>`;
-    if(e.type==='audio')return`<div class="vault-entry"><div class="vault-entry-header"><span>🎙️ Audio · ${e.date}</span>${del}</div><audio controls src="${e.content}" style="width:100%;margin-top:0.3rem"></audio></div>`;
-    return'';
-  }).join('');
-}
+function closeLawDetail(){document.getElementById('lawDetailModal').classList.remove('open');}
 
 // ══════════════════════════════════════════
 // HEALTH CHECK
 // ══════════════════════════════════════════
-async function checkHealth(){
-  const dot=document.getElementById('statusDot');
-  dot.textContent='● Online · AI Ready';dot.style.color='#4ade80';
-  document.getElementById('apiSetupBox').style.display='none';
-}
-checkHealth();
+document.getElementById('statusDot').textContent='● Online · AI Ready';
 
 // ══════════════════════════════════════════
-// INIT
+// CLOSE ALL MODALS ON ESC
 // ══════════════════════════════════════════
-applyTranslations('en');
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    hideDisguise();stopSOS();closeAlly();closeVault();closeExit();
+    closeLawDetail();closeTrustedContact();closeVaultSelector();
+  }
+});
 
 </script>
 </body>
