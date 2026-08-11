@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeVoice — Your Safe Space</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06040f;
+  --bg2: #0d0820;
+  --purple-deep: #1a0a3d;
+  --purple: #6c2bd9;
+  --purple-mid: #9b59f5;
+  --purple-light: #c084fc;
+  --violet: #7c3aed;
+  --pink: #e879f9;
+  --pink-soft: #f0abfc;
+  --green: #4ade80;
+  --white: #f8f4ff;
+  --white-dim: rgba(248,244,255,0.65);
+  --white-faint: rgba(248,244,255,0.12);
+  --glow: rgba(124,58,237,0.4);
+  --border: rgba(156,84,245,0.22);
+  --glass: rgba(14,8,30,0.7);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg); color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden; cursor: none; line-height: 1.6;
+}
+#cursor, #cursor-ring {
+  position: fixed; border-radius: 50%; pointer-events: none;
+  z-index: 10000; transform: translate(-50%,-50%);
+}
+#cursor { width: 10px; height: 10px; background: var(--purple-light); transition: transform 0.08s; mix-blend-mode: screen; }
+#cursor-ring { width: 38px; height: 38px; border: 1.5px solid rgba(192,132,252,0.5); transition: width 0.2s, height 0.2s; }
+#bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+body::after {
+  content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity:0.5;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 500;
+  padding: 1.1rem 3rem; display: flex; align-items: center; justify-content: space-between;
+  backdrop-filter: blur(24px) saturate(180%);
+  background: rgba(6,4,15,0.72); border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.35rem;
+  background: linear-gradient(135deg, var(--purple-light), var(--pink));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em; cursor: pointer;
+}
+.nav-logo span { font-family: 'Instrument Serif', serif; font-style: italic; }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a {
+  color: var(--white-dim); text-decoration: none;
+  font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+  transition: color 0.25s; cursor: pointer;
+}
+.nav-links a:hover { color: var(--purple-light); }
+.nav-actions { display: flex; gap: 0.7rem; align-items: center; }
+.btn-ghost {
+  background: var(--white-faint); border: 1px solid var(--border);
+  color: var(--white-dim); padding: 0.42rem 1rem;
+  border-radius: 100px; font-size: 0.74rem; cursor: pointer;
+  transition: all 0.25s; font-family: 'DM Sans', sans-serif;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+.btn-danger {
+  background: linear-gradient(135deg, #7f1d1d, #dc2626);
+  color: white; padding: 0.42rem 1.1rem; border-radius: 100px;
+  font-size: 0.74rem; border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; transition: all 0.25s; font-weight: 500;
+}
+.btn-danger:hover { transform: scale(1.05); box-shadow: 0 0 22px rgba(220,38,38,0.5); }
+
+/* COMMON */
+section { position: relative; z-index: 2; }
+.section-pad { padding: 7rem 3rem; }
+.section-tag { display: block; font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--purple-light); margin-bottom: 0.9rem; }
+.section-title { font-family: 'Syne', sans-serif; font-size: clamp(2rem,4.5vw,3.2rem); font-weight: 800; line-height: 1.08; letter-spacing: -0.03em; }
+.section-title em { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; background: linear-gradient(135deg, var(--purple-mid), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--violet), var(--pink));
+  color: white; padding: 0.85rem 2.2rem; border-radius: 100px; border: none;
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500;
+  cursor: pointer; transition: all 0.3s; box-shadow: 0 0 40px var(--glow);
+}
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 50px var(--glow); }
+.btn-outline {
+  background: transparent; color: var(--white-dim);
+  padding: 0.85rem 2.2rem; border-radius: 100px; border: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem; cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--purple-light); color: var(--white); }
+
+/* HERO */
+#home {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 6rem 2rem 5rem;
+}
+.orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; will-change: transform; }
+.orb1 { width:550px;height:550px;background:var(--violet);opacity:0.3;top:-150px;left:-180px;animation:drift1 14s ease-in-out infinite; }
+.orb2 { width:420px;height:420px;background:var(--pink);opacity:0.25;top:80px;right:-130px;animation:drift2 16s ease-in-out infinite; }
+.orb3 { width:320px;height:320px;background:#2563eb;opacity:0.18;bottom:-60px;left:38%;animation:drift1 11s ease-in-out infinite reverse; }
+@keyframes drift1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(35px,-45px)} }
+@keyframes drift2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-40px,30px)} }
+.hero-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--purple-light); margin-bottom: 1.6rem;
+  display: flex; align-items: center; gap: 1rem;
+}
+.hero-eyebrow::before,.hero-eyebrow::after { content:''; height:1px; width:45px; background:linear-gradient(90deg,transparent,var(--purple-light)); }
+.hero-eyebrow::after { transform: scaleX(-1); }
+.hero-title { font-family:'Syne',sans-serif; font-size:clamp(3.8rem,10vw,8.5rem); font-weight:800; line-height:0.93; letter-spacing:-0.04em; margin-bottom:1.2rem; }
+.hero-title .t1 { display:block; color:var(--white); }
+.hero-title .t2 { display:block; background:linear-gradient(135deg,var(--purple-mid) 0%,var(--pink) 60%,var(--purple-light) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Instrument Serif',serif; font-style:italic; font-weight:400; font-size:1.15em; animation:shimmer 4s ease-in-out infinite; }
+@keyframes shimmer { 0%,100%{filter:brightness(1)} 50%{filter:brightness(1.15)} }
+.hero-sub { font-size:1.08rem; color:var(--white-dim); max-width:520px; line-height:1.75; margin:1.8rem auto 2.8rem; }
+.hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+.hero-chips { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; margin-top:3.5rem; }
+.chip { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--white-dim); display:flex; align-items:center; gap:0.5rem; }
+.chip-dot { width:4px; height:4px; border-radius:50%; background:var(--purple-light); }
+.scroll-hint { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); font-size:0.68rem; letter-spacing:0.15em; color:var(--white-dim); display:flex; flex-direction:column; align-items:center; gap:0.6rem; animation:bobble 2.5s ease-in-out infinite; }
+.scroll-line { width:1px; height:40px; background:linear-gradient(to bottom,var(--purple-light),transparent); }
+@keyframes bobble { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+
+/* STATS */
+.stats-strip {
+  position:relative; z-index:2; display:flex; justify-content:center; flex-wrap:wrap;
+  background:rgba(18,10,36,0.5); border-top:1px solid var(--border); border-bottom:1px solid var(--border); backdrop-filter:blur(10px);
+}
+.stat { flex:1; min-width:190px; padding:2.2rem 2rem; border-right:1px solid var(--border); text-align:center; }
+.stat:last-child { border-right:none; }
+.stat-n { font-family:'Syne',sans-serif; font-size:2.8rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; margin-bottom:0.4rem; }
+.stat-l { font-size:0.75rem; color:var(--white-dim); letter-spacing:0.04em; }
+
+/* FEATURES */
+.features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.5px; max-width:1200px; margin:0 auto; background:var(--border); border:1px solid var(--border); }
+.feat {
+  background:var(--bg); padding:2.5rem; transition:background 0.35s; position:relative; overflow:hidden;
+  cursor:pointer;
+}
+.feat::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at 25% 25%,rgba(124,58,237,0.3),transparent 65%); opacity:0; transition:opacity 0.4s; }
+.feat:hover { background:var(--purple-deep); }
+.feat:hover::before { opacity:1; }
+.feat-ico { width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.4rem; }
+.feat-title { font-family:'Syne',sans-serif; font-size:1.05rem; font-weight:700; margin-bottom:0.7rem; }
+.feat-desc { font-size:0.85rem; color:var(--white-dim); line-height:1.65; }
+.feat-arrow { position:absolute; bottom:1.5rem; right:1.5rem; font-size:0.75rem; color:var(--purple-light); opacity:0; transition:opacity 0.3s,transform 0.3s; }
+.feat:hover .feat-arrow { opacity:1; transform:translateX(4px); }
+
+/* CHATBOT SECTION */
+.chat-layout { max-width:950px; margin:0 auto; display:grid; grid-template-columns:1fr 1.7fr; gap:3rem; align-items:start; }
+.chat-sidebar { position:sticky; top:90px; }
+.chat-sidebar p { font-size:0.88rem; color:var(--white-dim); line-height:1.7; margin-bottom:1.5rem; }
+.lang-row { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.5rem; }
+.lang-btn { padding:0.42rem 1rem; border-radius:100px; border:1px solid var(--border); background:transparent; color:var(--white-dim); font-size:0.78rem; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all 0.25s; }
+.lang-btn.on { background:linear-gradient(135deg,var(--violet),var(--pink)); border-color:transparent; color:white; }
+.privacy-box { background:rgba(124,58,237,0.09); border:1px solid var(--border); border-radius:12px; padding:1rem 1.1rem; font-size:0.77rem; color:var(--white-dim); line-height:1.65; }
+.privacy-box strong { color:var(--purple-light); }
+
+/* API KEY SETUP BOX */
+.api-setup-box {
+  background: rgba(124,58,237,0.08); border: 1px solid var(--border);
+  border-radius:16px; padding:1.4rem; margin-bottom:1.2rem;
+}
+.api-setup-box h4 { font-family:'Syne',sans-serif; font-size:0.85rem; margin-bottom:0.5rem; color:var(--purple-light); }
+.api-setup-box p { font-size:0.77rem; color:var(--white-dim); margin-bottom:0.8rem; }
+.api-input-row { display:flex; gap:0.5rem; }
+.api-input {
+  flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border);
+  border-radius:8px; padding:0.5rem 0.9rem; color:var(--white);
+  font-family:'DM Sans',sans-serif; font-size:0.8rem; outline:none;
+  transition:border-color 0.25s;
+}
+.api-input:focus { border-color:var(--purple-light); }
+.api-save-btn {
+  background:linear-gradient(135deg,var(--violet),var(--pink));
+  border:none; border-radius:8px; padding:0.5rem 1rem; cursor:pointer;
+  color:white; font-size:0.78rem; font-family:'DM Sans',sans-serif; white-space:nowrap;
+}
+.api-status { font-size:0.72rem; margin-top:0.5rem; }
+.api-status.ok { color:var(--green); }
+.api-status.err { color:#f87171; }
+
+/* CHAT BOX */
+.chat-box { background:var(--glass); border:1px solid var(--border); border-radius:20px; overflow:hidden; backdrop-filter:blur(20px); box-shadow:0 0 70px rgba(124,58,237,0.12); }
+.chat-head { padding:1rem 1.4rem; background:rgba(124,58,237,0.1); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:0.8rem; }
+.chat-ava { width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0; }
+.chat-head-info .name { font-family:'Syne',sans-serif; font-size:0.88rem; font-weight:700; }
+.chat-head-info .status { font-size:0.7rem; color:var(--green); }
+.chat-badge { margin-left:auto; font-size:0.63rem; color:var(--purple-light); letter-spacing:0.08em; display:flex; align-items:center; gap:0.3rem; }
+.chat-msgs { height:370px; overflow-y:auto; padding:1.4rem; display:flex; flex-direction:column; gap:1rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+.msg { display:flex; gap:0.6rem; align-items:flex-start; max-width:88%; }
+.msg.user { margin-left:auto; flex-direction:row-reverse; }
+.msg-ico { width:26px;height:26px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:0.72rem; }
+.msg.user .msg-ico { background:rgba(255,255,255,0.08); border:1px solid var(--border); }
+.bubble { padding:0.72rem 1rem; border-radius:14px; font-size:0.84rem; line-height:1.6; }
+.msg.bot .bubble { background:rgba(124,58,237,0.14); border:1px solid var(--border); color:var(--white); }
+.msg.user .bubble { background:linear-gradient(135deg,var(--violet),var(--pink)); color:white; }
+.typing-wrap { display:flex; gap:4px; padding:4px 0; }
+.typing-wrap span { width:6px;height:6px;border-radius:50%;background:var(--purple-light);animation:ty 1.2s infinite; }
+.typing-wrap span:nth-child(2){animation-delay:.2s} .typing-wrap span:nth-child(3){animation-delay:.4s}
+@keyframes ty { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-7px)} }
+.quick-chips { display:flex; flex-wrap:wrap; gap:0.4rem; padding:0.6rem 1.4rem 0.7rem; }
+.qchip { font-size:0.7rem; padding:0.28rem 0.75rem; background:var(--white-faint); border:1px solid var(--border); border-radius:100px; color:var(--white-dim); cursor:pointer; transition:all 0.2s; font-family:'DM Sans',sans-serif; }
+.qchip:hover { background:rgba(124,58,237,0.2); color:var(--purple-light); }
+.chat-input-row { display:flex; gap:0.5rem; padding:0.9rem 1.2rem; border-top:1px solid var(--border); background:rgba(0,0,0,0.25); align-items:center; }
+.chat-in { flex:1; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:0.58rem 1.2rem; color:var(--white); font-family:'DM Sans',sans-serif; font-size:0.84rem; outline:none; transition:border-color 0.25s; }
+.chat-in::placeholder { color:rgba(248,244,255,0.28); }
+.chat-in:focus { border-color:var(--purple-light); }
+.send-btn,.voice-btn { width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.9rem;transition:all 0.2s; }
+.send-btn { background:linear-gradient(135deg,var(--violet),var(--pink)); }
+.send-btn:hover { transform:scale(1.1); box-shadow:0 0 20px var(--glow); }
+.voice-btn { background:var(--white-faint); border:1px solid var(--border); }
+.voice-btn.recording { background:rgba(220,38,38,0.3); border-color:#dc2626; animation:pulse-rec 0.8s ease-in-out infinite; }
+@keyframes pulse-rec { 0%,100%{transform:scale(1)} 50%{transform:scale(1.12)} }
+
+/* HELPLINES */
+.helplines-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; max-width:1100px; margin:0 auto; }
+.hl-card { background:var(--glass); border:1px solid var(--border); border-radius:16px; padding:1.5rem; backdrop-filter:blur(10px); transition:all 0.3s; position:relative; overflow:hidden; }
+.hl-card::after { content:''; position:absolute; top:0;left:0;right:0; height:2px; background:linear-gradient(90deg,var(--violet),var(--pink)); transform:scaleX(0); transition:transform 0.3s; transform-origin:left; }
+.hl-card:hover { border-color:var(--purple-mid); transform:translateY(-3px); }
+.hl-card:hover::after { transform:scaleX(1); }
+.hl-ico { font-size:1.7rem; margin-bottom:0.7rem; }
+.hl-org { font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem; margin-bottom:0.3rem; }
+.hl-num { font-size:1.55rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-family:'Syne',sans-serif; letter-spacing:-0.02em; margin-bottom:0.3rem; }
+.hl-desc { font-size:0.77rem; color:var(--white-dim); line-height:1.55; }
+.hl-tag { display:inline-block; margin-top:0.5rem; font-size:0.62rem; letter-spacing:0.08em; padding:0.22rem 0.6rem; border-radius:100px; background:rgba(124,58,237,0.14); color:var(--purple-light); border:1px solid var(--border); }
+.hl-call-btn {
+  display:block; width:100%; margin-top:0.9rem;
+  background:linear-gradient(135deg,var(--violet),var(--pink));
+  border:none; border-radius:100px; padding:0.5rem; cursor:pointer;
+  color:white; font-size:0.78rem; font-family:'DM Sans',sans-serif; font-weight:500;
+  transition:all 0.25s; text-align:center; text-decoration:none;
+}
+.hl-call-btn:hover { transform:scale(1.03); box-shadow:0 4px 20px var(--glow); }
+
+/* LAWS */
+.laws-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:1.4rem; max-width:1100px; margin:0 auto; }
+.law-card { background:var(--glass); border:1px solid var(--border); border-radius:16px; padding:2rem; backdrop-filter:blur(10px); transition:all 0.3s; cursor:pointer; position:relative; overflow:hidden; }
+.law-card:hover { border-color:var(--purple-mid); background:rgba(26,10,61,0.85); transform:translateY(-3px); }
+.law-code { font-family:'Syne',sans-serif; font-size:1.7rem; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.35rem; }
+.law-name { font-size:0.83rem; font-weight:600; margin-bottom:0.8rem; }
+.law-desc { font-size:0.81rem; color:var(--white-dim); line-height:1.65; }
+.law-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:1rem; }
+.law-tag { font-size:0.62rem; padding:0.2rem 0.6rem; border-radius:100px; background:rgba(124,58,237,0.12); color:var(--purple-light); border:1px solid var(--border); letter-spacing:0.05em; }
+.law-ask-btn { margin-top:1.2rem; font-size:0.75rem; color:var(--purple-light); background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:100px; padding:0.35rem 0.9rem; cursor:pointer; transition:all 0.25s; font-family:'DM Sans',sans-serif; }
+.law-ask-btn:hover { background:rgba(124,58,237,0.25); }
+
+/* FEATURE DETAIL MODAL */
+.modal-overlay {
+  position:fixed; inset:0; z-index:2000; background:rgba(6,4,15,0.88);
+  backdrop-filter:blur(12px); display:none; align-items:center; justify-content:center;
+  padding:2rem;
+}
+.modal-overlay.open { display:flex; }
+.modal-box {
+  background:var(--bg2); border:1px solid var(--border); border-radius:24px;
+  max-width:580px; width:100%; padding:2.5rem; position:relative;
+  animation:modalIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  max-height:85vh; overflow-y:auto;
+}
+@keyframes modalIn { from{opacity:0;transform:scale(0.92) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
+.modal-close { position:absolute; top:1rem; right:1.2rem; background:var(--white-faint); border:1px solid var(--border); color:var(--white-dim); width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:0.9rem; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.modal-close:hover { background:rgba(255,255,255,0.1); color:var(--white); }
+.modal-ico { width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--violet),var(--pink));display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem; }
+.modal-title { font-family:'Syne',sans-serif; font-size:1.6rem; font-weight:800; margin-bottom:0.5rem; }
+.modal-subtitle { font-size:0.85rem; color:var(--purple-light); margin-bottom:1.4rem; letter-spacing:0.05em; }
+.modal-body { font-size:0.88rem; color:var(--white-dim); line-height:1.75; }
+.modal-body p { margin-bottom:1rem; }
+.modal-body ul { padding-left:1.2rem; margin-bottom:1rem; }
+.modal-body li { margin-bottom:0.4rem; }
+.modal-body strong { color:var(--white); }
+.modal-body .highlight { background:rgba(124,58,237,0.12); border:1px solid var(--border); border-radius:10px; padding:0.9rem 1.1rem; margin:1rem 0; font-size:0.83rem; }
+.modal-cta { margin-top:1.5rem; display:flex; gap:0.7rem; flex-wrap:wrap; }
+
+/* DISGUISE CALCULATOR */
+#disguise { display:none; position:fixed; inset:0; z-index:99999; background:#1c1c1e; flex-direction:column; }
+#disguise.show { display:flex; }
+.calc-screen { background:#1c1c1e; padding:1.5rem 1.8rem 0.8rem; text-align:right; flex-shrink:0; }
+.calc-prev-val { font-size:1rem; color:rgba(255,255,255,0.35); min-height:1.4rem; }
+.calc-main { font-size:4rem; color:white; font-weight:200; line-height:1.1; word-break:break-all; }
+.calc-keys { display:grid; grid-template-columns:repeat(4,1fr); flex:1; gap:1px; background:#3a3a3c; }
+.ck { background:#505050; border:none; font-size:1.6rem; color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent; transition:filter 0.1s; }
+.ck:active { filter:brightness(0.7); }
+.ck.fn { background:#a5a5a5; color:#1c1c1e; }
+.ck.op,.ck.eq { background:#ff9f0a; }
+.ck.zero { grid-column:span 2; justify-content:flex-start; padding-left:1.8rem; }
+.calc-back { position:fixed; bottom:16px; right:16px; background:rgba(255,255,255,0.06); border:none; border-radius:50%; width:38px; height:38px; cursor:pointer; color:rgba(255,255,255,0.2); font-size:0.7rem; display:flex; align-items:center; justify-content:center; }
+
+/* FOOTER */
+footer { position:relative; z-index:2; padding:3rem; border-top:1px solid var(--border); background:rgba(6,4,15,0.9); display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:2rem; }
+.footer-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.2rem; margin-bottom:0.5rem; background:linear-gradient(135deg,var(--purple-light),var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.footer-note { font-size:0.77rem; color:var(--white-dim); max-width:380px; line-height:1.65; }
+.footer-sos { font-size:0.77rem; color:var(--purple-light); }
+
+/* SCROLL ANIM */
+.fade { opacity:0; transform:translateY(28px); transition:opacity 0.65s ease, transform 0.65s ease; }
+.fade.in { opacity:1; transform:translateY(0); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--purple); border-radius:4px; }
+
+/* TOAST NOTIFICATION */
+#toast {
+  position:fixed; bottom:2rem; left:50%; transform:translateX(-50%) translateY(20px);
+  background:rgba(26,10,61,0.95); border:1px solid var(--border); border-radius:100px;
+  padding:0.65rem 1.5rem; font-size:0.82rem; color:var(--white); z-index:9999;
+  opacity:0; transition:all 0.35s; pointer-events:none; backdrop-filter:blur(10px);
+  white-space:nowrap;
+}
+#toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  nav { padding:1rem 1.5rem; }
+  .nav-links { display:none; }
+  .section-pad { padding:4.5rem 1.5rem; }
+  .chat-layout { grid-template-columns:1fr; }
+  .chat-sidebar { position:static; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="navTo('home')">Safe<span>Voice</span></div>
+  <ul class="nav-links">
+    <li><a onclick="navTo('home')">Home</a></li>
+    <li><a onclick="navTo('features')">Features</a></li>
+    <li><a onclick="navTo('chatbot')">Get Help</a></li>
+    <li><a onclick="navTo('helplines')">Helplines</a></li>
+    <li><a onclick="navTo('laws')">Your Rights</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-ghost" onclick="showDisguise()">🧮 Disguise</button>
+    <button class="btn-danger" onclick="quickExit()">⚡ Quick Exit</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-eyebrow">Anonymous · Multilingual · No Data Stored · Karnataka</div>
+  <h1 class="hero-title">
+    <span class="t1">You Are Not</span>
+    <span class="t2">Alone</span>
+  </h1>
+  <p class="hero-sub">SafeVoice gives every woman in Karnataka — in her own language — immediate access to AI-powered legal guidance, emergency helplines, and support. No login. No trace.</p>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="navTo('chatbot')">💬 Talk to SafeVoice</button>
+    <button class="btn-outline" onclick="navTo('helplines')">📞 Emergency Helplines</button>
+  </div>
+  <div class="hero-chips">
+    <span class="chip"><span class="chip-dot"></span>Kannada</span>
+    <span class="chip"><span class="chip-dot"></span>Hindi</span>
+    <span class="chip"><span class="chip-dot"></span>Telugu</span>
+    <span class="chip"><span class="chip-dot"></span>English</span>
+    <span class="chip"><span class="chip-dot"></span>IPC 498A</span>
+    <span class="chip"><span class="chip-dot"></span>PWDVA</span>
+    <span class="chip"><span class="chip-dot"></span>POCSO</span>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip fade">
+  <div class="stat"><div class="stat-n">86%</div><div class="stat-l">Violence by known person in India</div></div>
+  <div class="stat"><div class="stat-n">498A</div><div class="stat-l">Key law protecting married women</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">Data stored — privacy by design</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Languages supported immediately</div></div>
+</div>
+
+<!-- FEATURES -->
+<section id="features" class="section-pad">
+  <div class="section-header fade">
+    <span class="section-tag">Built different</span>
+    <h2 class="section-title">Every feature built<br>for <em>real safety</em></h2>
+  </div>
+  <div class="features-grid fade">
+    <div class="feat" onclick="openFeatureModal('ai')">
+      <div class="feat-ico">🤖</div>
+      <div class="feat-title">AI Legal Guidance</div>
+      <div class="feat-desc">Describe your situation in plain words and SafeVoice maps it to the correct law — IPC 498A, PWDVA, POCSO — without needing any legal terminology.</div>
+      <span class="feat-arrow">→ Learn more</span>
+    </div>
+    <div class="feat" onclick="openFeatureModal('lang')">
+      <div class="feat-ico">🌐</div>
+      <div class="feat-title">4 Languages</div>
+      <div class="feat-desc">Kannada, Hindi, Telugu, and English. Switch instantly. Responses generated in your chosen language — because help should speak your language.</div>
+      <span class="feat-arrow">→ Learn more</span>
+    </div>
+    <div class="feat" onclick="showDisguise()">
+      <div class="feat-ico">👁️</div>
+      <div class="feat-title">Disguise Mode</div>
+      <div class="feat-desc">One tap transforms the entire app into a fully functional calculator. If someone walks in, there's nothing to see and nothing to explain.</div>
+      <span class="feat-arrow">→ Try it now</span>
+    </div>
+    <div class="feat" onclick="openFeatureModal('privacy')">
+      <div class="feat-ico">🔒</div>
+      <div class="feat-title">Zero Data Storage</div>
+      <div class="feat-desc">No account. No login. No call log. No history stored anywhere. Your privacy is our architecture — not just a promise.</div>
+      <span class="feat-arrow">→ Learn more</span>
+    </div>
+    <div class="feat" onclick="quickExit()">
+      <div class="feat-ico">⚡</div>
+      <div class="feat-title">Quick Exit</div>
+      <div class="feat-desc">One click redirects to Google instantly and wipes the session. Always visible in the nav. Because every second can matter.</div>
+      <span class="feat-arrow">→ Test exit</span>
+    </div>
+    <div class="feat" onclick="navTo('helplines')">
+      <div class="feat-ico">📍</div>
+      <div class="feat-title">Local Helplines</div>
+      <div class="feat-desc">Karnataka-specific helplines, One Stop Centres, Vanitha helpline 1091 — curated, verified, and displayed with full context.</div>
+      <span class="feat-arrow">→ View helplines</span>
+    </div>
+    <div class="feat" onclick="openFeatureModal('voice')">
+      <div class="feat-ico">🎤</div>
+      <div class="feat-title">Voice Input</div>
+      <div class="feat-desc">Speak instead of type — processed locally in your browser using Web Speech API. Supports all four languages. Safe when typing isn't.</div>
+      <span class="feat-arrow">→ Try voice</span>
+    </div>
+    <div class="feat" onclick="navTo('laws')">
+      <div class="feat-ico">📜</div>
+      <div class="feat-title">Know Your Rights</div>
+      <div class="feat-desc">Plain-language summaries of every protective law — what each protects, what penalties abusers face, what your next steps are.</div>
+      <span class="feat-arrow">→ View rights</span>
+    </div>
+  </div>
+</section>
+
+<!-- CHATBOT -->
+<section id="chatbot" class="section-pad">
+  <div class="section-header fade">
+    <span class="section-tag">AI-Powered · Gemini 2.5 Flash</span>
+    <h2 class="section-title">Talk to <em>SafeVoice</em></h2>
+  </div>
+  <div class="chat-layout fade">
+    <div class="chat-sidebar">
+      <div class="api-setup-box" id="apiSetupBox">
+        <h4>⚙️ Connect AI Brain</h4>
+        <p>Enter your Gemini API key to activate the AI. It's sent to your backend server — never stored here.</p>
+        <div class="api-input-row">
+          <input type="password" class="api-input" id="apiKeyInput" placeholder="AIza...your key">
+          <button class="api-save-btn" onclick="saveApiKey()">Save</button>
+        </div>
+        <div class="api-status" id="apiStatus"></div>
+      </div>
+
+      <p>Choose your language and describe your situation in your own words. SafeVoice will guide you through your legal rights, next steps, and who to contact.</p>
+      <div class="lang-row" id="langRow">
+        <button class="lang-btn on" onclick="setLang('en',this)">English</button>
+        <button class="lang-btn" onclick="setLang('kn',this)">ಕನ್ನಡ</button>
+        <button class="lang-btn" onclick="setLang('hi',this)">हिंदी</button>
+        <button class="lang-btn" onclick="setLang('te',this)">తెలుగు</button>
+      </div>
+      <div class="privacy-box">
+        <strong>🔒 Completely private.</strong><br>
+        Your messages go to the backend server — never stored, never logged. No account needed. Quick Exit clears everything instantly.
+      </div>
+    </div>
+
+    <div class="chat-box">
+      <div class="chat-head">
+        <div class="chat-ava">🛡️</div>
+        <div class="chat-head-info">
+          <div class="name">SafeVoice AI</div>
+          <div class="status" id="statusDot">● Connecting...</div>
+        </div>
+        <div class="chat-badge">🔐 Anonymous</div>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="msg bot">
+          <div class="msg-ico">🛡️</div>
+          <div>
+            <div class="bubble">Hello. This is a safe, completely private space. I'm here to help you understand your legal rights and options. Please describe your situation in your own words — there's no right or wrong way.</div>
+          </div>
+        </div>
+      </div>
+      <div class="quick-chips" id="quickChips"></div>
+      <div class="chat-input-row">
+        <input type="text" class="chat-in" id="chatIn" placeholder="Type your message here..." onkeydown="if(event.key==='Enter')sendMsg()">
+        <button class="send-btn" onclick="sendMsg()" title="Send">➤</button>
+        <button class="voice-btn" id="voiceBtn" onclick="toggleVoice()" title="Voice input">🎤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELPLINES -->
+<section id="helplines" class="section-pad">
+  <div class="section-header fade">
+    <span class="section-tag">Available 24/7</span>
+    <h2 class="section-title">Emergency <em>Helplines</em></h2>
+  </div>
+  <div class="helplines-grid fade">
+    <div class="hl-card">
+      <div class="hl-ico">👩‍⚖️</div>
+      <div class="hl-org">National Women Helpline</div>
+      <div class="hl-num">181</div>
+      <div class="hl-desc">24/7 support for women in distress. Legal aid, counselling, and shelter referrals.</div>
+      <span class="hl-tag">PAN INDIA · 24/7</span>
+      <a href="tel:181" class="hl-call-btn">📞 Call 181 Now</a>
+    </div>
+    <div class="hl-card">
+      <div class="hl-ico">🏠</div>
+      <div class="hl-org">Vanitha Sahayavani</div>
+      <div class="hl-num">1091</div>
+      <div class="hl-desc">Karnataka state women's helpline. Legal aid, shelter, and counselling.</div>
+      <span class="hl-tag">KARNATAKA · 24/7</span>
+      <a href="tel:1091" class="hl-call-btn">📞 Call 1091 Now</a>
+    </div>
+    <div class="hl-card">
+      <div class="hl-ico">🚔</div>
+      <div class="hl-org">Police Emergency</div>
+      <div class="hl-num">100</div>
+      <div class="hl-desc">Immediate danger. File FIR for 498A, assault, and other offences.</div>
+      <span class="hl-tag">EMERGENCY · 24/7</span>
+      <a href="tel:100" class="hl-call-btn">📞 Call 100 Now</a>
+    </div>
+    <div class="hl-card">
+      <div class="hl-ico">🏥</div>
+      <div class="hl-org">One Stop Centre</div>
+      <div class="hl-num">7827170170</div>
+      <div class="hl-desc">Medical, police, legal aid, and shelter under one roof. Government-run.</div>
+      <span class="hl-tag">KARNATAKA · FREE</span>
+      <a href="tel:7827170170" class="hl-call-btn">📞 Call Now</a>
+    </div>
+    <div class="hl-card">
+      <div class="hl-ico">👶</div>
+      <div class="hl-org">Childline (POCSO)</div>
+      <div class="hl-num">1098</div>
+      <div class="hl-desc">Child abuse and POCSO emergencies. Free, 24/7 nationwide.</div>
+      <span class="hl-tag">CHILDREN · 24/7</span>
+      <a href="tel:1098" class="hl-call-btn">📞 Call 1098 Now</a>
+    </div>
+    <div class="hl-card">
+      <div class="hl-ico">🧠</div>
+      <div class="hl-org">iCall Mental Health</div>
+      <div class="hl-num">9152987821</div>
+      <div class="hl-desc">Free counselling for trauma, abuse, and emotional distress.</div>
+      <span class="hl-tag">COUNSELLING · FREE</span>
+      <a href="tel:9152987821" class="hl-call-btn">📞 Call Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- LAWS -->
+<section id="laws" class="section-pad">
+  <div class="section-header fade">
+    <span class="section-tag">Know your rights</span>
+    <h2 class="section-title">Laws that <em>protect you</em></h2>
+  </div>
+  <div class="laws-grid fade">
+    <div class="law-card" onclick="askAboutLaw('IPC 498A - cruelty by husband or relatives')">
+      <div class="law-code">IPC 498A</div>
+      <div class="law-name">Protection from Cruelty by Husband or Relatives</div>
+      <div class="law-desc">Criminalises wilful cruelty by husband or his relatives. Non-bailable, cognizable offence. Up to 3 years imprisonment + fine. Police must act immediately.</div>
+      <div class="law-tags"><span class="law-tag">Physical abuse</span><span class="law-tag">Mental cruelty</span><span class="law-tag">Dowry harassment</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+    <div class="law-card" onclick="askAboutLaw('PWDVA - Protection of Women from Domestic Violence Act 2005')">
+      <div class="law-code">PWDVA</div>
+      <div class="law-name">Protection of Women from Domestic Violence Act, 2005</div>
+      <div class="law-desc">Civil remedies: Protection Orders, Residence Orders, Monetary Relief, Custody Orders. Emergency orders within 24 hours. You can stay in your home.</div>
+      <div class="law-tags"><span class="law-tag">Protection order</span><span class="law-tag">Stay at home</span><span class="law-tag">Financial relief</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+    <div class="law-card" onclick="askAboutLaw('POCSO - Protection of Children from Sexual Offences Act 2012')">
+      <div class="law-code">POCSO</div>
+      <div class="law-name">Protection of Children from Sexual Offences Act, 2012</div>
+      <div class="law-desc">Protects children under 18 from sexual assault and harassment. Child-friendly procedures. 7 years to life imprisonment. Identity fully protected.</div>
+      <div class="law-tags"><span class="law-tag">Under 18</span><span class="law-tag">Sexual offences</span><span class="law-tag">Strict penalties</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+    <div class="law-card" onclick="askAboutLaw('IPC 354 - assault or criminal force against a woman')">
+      <div class="law-code">IPC 354</div>
+      <div class="law-name">Assault / Criminal Force Against Woman</div>
+      <div class="law-desc">Assault to outrage a woman's modesty: 1–5 years. Also covers stalking (354D) and voyeurism (354C). Non-bailable in serious cases.</div>
+      <div class="law-tags"><span class="law-tag">Assault</span><span class="law-tag">Stalking</span><span class="law-tag">Harassment</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+    <div class="law-card" onclick="askAboutLaw('IPC 406 - criminal breach of trust and Streedhan recovery')">
+      <div class="law-code">IPC 406</div>
+      <div class="law-name">Criminal Breach of Trust — Streedhan Recovery</div>
+      <div class="law-desc">Protects a woman's Streedhan (jewellery, gifts). In-laws withholding it is a criminal offence. Complaint leads to court order for return of all property.</div>
+      <div class="law-tags"><span class="law-tag">Streedhan</span><span class="law-tag">Jewellery</span><span class="law-tag">Property rights</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+    <div class="law-card" onclick="askAboutLaw('Emergency rights under the Domestic Violence Act - Protection Orders and maintenance')">
+      <div class="law-code">DV Act</div>
+      <div class="law-name">Emergency Rights Under Domestic Violence Act</div>
+      <div class="law-desc">Emergency protection orders in 24 hours. Right to live in shared household. Right to maintenance and compensation. Right to free legal aid.</div>
+      <div class="law-tags"><span class="law-tag">24-hr order</span><span class="law-tag">Shared home</span><span class="law-tag">Maintenance</span></div>
+      <button class="law-ask-btn">💬 Ask SafeVoice about this →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">SafeVoice</div>
+    <p class="footer-note">Built by Team Nova — PES University CSE (AIML). Hackfinity 2025. Every line of code written to protect a woman's dignity and access to justice.</p>
+  </div>
+  <div class="footer-sos">
+    🆘 EMERGENCY: 100 &nbsp;|&nbsp; WOMEN: 181 &nbsp;|&nbsp; KARNATAKA: 1091
+  </div>
+</footer>
+
+<!-- DISGUISE CALCULATOR -->
+<div id="disguise">
+  <div class="calc-screen">
+    <div class="calc-prev-val" id="cPrev"></div>
+    <div class="calc-main" id="cMain">0</div>
+  </div>
+  <div class="calc-keys">
+    <button class="ck fn" onclick="ck('AC')">AC</button>
+    <button class="ck fn" onclick="ck('+/-')">+/-</button>
+    <button class="ck fn" onclick="ck('%')">%</button>
+    <button class="ck op" onclick="ck('/')">÷</button>
+    <button class="ck" onclick="ck('7')">7</button>
+    <button class="ck" onclick="ck('8')">8</button>
+    <button class="ck" onclick="ck('9')">9</button>
+    <button class="ck op" onclick="ck('*')">×</button>
+    <button class="ck" onclick="ck('4')">4</button>
+    <button class="ck" onclick="ck('5')">5</button>
+    <button class="ck" onclick="ck('6')">6</button>
+    <button class="ck op" onclick="ck('-')">−</button>
+    <button class="ck" onclick="ck('1')">1</button>
+    <button class="ck" onclick="ck('2')">2</button>
+    <button class="ck" onclick="ck('3')">3</button>
+    <button class="ck op" onclick="ck('+')">+</button>
+    <button class="ck zero" onclick="ck('0')">0</button>
+    <button class="ck" onclick="ck('.')">.</button>
+    <button class="ck eq" onclick="ck('=')">=</button>
+  </div>
+  <button class="calc-back" onclick="hideDisguise()" title="Return">✕</button>
+</div>
+
+<!-- FEATURE MODALS -->
+<div class="modal-overlay" id="featureModal" onclick="closeModalIf(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-ico" id="mIco"></div>
+    <div class="modal-title" id="mTitle"></div>
+    <div class="modal-subtitle" id="mSubtitle"></div>
+    <div class="modal-body" id="mBody"></div>
+    <div class="modal-cta" id="mCta"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+const API_BASE = window.location.origin;
+
+// ─── FEATURE MODAL DATA ───
+const FEATURE_DATA = {
+  ai: {
+    ico: '🤖', title: 'AI Legal Guidance', subtitle: 'Powered by Gemini 2.5 Flash',
+    body: `
+      <p>SafeVoice's AI understands <strong>plain, informal language</strong> — you don't need to know any legal terms. Just describe what happened to you.</p>
+      <div class="highlight">Example: "My husband hits me when he drinks and his mother takes away my salary" → SafeVoice maps this to <strong>IPC 498A</strong> (cruelty) and <strong>PWDVA</strong> (economic abuse) and tells you exactly what to do.</div>
+      <p>The AI knows:</p>
+      <ul>
+        <li><strong>IPC Section 498A</strong> — Cruelty by husband or relatives</li>
+        <li><strong>PWDVA 2005</strong> — Protection Orders, Residence Orders, Monetary Relief</li>
+        <li><strong>POCSO 2012</strong> — Child sexual offences</li>
+        <li><strong>IPC 354, 354A, 354D</strong> — Assault, stalking, harassment</li>
+        <li><strong>IPC 406</strong> — Streedhan recovery</li>
+      </ul>
+      <p>The AI responds in your language with compassion — it never blames you, never judges you.</p>
+    `,
+    cta: [{ label: '💬 Try it now', action: "navTo('chatbot')" }]
+  },
+  lang: {
+    ico: '🌐', title: '4 Languages', subtitle: 'Kannada · Hindi · Telugu · English',
+    body: `
+      <p>SafeVoice is built for the reality that <strong>most rural Karnataka women don't read English</strong> — and all Indian legal information is currently only in English.</p>
+      <p>You can switch languages at any time in the chat section. The AI will respond entirely in your chosen language.</p>
+      <div class="highlight">
+        <strong>🇮🇳 Supported languages:</strong><br><br>
+        🔸 <strong>English</strong> — Default<br>
+        🔸 <strong>ಕನ್ನಡ</strong> (Kannada) — Primary Karnataka language<br>
+        🔸 <strong>हिंदी</strong> (Hindi) — For migrant women<br>
+        🔸 <strong>తెలుగు</strong> (Telugu) — For border districts
+      </div>
+      <p>Voice input also supports all four languages using the Web Speech API — speak in your language, get answers in your language.</p>
+    `,
+    cta: [{ label: '💬 Try in your language', action: "navTo('chatbot')" }]
+  },
+  privacy: {
+    ico: '🔒', title: 'Zero Data Storage', subtitle: 'Privacy by Architecture',
+    body: `
+      <p>Privacy isn't a feature added on top — it is the <strong>architectural foundation</strong> of SafeVoice.</p>
+      <ul>
+        <li><strong>No login, no account</strong> — nothing to discover</li>
+        <li><strong>No chat history stored</strong> — every session is stateless</li>
+        <li><strong>No call log</strong> — it's a chatbot, not a phone call</li>
+        <li><strong>API key on backend</strong> — never visible to anyone</li>
+        <li><strong>Quick Exit</strong> — one click takes you to Google instantly</li>
+        <li><strong>Disguise Mode</strong> — app instantly looks like a calculator</li>
+      </ul>
+      <div class="highlight">
+        The backend processes your message, calls Gemini, returns the reply, and <strong>immediately discards everything</strong>. There is no database. There is no log file. The conversation exists only in your browser's RAM — and disappears when you close the tab.
+      </div>
+    `,
+    cta: [{ label: '🧮 Try disguise mode', action: "showDisguise()" }]
+  },
+  voice: {
+    ico: '🎤', title: 'Voice Input', subtitle: 'Speak in your language',
+    body: `
+      <p>For women who find it difficult to type — or where typing would be noticed — SafeVoice supports <strong>voice input in all 4 languages</strong>.</p>
+      <div class="highlight">
+        ⚠️ <strong>Voice input requires Chrome browser</strong> — it uses the Web Speech API which works best in Chrome/Edge on Android and desktop.
+      </div>
+      <p>How to use:</p>
+      <ul>
+        <li>Select your language using the language buttons</li>
+        <li>Tap the 🎤 microphone button in the chat</li>
+        <li>Speak naturally — the app will transcribe and send automatically</li>
+        <li>The microphone turns red 🔴 while recording</li>
+      </ul>
+      <p>Voice is processed entirely by your device's browser — it is <strong>not recorded or sent to any server</strong>. Only the text transcript is sent to SafeVoice.</p>
+    `,
+    cta: [{ label: '🎤 Try voice input', action: "navTo('chatbot')" }]
+  }
+};
+
+// ─── CURSOR ───
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+function addHover(sel){ document.querySelectorAll(sel).forEach(el=>{ el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='58px';ring.style.height='58px';}); el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='38px';ring.style.height='38px';}); }); }
+addHover('a,button,.feat,.hl-card,.law-card,.qchip,.lang-btn,.hl-call-btn');
+
+// ─── CANVAS PARTICLES ───
+const cv = document.getElementById('bg-canvas');
+const ctx2 = cv.getContext('2d');
+let W,H,pts=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;}
+resize(); window.addEventListener('resize',resize);
+const cols=['#c084fc','#e879f9','#7c3aed','#9b59f5','#a78bfa'];
+for(let i=0;i<150;i++) pts.push({x:Math.random()*1200,y:Math.random()*800,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:Math.random()*1.4+.3,a:Math.random()*.45+.08,c:cols[Math.floor(Math.random()*cols.length)]});
+(function draw(){
+  ctx2.clearRect(0,0,W,H);
+  for(let i=0;i<pts.length;i++){
+    let p=pts[i];p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+    ctx2.beginPath();ctx2.arc(p.x,p.y,p.r,0,Math.PI*2);ctx2.fillStyle=p.c;ctx2.globalAlpha=p.a;ctx2.fill();
+    for(let j=i+1;j<pts.length;j++){let q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);if(d<90){ctx2.globalAlpha=.07*(1-d/90);ctx2.beginPath();ctx2.moveTo(p.x,p.y);ctx2.lineTo(q.x,q.y);ctx2.strokeStyle='#7c3aed';ctx2.lineWidth=.5;ctx2.stroke();}}
+  }
+  ctx2.globalAlpha=1;requestAnimationFrame(draw);
+})();
+
+// ─── SCROLL REVEAL ───
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// ─── NAVIGATION ───
+function navTo(id){
+  const el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function quickExit(){
+  window.location.replace('https://www.google.com');
+}
+
+// ─── TOAST ───
+function showToast(msg, duration=3000){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), duration);
+}
+
+// ─── FEATURE MODAL ───
+function openFeatureModal(key){
+  const d = FEATURE_DATA[key]; if(!d) return;
+  document.getElementById('mIco').textContent = d.ico;
+  document.getElementById('mTitle').textContent = d.title;
+  document.getElementById('mSubtitle').textContent = d.subtitle;
+  document.getElementById('mBody').innerHTML = d.body;
+  const cta = document.getElementById('mCta');
+  cta.innerHTML = d.cta.map(c=>`<button class="btn-primary" onclick="closeModal();${c.action}" style="font-size:0.85rem;padding:0.65rem 1.4rem">${c.label}</button>`).join('');
+  document.getElementById('featureModal').classList.add('open');
+}
+function closeModal(){ document.getElementById('featureModal').classList.remove('open'); }
+function closeModalIf(e){ if(e.target.id==='featureModal') closeModal(); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); hideDisguise(); } });
+
+// ─── HEALTH CHECK ───
+async function checkHealth(){
+  const dot = document.getElementById('statusDot');
+  try {
+    const r = await fetch(API_BASE + '/health');
+    const d = await r.json();
+    if(d.gemini_configured){
+      dot.textContent='● Online · AI Ready'; dot.style.color='#4ade80';
+      document.getElementById('apiSetupBox').style.display='none';
+    } else {
+      dot.textContent='● Online · No API Key'; dot.style.color='#facc15';
+    }
+  } catch(e){
+    dot.textContent='● Backend offline'; dot.style.color='#f87171';
+    showToast('⚠️ Backend not running. Start with: uvicorn main:app --reload --port 8000');
+  }
+}
+checkHealth();
+
+// ─── API KEY MANAGEMENT ───
+function saveApiKey(){
+  const key = document.getElementById('apiKeyInput').value.trim();
+  const status = document.getElementById('apiStatus');
+  if(!key){ status.textContent='Please enter an API key'; status.className='api-status err'; return; }
+  if(!key.startsWith('AIza')){ status.textContent='Key should start with AIza...'; status.className='api-status err'; return; }
+  // Update the .env via backend (store in sessionStorage for demo; production = backend call)
+  sessionStorage.setItem('sv_gemini_key', key);
+  status.textContent='✓ Key saved for this session'; status.className='api-status ok';
+  showToast('🔑 API key saved — connecting to AI...');
+  // Try health check again
+  setTimeout(checkHealth, 500);
+}
+
+// ─── LANGUAGE ───
+let lang = 'en';
+const QP = {
+  en: ['What is IPC 498A?','My husband is abusive','How do I file an FIR?','I need shelter','What is PWDVA?'],
+  kn: ['IPC 498A ಎಂದರೇನು?','ನನ್ನ ಪತಿ ಹಿಂಸೆ ನೀಡುತ್ತಾರೆ','ದೂರು ಹೇಗೆ ದಾಖಲಿಸಬೇಕು?','ಆಶ್ರಯ ಬೇಕು','PWDVA ಏನು?'],
+  hi: ['IPC 498A क्या है?','मेरे पति मुझे मारते हैं','FIR कैसे दर्ज करें?','मुझे आश्रय चाहिए','PWDVA क्या है?'],
+  te: ['IPC 498A అంటే ఏమిటి?','నా భర్త హింస చేస్తున్నారు','ఫిర్యాదు ఎలా నమోదు చేయాలి?','ఆశ్రయం కావాలి','PWDVA అంటే ఏమిటి?']
+};
+const PH = { en:'Type your message here...',kn:'ನಿಮ್ಮ ಸಂದೇಶ ಟೈಪ್ ಮಾಡಿ...',hi:'यहाँ अपना संदेश लिखें...',te:'మీ సందేశాన్ని ఇక్కడ టైప్ చేయండి...' };
+
+function setLang(l, btn){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.getElementById('chatIn').placeholder=PH[l];
+  renderChips();
+  showToast('Language set to ' + btn.textContent);
+}
+function renderChips(){
+  const c=document.getElementById('quickChips');
+  c.innerHTML=QP[lang].map(t=>`<span class="qchip" onclick="useChip('${t.replace(/'/g,"\\'")}')"> ${t}</span>`).join('');
+  // Re-add hover effects to new chips
+  addHover('.qchip');
+}
+function useChip(t){ document.getElementById('chatIn').value=t; sendMsg(); }
+renderChips();
+
+// ─── CHAT ───
+let history=[];
+
+function addMsg(text, role, src=''){
+  const wrap=document.getElementById('chatMsgs');
+  const div=document.createElement('div'); div.className=`msg ${role}`;
+  const ico=document.createElement('div'); ico.className='msg-ico'; ico.textContent=role==='bot'?'🛡️':'👤';
+  const right=document.createElement('div');
+  const bub=document.createElement('div'); bub.className='bubble';
+  bub.innerHTML=text.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+  right.appendChild(bub);
+  if(src){const s=document.createElement('div');s.style.cssText='font-size:0.62rem;color:var(--purple-light);opacity:0.6;margin-top:0.2rem;padding-left:0.2rem';s.textContent='via '+src;right.appendChild(s);}
+  div.appendChild(ico); div.appendChild(right);
+  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
+}
+function showTyping(){
+  const wrap=document.getElementById('chatMsgs');
+  const d=document.createElement('div'); d.className='msg bot'; d.id='typing';
+  d.innerHTML='<div class="msg-ico">🛡️</div><div><div class="bubble"><div class="typing-wrap"><span></span><span></span><span></span></div></div></div>';
+  wrap.appendChild(d); wrap.scrollTop=wrap.scrollHeight;
+}
+function hideTyping(){ const t=document.getElementById('typing'); if(t)t.remove(); }
+
+async function sendMsg(){
+  const inp=document.getElementById('chatIn');
+  const txt=inp.value.trim(); if(!txt)return;
+  inp.value='';
+  addMsg(txt,'user'); history.push({role:'user',content:txt});
+  showTyping();
+
+  // Check if we have a session key to inject (for demos without .env configured)
+  const sessionKey = sessionStorage.getItem('sv_gemini_key');
+
+  try{
+    const payload = {message:txt, history:history.slice(-10), language:lang};
+    if(sessionKey) payload.api_key_override = sessionKey; // Optional: backend can accept this
+
+    const res=await fetch(API_BASE+'/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    hideTyping();
+    if(!res.ok) throw new Error('Server error '+res.status);
+    const d=await res.json();
+    addMsg(d.reply,'bot', d.source==='gemini'?'Gemini AI':'knowledge base');
+    history.push({role:'assistant',content:d.reply});
+  }catch(e){
+    hideTyping();
+    addMsg('Connection issue. If you\'re in danger right now:\n\n**📞 Call 100 (Police)** or **1091 (Vanitha Sahayavani)** immediately.','bot');
+  }
+}
+
+// ─── LAW CARDS → CHAT ───
+function askAboutLaw(lawQuery){
+  navTo('chatbot');
+  setTimeout(()=>{
+    document.getElementById('chatIn').value = 'Tell me about ' + lawQuery;
+    sendMsg();
+  }, 600);
+}
+
+// ─── VOICE INPUT ───
+let recog=null;
+function toggleVoice(){
+  const btn=document.getElementById('voiceBtn');
+  if(recog){recog.stop();recog=null;btn.classList.remove('recording');btn.textContent='🎤';return;}
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+    showToast('⚠️ Voice works in Chrome. Please use Chrome browser.');return;
+  }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recog=new SR();
+  recog.lang={en:'en-IN',kn:'kn-IN',hi:'hi-IN',te:'te-IN'}[lang]||'en-IN';
+  recog.onstart=()=>{btn.classList.add('recording');btn.textContent='🔴';showToast('🎤 Listening... speak now');};
+  recog.onresult=e=>{
+    const transcript=e.results[0][0].transcript;
+    document.getElementById('chatIn').value=transcript;
+    recog=null;btn.classList.remove('recording');btn.textContent='🎤';
+    sendMsg();
+  };
+  recog.onerror=()=>{recog=null;btn.classList.remove('recording');btn.textContent='🎤';showToast('Voice error — try again');};
+  recog.onend=()=>{if(recog){recog=null;btn.classList.remove('recording');btn.textContent='🎤';}};
+  recog.start();
+}
+
+// ─── DISGUISE CALCULATOR ───
+let cVal='0',cPrev='',cOp=null,cNew=false;
+function showDisguise(){ document.getElementById('disguise').classList.add('show'); }
+function hideDisguise(){ document.getElementById('disguise').classList.remove('show'); }
+
+function ck(v){
+  const disp=document.getElementById('cMain');
+  const prev=document.getElementById('cPrev');
+  if(v==='AC'){cVal='0';cPrev='';cOp=null;cNew=false;prev.textContent='';}
+  else if(v==='+/-'){cVal=String(-parseFloat(cVal));}
+  else if(v==='%'){cVal=String(parseFloat(cVal)/100);}
+  else if(['+','-','*','/'].includes(v)){
+    cOp=v;cPrev=cVal;cNew=true;
+    prev.textContent=cVal+' '+(v==='*'?'×':v==='/'?'÷':v);
+  }
+  else if(v==='='){
+    if(cOp&&cPrev!==''){
+      try{const r=eval(cPrev+cOp+cVal);cVal=String(parseFloat(r.toFixed(10)));}catch(e){cVal='Error';}
+      prev.textContent='';cOp=null;cNew=false;
+    }
+  }
+  else if(v==='.'){
+    if(cNew){cVal='0.';cNew=false;}
+    else if(!cVal.includes('.'))cVal+='.';
+  }
+  else{
+    if(cVal==='0'||cNew){cVal=v;cNew=false;}
+    else if(cVal.length<12)cVal+=v;
+  }
+  disp.textContent=cVal.length>10?parseFloat(cVal).toExponential(3):cVal;
+}
+</script>
+</body>
+</html>
